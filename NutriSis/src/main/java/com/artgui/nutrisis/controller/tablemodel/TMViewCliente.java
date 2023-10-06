@@ -10,11 +10,6 @@ public class TMViewCliente extends AbstractTableModel {
     
     private final int COL_ID = 0;
     private final int COL_NOME = 1;
-    private final int COL_SOBRENOME = 2;
-    private final int COL_ALTURA = 3;
-    private final int COL_PESO = 4;
-    private final int COL_GENERO = 5;
-    private final int COL_BIOTIPO = 6;
     
     public TMViewCliente(List<Object> lst){
         this.lista = lst;
@@ -27,7 +22,7 @@ public class TMViewCliente extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 2;
     }
 
     @Override
@@ -48,16 +43,7 @@ public class TMViewCliente extends AbstractTableModel {
                 return aux.getId();
             case COL_NOME:
                 return aux.getNome();
-            case COL_SOBRENOME:
-               // return aux.getSobrenome();
-            case COL_ALTURA:
-                return aux.getAltura();
-            case COL_PESO:
-                return aux.getPeso();
-            case COL_GENERO:
-                return aux.getGenero();
-            case COL_BIOTIPO:
-              //  return aux.getBiotipo();
+            
             default:
                 break;
 
@@ -77,20 +63,10 @@ public class TMViewCliente extends AbstractTableModel {
                 return "Id";
             case COL_NOME:
                 return "Nome";
-            case COL_SOBRENOME:
-                return "Sobrenome";
-            case COL_ALTURA:
-                return "ALtura";
-            case COL_PESO:
-                return "Peso";
-            case COL_GENERO:
-                return "Genero";
-            case COL_BIOTIPO:
-                return "Biotipo";
+            
             default:
                 break;
         }
         return "";
     }
-    
 }

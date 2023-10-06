@@ -7,7 +7,7 @@ public interface IDao {
     
     public void update(Object obj);
     
-    public boolean delete(Object obj);
+    public void delete(Object obj);
             
     public Object find(Object obj);
         
