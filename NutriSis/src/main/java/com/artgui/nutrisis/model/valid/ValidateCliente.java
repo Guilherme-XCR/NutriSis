@@ -2,13 +2,12 @@ package com.artgui.nutrisis.model.valid;
 
 import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.regex.Pattern;
 
 public class ValidateCliente {
 
-    public Cliente validaCamposEntrada(String nome, String email, String senha, String cpf, String telefone, float altura, float peso, String genero, LocalTime dataNascimento) {
+    public Cliente validaCamposEntrada(String nome, String email, String senha, String cpf, String telefone, float altura, float peso, String genero/*, Date dataNascimento*/) {
         // Realize as validações necessárias aqui
 
         if (altura <= 0 || altura > 3.0) {
@@ -41,7 +40,7 @@ public class ValidateCliente {
         }
 
         // Se todas as validações passarem, crie um novo objeto Cliente
-        return new Cliente(nome, email, senha, cpf, telefone, altura, peso, genero, dataNascimento);
+        return new Cliente(nome, email, senha, cpf, telefone, altura, peso, genero/*, dataNascimento*/);
     }
 
     private boolean isValidCPF(String cpf) {

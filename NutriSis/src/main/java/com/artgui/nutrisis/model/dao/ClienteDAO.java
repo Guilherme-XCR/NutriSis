@@ -42,9 +42,14 @@ public class ClienteDAO implements IDao {
     @Override
     public void delete(Object obj) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        this.entityManager.getTransaction().begin();
-        this.entityManager.remove(obj);
-        this.entityManager.getTransaction().commit();  
+        
+        Cliente cliente = (Cliente) obj;
+         this.entityManager.getTransaction().begin();
+        qry = this.entityManager.createQuery("DELETE FROM Cliente WHERE id=:id ");
+        qry.setParameter("id", cliente.getId());
+        qry.executeUpdate();
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
     }
 
     @Override

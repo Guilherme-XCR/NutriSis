@@ -1,14 +1,28 @@
 package com.artgui.nutrisis.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 
-public class Nutricionista extends Usuario {
+@Getter
+@Setter
+
+@Entity
+
+public class Nutricionista extends Usuario{
+  
     private String crn;
     private String especializacao;
+    
+    // Construtor sem argumento
+    public Nutricionista(){
+    }
+    
+    // Construtor sem Id
+    public Nutricionista(String nome, String email, String senha, String cpf, String telefone, String crn, String especializacao){
+        super(nome, email, senha, cpf, telefone);
+        this.crn = crn;
+        this.especializacao = especializacao;
+    }    
 }
