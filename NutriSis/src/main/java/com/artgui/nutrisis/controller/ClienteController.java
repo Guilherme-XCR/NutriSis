@@ -16,9 +16,9 @@ public class ClienteController {
         repositorio = new ClienteDAO();
     }
     
-    public void cadastrar(String nome, String email, String senha, String cpf, String telefone, float altura, float peso, String genero/*, Date dataNascimento*/){
+    public void cadastrar(String nome, String email, String senha, String cpf, String telefone, float altura, float peso, String genero, String dataNascimento){
         ValidateCliente valid = new ValidateCliente();
-        Cliente cliente = valid.validaCamposEntrada(nome, email, senha, cpf, telefone, altura, peso, genero/*, dataNascimento*/);
+        Cliente cliente = valid.validaCamposEntrada(nome, email, senha, cpf, telefone, altura, peso, genero, dataNascimento);
     
         repositorio.save(cliente);
     }
@@ -27,9 +27,9 @@ public class ClienteController {
         return (Cliente) this.repositorio.findByCpf(cpf);
     }
     
-    public void atualizar(int id, String nome, String email, String senha, String cpf, String telefone, float altura, float peso, String genero/*, Date dataNascimento*/){
+    public void atualizar(int id, String nome, String email, String senha, String cpf, String telefone, float altura, float peso, String genero, String dataNascimento){
         ValidateCliente valid = new ValidateCliente();
-        Cliente cliente = valid.validaCamposEntrada(nome, email, senha, cpf, telefone, altura, peso, genero/*, dataNascimento*/);
+        Cliente cliente = valid.validaCamposEntrada(nome, email, senha, cpf, telefone, altura, peso, genero, dataNascimento);
         cliente.setId(id);
         
         repositorio.update(cliente);
@@ -46,7 +46,7 @@ public class ClienteController {
     public void atualizarTabela(JTable grd){
         List<Object> lst = repositorio.findAll();
         
-        TMViewCliente tmAluno = new TMViewCliente(lst);
-        grd.setModel(tmAluno);
+        TMViewCliente tmCliente = new TMViewCliente(lst);
+        grd.setModel(tmCliente);
     }
 }

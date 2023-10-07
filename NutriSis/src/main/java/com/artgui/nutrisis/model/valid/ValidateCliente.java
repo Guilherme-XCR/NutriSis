@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class ValidateCliente {
 
-    public Cliente validaCamposEntrada(String nome, String email, String senha, String cpf, String telefone, float altura, float peso, String genero/*, Date dataNascimento*/) {
+    public Cliente validaCamposEntrada(String nome, String email, String senha, String cpf, String telefone, float altura, float peso, String genero, String dataNascimento) {
         // Realize as validações necessárias aqui
 
         if (altura <= 0 || altura > 3.0) {
@@ -38,9 +38,13 @@ public class ValidateCliente {
         if (cpf == null || !isValidCPF(cpf)) {
             throw new ClienteException("CPF inválido.");
         }
-
+        
+        if (dataNascimento == null || dataNascimento.isEmpty()) {
+            throw new ClienteException("Data Nascimento inválido.");
+        }
+        
         // Se todas as validações passarem, crie um novo objeto Cliente
-        return new Cliente(nome, email, senha, cpf, telefone, altura, peso, genero/*, dataNascimento*/);
+        return new Cliente(nome, email, senha, cpf, telefone, altura, peso, genero, dataNascimento);
     }
 
     private boolean isValidCPF(String cpf) {

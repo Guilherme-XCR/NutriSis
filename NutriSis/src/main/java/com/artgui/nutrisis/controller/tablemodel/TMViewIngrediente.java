@@ -10,8 +10,8 @@ public class TMViewIngrediente extends AbstractTableModel{
     
     private final int COL_ID = 0;
     private final int COL_NOME = 1;
-    private final int COL_QUANTIDADE = 2;
-    private final int COL_UNIDADE_MEDIDA = 3;
+    private final int COL_UNIDADE_MEDIDA = 2;
+    private final int COL_QUANTIDADE = 3;
     
     public TMViewIngrediente(List<Object> lst){
         this.lista = lst;
@@ -45,10 +45,10 @@ public class TMViewIngrediente extends AbstractTableModel{
                 return aux.getId();
             case COL_NOME:
                 return aux.getNome();
-            case COL_QUANTIDADE:
-                return aux.getQuantidade();
             case COL_UNIDADE_MEDIDA:
                 return aux.getUnidadeMedida();
+            case COL_QUANTIDADE:
+                return aux.getQuantidade();
                 
             default:
                 break;
@@ -69,11 +69,11 @@ public class TMViewIngrediente extends AbstractTableModel{
                 return "Id";
             case COL_NOME:
                 return "Nome";
-            case COL_QUANTIDADE:
-                return "Quantidade";
             case COL_UNIDADE_MEDIDA:
                 return "Und. Medida";
-                
+            case COL_QUANTIDADE:
+                return "Quantidade";
+            
             default:
                 break;
         }

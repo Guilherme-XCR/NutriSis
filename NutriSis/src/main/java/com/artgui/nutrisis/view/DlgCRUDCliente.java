@@ -23,16 +23,12 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
         
         initComponents();
         
-        //this.adicionarMascaraNosCampos();
+        this.adicionarMascaraNosCampos();
         this.habilitarCampos(false);
         this.limparCampos();
         
         clienteController.atualizarTabela(grdClientes); 
         
-        /* DATA BLOQUEADA */
-        panDataNascimento.enable(false);
-        lblDataNascimento.enable(false);
-        edtDataNascimento.enable(false);
     }
 
     public void habilitarCampos(boolean flag) {
@@ -52,22 +48,24 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
         fEdtAltura.setText("");
         fEdtPeso.setText("");
         edtGenero.setText("");
-        edtDataNascimento.setText("");
+        fEdtDataNascimento.setText("");
     }
 
     public void adicionarMascaraNosCampos() {
       
         try {
-            MaskFormatter cpfFormatter = new MaskFormatter("###.###.###-##");
-            MaskFormatter telefoneFormatter = new MaskFormatter("(##) ####-####");
-            MaskFormatter alturaFormatter = new MaskFormatter("#.##");
-            MaskFormatter pesoFormatter = new MaskFormatter("###.#");
+            //MaskFormatter cpfFormatter = new MaskFormatter("###.###.###-##");
+            MaskFormatter telefoneFormatter = new MaskFormatter("(##) #####-####");
+            //MaskFormatter alturaFormatter = new MaskFormatter("#.##");
+            //MaskFormatter pesoFormatter = new MaskFormatter("###.#");
+            MaskFormatter dataNascimentoFormatter = new MaskFormatter("##-##-####");
+
             
-            cpfFormatter.install(fEdtCpf);
-            alturaFormatter.install(fEdtAltura);
+            //cpfFormatter.install(fEdtCpf);
+            //alturaFormatter.install(fEdtAltura);
             telefoneFormatter.install(fEdtTelefone);   
-            pesoFormatter.install(fEdtPeso);      
-                    
+            //pesoFormatter.install(fEdtPeso);      
+            dataNascimentoFormatter.install(fEdtDataNascimento);
         } catch (ParseException ex) {
             Logger.getLogger(DlgCRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -83,7 +81,7 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
         fEdtAltura.setText(c.getAltura() + "");
         fEdtPeso.setText(c.getPeso() + "");
         edtGenero.setText(c.getGenero());
-        edtDataNascimento.setText("");
+        fEdtDataNascimento.setText(c.getDataNascimento() + "");
     }
   
     private Object getObjetoSelecionadoNaGrid() {
@@ -143,7 +141,7 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
         edtGenero = new javax.swing.JTextField();
         panDataNascimento = new javax.swing.JPanel();
         lblDataNascimento = new javax.swing.JLabel();
-        edtDataNascimento = new javax.swing.JTextField();
+        fEdtDataNascimento = new javax.swing.JFormattedTextField();
         panTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         grdClientes = new javax.swing.JTable();
@@ -526,11 +524,9 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
         lblDataNascimento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDataNascimento.setText("Data Nascimento");
 
-        edtDataNascimento.setBackground(new java.awt.Color(51, 51, 51));
-        edtDataNascimento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        edtDataNascimento.setForeground(new java.awt.Color(204, 204, 204));
-        edtDataNascimento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        edtDataNascimento.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(30, 30, 30), 1, true));
+        fEdtDataNascimento.setBackground(new java.awt.Color(51, 51, 51));
+        fEdtDataNascimento.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(30, 30, 30), 1, true));
+        fEdtDataNascimento.setForeground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout panDataNascimentoLayout = new javax.swing.GroupLayout(panDataNascimento);
         panDataNascimento.setLayout(panDataNascimentoLayout);
@@ -539,12 +535,12 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
             .addGroup(panDataNascimentoLayout.createSequentialGroup()
                 .addComponent(lblDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtDataNascimento))
+                .addComponent(fEdtDataNascimento))
         );
         panDataNascimentoLayout.setVerticalGroup(
             panDataNascimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(edtDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(lblDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(fEdtDataNascimento)
         );
 
         javax.swing.GroupLayout panClienteInputsLayout = new javax.swing.GroupLayout(panClienteInputs);
@@ -676,6 +672,8 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
         this.habilitarCampos(true);
         this.limparCampos();
+        
+        idClienteEditando = -1;
     }//GEN-LAST:event_btnCriarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -706,6 +704,9 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         }
+        this.idClienteEditando = -1;
+        this.limparCampos();
+        this.habilitarCampos(false);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -728,8 +729,8 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
                         fEdtTelefone.getText(), 
                         Float.parseFloat(fEdtAltura.getText()), 
                         Float.parseFloat(fEdtPeso.getText()), 
-                        edtGenero.getText()/*, 
-                        dataNascimento*/
+                        edtGenero.getText(), 
+                        fEdtDataNascimento.getText()
                 );
             } else {
                 clienteController.cadastrar(
@@ -740,8 +741,8 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
                         fEdtTelefone.getText(), 
                         Float.parseFloat(fEdtAltura.getText()), 
                         Float.parseFloat(fEdtPeso.getText()), 
-                        edtGenero.getText()/*, 
-                        dataNascimento*/
+                        edtGenero.getText(), 
+                        fEdtDataNascimento.getText()
                 );
             }
             idClienteEditando = -1;
@@ -760,12 +761,12 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JTextField edtDataNascimento;
     private javax.swing.JTextField edtEmail;
     private javax.swing.JTextField edtGenero;
     private javax.swing.JTextField edtNome;
     private javax.swing.JFormattedTextField fEdtAltura;
     private javax.swing.JFormattedTextField fEdtCpf;
+    private javax.swing.JFormattedTextField fEdtDataNascimento;
     private javax.swing.JFormattedTextField fEdtPeso;
     private javax.swing.JFormattedTextField fEdtTelefone;
     private javax.swing.JTable grdClientes;

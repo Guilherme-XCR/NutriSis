@@ -9,9 +9,7 @@ public class TMViewReceita extends AbstractTableModel{
     private List<Object> lista;
     
     private final int COL_ID = 0;
-    private final int COL_TITULO = 1;
-    private final int COL_TEMPO_PREPARO = 2;
-    private final int COL_CATEGORIA = 3;
+    private final int COL_NOME = 1;
     
     public TMViewReceita(List<Object> lst){
         this.lista = lst;
@@ -24,7 +22,7 @@ public class TMViewReceita extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 2;
     }
 
     @Override
@@ -43,12 +41,8 @@ public class TMViewReceita extends AbstractTableModel{
         switch (columnIndex) {
             case COL_ID:
                 return aux.getId();
-            case COL_TITULO:
-                //return aux.getTitulo();
-            case COL_TEMPO_PREPARO:
-                //return aux.getTempoPreparoMin();
-            case COL_CATEGORIA:
-                return aux.getCategoria();
+            case COL_NOME:
+                return aux.getNome();
                 
             default:
                 break;
@@ -67,12 +61,8 @@ public class TMViewReceita extends AbstractTableModel{
         switch (columnIndex) {
             case COL_ID:
                 return "Id";
-            case COL_TITULO:
-                return "Titulo";
-            case COL_TEMPO_PREPARO:
-                return "Tempo Preparo(min)";
-            case COL_CATEGORIA:
-                return "Categoria";
+            case COL_NOME:
+                return "Nome";
                 
             default:
                 break;
