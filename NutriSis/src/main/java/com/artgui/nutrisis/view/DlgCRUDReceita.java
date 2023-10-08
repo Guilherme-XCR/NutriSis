@@ -84,7 +84,9 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
         edtCategoria.setText(r.getCategoria());
         fEdtIdNutricionista.setText(r.getNutricionista().getId() + "");
         edtModoDePreparo.setText(r.getModoPreparo());
-        ingredienteController.atualizarTabela(grdIngredientes, r.getIngredientes());        
+        ingredientes = new ArrayList<>(r.getIngredientes());
+        
+        ingredienteController.atualizarTabela(grdIngredientes, ingredientes);        
     }
   
     private Object getObjetoSelecionadoNaGridReceita() {
@@ -305,8 +307,8 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
         );
         panTempoPreparoLayout.setVerticalGroup(
             panTempoPreparoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTempoPreparo, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-            .addComponent(fEdtTempoPreparo)
+            .addComponent(lblTempoPreparo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fEdtTempoPreparo, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
         panPorcoes.setBackground(new java.awt.Color(51, 51, 51));
@@ -397,8 +399,8 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
         );
         panIdNutricionistaLayout.setVerticalGroup(
             panIdNutricionistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIdNutricionista, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-            .addComponent(fEdtIdNutricionista)
+            .addComponent(lblIdNutricionista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fEdtIdNutricionista, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
         panModoDePreparo.setBackground(new java.awt.Color(51, 51, 51));
@@ -431,8 +433,8 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
         );
         panModoDePreparoLayout.setVerticalGroup(
             panModoDePreparoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblModoPreparo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(lblModoPreparo, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         panIngredientes.setBackground(new java.awt.Color(51, 51, 51));
@@ -558,7 +560,7 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panModoDePreparo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -590,10 +592,10 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
             panTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panTableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(lblTituloTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                    .addComponent(lblTituloTabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panTableLayout.setVerticalGroup(
             panTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -615,8 +617,8 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panPrincipalLayout.setVerticalGroup(
@@ -624,10 +626,11 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
             .addGroup(panPrincipalLayout.createSequentialGroup()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panInputs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panTable, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panInputs, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -638,9 +641,7 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -659,12 +660,13 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
         if (receita == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
-            this.limparCampos();
-            this.habilitarCampos(true);
-            this.preencherFormulario(receita);
             this.idReceitaEditando = receita.getId();
+
+            this.habilitarCampos(true);
+            this.limparCampos();
+
+            this.preencherFormulario(receita);
         }
-        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -721,7 +723,7 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
         dlgCRUDIngrediente.setLocationRelativeTo(this);
         dlgCRUDIngrediente.setVisible(true);
         
-        if (ingrediente == null){
+        if (ingrediente.getId() == -1){
             JOptionPane.showMessageDialog(this, "Criação cancelada");
         }else{
             ingredientes.add(ingrediente);
@@ -735,19 +737,25 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
        Ingrediente ingredienteRetonar = new Ingrediente();
        ingredienteRetonar.copy(ingredienteEditando);
        
-        if (ingredienteEditando == null)
+       System.out.println("\n\n\n"
+               + "Nome edt: " + ingredienteEditando.getNome()
+               + "Nome ret: " + ingredienteRetonar.getNome()
+               + "\n\n\n");
+       
+        if (ingredienteEditando == null){
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
+        }else {
             
             DlgCRUDIngrediente dlgCRUDIngrediente = new DlgCRUDIngrediente(this, true, ingredienteRetonar, true);
             dlgCRUDIngrediente.setLocationRelativeTo(this);
             dlgCRUDIngrediente.setVisible(true);
 
-            if (ingredienteRetonar == null){
+            if (ingredienteRetonar.getId() == -1){
                 JOptionPane.showMessageDialog(this, "Edição cancelada");
             }else{
-                ingredientes.remove(ingredienteEditando);
-                ingredientes.add(ingredienteRetonar);
+                ingredienteEditando.setNome(ingredienteRetonar.getNome());
+                ingredienteEditando.setUnidadeMedida(ingredienteRetonar.getUnidadeMedida());
+                ingredienteEditando.setQuantidade(ingredienteRetonar.getQuantidade());
                 
                 ingredienteController.atualizarTabela(grdIngredientes, ingredientes);
             }
@@ -755,31 +763,26 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditarIngredienteActionPerformed
 
     private void btnExcluirIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirIngredienteActionPerformed
-       
+     
         Ingrediente ingrediente = (Ingrediente) this.getObjetoSelecionadoNaGridIngrediente();
 
         if (ingrediente == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
-            try {
-                ingredienteController.excluir(ingrediente);
-
-                receitaController.atualizarTabela(grdReceitas);
+            try {   
+                Ingrediente i = ingredienteController.buscar(ingrediente);
+                if(i != null){
+                    ingredienteController.excluir(ingrediente);
+                }
                 JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
             } catch (ClienteException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
-        }
-        this.idReceitaEditando = -1;
-        this.limparCampos();
-        this.habilitarCampos(false);
-        
-        
-        
-        
-        
-        
-        
+            ingredientes.remove(ingrediente);                ingredientes.remove(ingrediente);
+
+            ingredienteController.atualizarTabela(grdIngredientes, ingredientes);
+
+        }  
     }//GEN-LAST:event_btnExcluirIngredienteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -795,8 +798,6 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
     private javax.swing.JTextArea edtModoDePreparo;
     private javax.swing.JTextField edtNome;
     private javax.swing.JFormattedTextField fEdtIdNutricionista;
-    private javax.swing.JFormattedTextField fEdtIdNutricionista1;
-    private javax.swing.JFormattedTextField fEdtIdNutricionista2;
     private javax.swing.JFormattedTextField fEdtPorcoes;
     private javax.swing.JFormattedTextField fEdtTempoPreparo;
     private javax.swing.JTable grdIngredientes;
@@ -806,8 +807,6 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblIdNutricionista;
-    private javax.swing.JLabel lblIdNutricionista1;
-    private javax.swing.JLabel lblIdNutricionista2;
     private javax.swing.JLabel lblModoPreparo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPorcoes;
@@ -818,8 +817,6 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
     private javax.swing.JPanel panButtons;
     private javax.swing.JPanel panCategoria;
     private javax.swing.JPanel panIdNutricionista;
-    private javax.swing.JPanel panIdNutricionista1;
-    private javax.swing.JPanel panIdNutricionista2;
     private javax.swing.JPanel panIngredientes;
     private javax.swing.JPanel panInputs;
     private javax.swing.JPanel panModoDePreparo;

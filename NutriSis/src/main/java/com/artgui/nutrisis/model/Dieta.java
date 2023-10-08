@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Dieta implements Serializable {
     private String descricao;
     private int diasDuracao;
     
-    @OneToMany(mappedBy = "dieta", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "dieta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Refeicao> refeicoes;
     
     @ManyToOne(cascade = CascadeType.ALL)

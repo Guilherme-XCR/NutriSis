@@ -28,10 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="panPrincipal" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
+          <Component id="panPrincipal" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -52,8 +49,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="panInputs" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="panTable" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="panTable" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Component id="lblTitulo" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -63,11 +60,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="lblTitulo" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="panButtons" alignment="0" max="32767" attributes="0"/>
-                      <Component id="panInputs" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="panTable" alignment="0" max="32767" attributes="0"/>
+                      <Component id="panInputs" alignment="0" max="32767" attributes="0"/>
+                      <Component id="panButtons" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -283,7 +281,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panModoDePreparo" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panIngredientes" min="-2" pref="310" max="-2" attributes="0"/>
+                      <Component id="panIngredientes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -391,8 +389,8 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblTempoPreparo" pref="50" max="32767" attributes="0"/>
-                      <Component id="fEdtTempoPreparo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblTempoPreparo" max="32767" attributes="0"/>
+                      <Component id="fEdtTempoPreparo" alignment="0" pref="50" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -613,8 +611,8 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblIdNutricionista" pref="50" max="32767" attributes="0"/>
-                      <Component id="fEdtIdNutricionista" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblIdNutricionista" max="32767" attributes="0"/>
+                      <Component id="fEdtIdNutricionista" alignment="0" pref="50" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -685,8 +683,8 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblModoPreparo" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" alignment="0" pref="100" max="32767" attributes="0"/>
+                      <Component id="lblModoPreparo" pref="80" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -955,11 +953,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblTituloTabela" alignment="0" min="-2" pref="452" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" pref="264" max="32767" attributes="0"/>
+                          <Component id="lblTituloTabela" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

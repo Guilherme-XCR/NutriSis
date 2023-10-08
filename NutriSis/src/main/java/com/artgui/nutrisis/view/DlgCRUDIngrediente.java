@@ -11,18 +11,20 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
         
         this.ingredienteRetornar = ingredienteRetornar;
         
+        initComponents();
+        
         if(isEditando){
             this.preencherFormulario(ingredienteRetornar);
         }
-        
-        initComponents();
-
     }
 
     public void preencherFormulario(Ingrediente i) {
-    
-        edtNome.setText(i.getNome());
-        edtUnidadeMedida.setText(i.getUnidadeMedida());
+    System.out.println("\n\n\n"
+               + "Nome i: " + i.getNome()
+               + "\n\n\n");
+        
+        edtNome.setText(i.getNome() + "");
+        edtUnidadeMedida.setText(i.getUnidadeMedida() + "");
         fEdtQuantidade.setText(i.getQuantidade() + "");
     }
     
@@ -251,21 +253,16 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        ingredienteRetornar = null;
+        ingredienteRetornar.setId(-1);
         
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+       
         ingredienteRetornar.setNome(edtNome.getText());
         ingredienteRetornar.setUnidadeMedida(edtUnidadeMedida.getText());
         ingredienteRetornar.setQuantidade(Float.parseFloat(fEdtQuantidade.getText()));
-        
-//        System.out.println("---------------------------------");
-//        System.out.println("Nome      : " + ingredienteRetornar.getNome());
-//        System.out.println("Und Medida: " + ingredienteRetornar.getUnidadeMedida());
-//        System.out.println("Quantidade: " + ingredienteRetornar.getQuantidade());
-//        System.out.println("---------------------------------");
         
         dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed

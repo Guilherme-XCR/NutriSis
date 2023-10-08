@@ -20,10 +20,21 @@ public class ReceitaController {
         repositorio = new ReceitaDAO();
     }
     
-    public void cadastrar(String nome, String modoPreparo, String tempoPreparo, int porcoes, String categoria, List<Ingrediente> ingredientes, Nutricionista nutricionista){
-        
+    public void cadastrar(
+            String nome, 
+            String modoPreparo, 
+            String tempoPreparo, 
+            int porcoes, 
+            String categoria, 
+            List<Ingrediente> ingredientes, 
+            Nutricionista nutricionista
+    ){
         ValidateReceita valid = new ValidateReceita();
         Receita receita = valid.validaCamposEntrada(nome, modoPreparo, tempoPreparo, porcoes, categoria, ingredientes, nutricionista);
+        
+        for (Ingrediente i : receita.getIngredientes()){
+            i.setReceita(receita);
+        }
         
         repositorio.save(receita);
     }
@@ -36,6 +47,9 @@ public class ReceitaController {
         ValidateReceita valid = new ValidateReceita();
         Receita receita = valid.validaCamposEntrada(nome, modoPreparo, tempoPreparo, porcoes, categoria, ingredientes, nutricionista);
         receita.setId(id);
+        for (Ingrediente i : receita.getIngredientes()){
+            i.setReceita(receita);
+        }
         
         repositorio.update(receita);
     }

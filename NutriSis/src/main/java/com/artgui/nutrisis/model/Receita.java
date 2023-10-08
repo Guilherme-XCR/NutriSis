@@ -3,6 +3,7 @@ package com.artgui.nutrisis.model;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ public class Receita {
     private int porcoes;
     private String categoria;
 
-    @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Ingrediente> ingredientes;
     
     @ManyToOne(cascade = CascadeType.ALL)

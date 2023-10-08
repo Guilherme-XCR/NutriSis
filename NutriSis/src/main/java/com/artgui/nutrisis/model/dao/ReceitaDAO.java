@@ -2,6 +2,7 @@ package com.artgui.nutrisis.model.dao;
 
 import com.artgui.nutrisis.factory.DatabaseJPA;
 import com.artgui.nutrisis.interfaces.IDao;
+import com.artgui.nutrisis.model.Ingrediente;
 import com.artgui.nutrisis.model.Receita;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,8 +20,21 @@ public class ReceitaDAO implements IDao{
     
     @Override
     public void save(Object obj) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+       
+        Receita r = (Receita) obj;
+        System.out.println("==============================================================");
+        System.out.println("Nome: " + r.getNome());
+        System.out.println("ID: " + r.getId());
         
+        for(Ingrediente i: r.getIngredientes()){
+            System.out.println("Nome: " + i.getNome());
+            System.out.println("ID: " + i.getId());
+        }
+        
+        System.out.println("==============================================================");
+        
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+       
         this.entityManager.getTransaction().begin();       
         this.entityManager.persist(obj);                    
         this.entityManager.getTransaction().commit();        

@@ -3,7 +3,6 @@ package com.artgui.nutrisis.controller;
 import com.artgui.nutrisis.controller.tablemodel.TMViewIngrediente;
 import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Ingrediente;
-import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.dao.IngredienteDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,10 @@ public class IngredienteController {
         repositorio = new IngredienteDAO();
     }
         
+    public Ingrediente buscar(Object obj){
+        return (Ingrediente) this.repositorio.find(obj);
+    }
+    
     public void excluir(Ingrediente ingrediente){
         if (ingrediente != null) {
             repositorio.delete(ingrediente);
