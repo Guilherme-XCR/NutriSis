@@ -1,6 +1,8 @@
 package com.artgui.nutrisis.view;
 
 import com.artgui.nutrisis.controller.DietaController;
+import com.artgui.nutrisis.controller.RefeicaoController;
+import com.artgui.nutrisis.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Refeicao;
 import java.text.ParseException;
@@ -8,11 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 public class DlgCRUDDieta extends javax.swing.JDialog {
 
-    DietaController dietaControlle;
+    DietaController dietaController;
+    RefeicaoController refeicaoController;
+    
     int idDietaEditando;
     
     List<Refeicao> refeicoes;
@@ -20,8 +25,10 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
     public DlgCRUDDieta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         
-        dietaControlle = new DietaController();
         idDietaEditando = -1;
+        dietaController = new DietaController();
+        refeicaoController = new RefeicaoController();
+        
         refeicoes = new ArrayList<>();
         
         initComponents();
@@ -29,10 +36,8 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
         this.habilitarCampos(false);
         this.limparCampos();
              
-        // ATUALIZAR TABELAS
-        
-        
-
+        dietaController.atualizarTabela(grdDietas);
+        refeicaoController.atualizarTabela(grdRefeicoes, new ArrayList<>());
     }
 
     public void habilitarCampos(boolean flag) {
@@ -49,14 +54,14 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
         fEdtDiasDuracao.setText("");
         fEdtIdNutricionista.setText("");
         
-        //Limpar a tabela
+        refeicaoController.atualizarTabela(grdRefeicoes, new ArrayList<>());
         
     }
 
     public void adicionarMascaraNosCampos() {
       
         try {
-            MaskFormatter diasDuracaoFormatter = new MaskFormatter("#######");
+            MaskFormatter diasDuracaoFormatter = new MaskFormatter("########");
             MaskFormatter idNutricionistaFormatter = new MaskFormatter("#########");
             
             diasDuracaoFormatter.install(fEdtDiasDuracao);
@@ -74,7 +79,8 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
         fEdtDiasDuracao.setText(d.getDiasDuracao() + "");
         fEdtIdNutricionista.setText(d.getNutricionista().getId() + "");
         
-        //Limpar a tabela
+        List<Refeicao> refeicoes = d.getRefeicoes();
+        refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
         
     }
   
@@ -491,10 +497,10 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
             panTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panTableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(lblTituloTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                    .addComponent(lblTituloTabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panTableLayout.setVerticalGroup(
             panTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,8 +522,8 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panPrincipalLayout.setVerticalGroup(
@@ -541,27 +547,58 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
+        idDietaEditando = -1;
+        
         this.habilitarCampos(true);
         this.limparCampos();
     }//GEN-LAST:event_btnCriarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        Dieta dieta = (Dieta) this.getObjetoSelecionadoNaGridDieta();
+        
+        if (dieta == null)
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+            this.idDietaEditando = dieta.getId();
+
+            this.habilitarCampos(true);
+            this.limparCampos();
+
+            this.preencherFormulario(dieta);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        Dieta dieta = (Dieta) this.getObjetoSelecionadoNaGridDieta();
+        
+        if (dieta == null)
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        else {
+            try {
+                dietaController.excluir(dieta);
+                dietaController.atualizarTabela(grdDietas);
+                JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+            } catch (DietaException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
+        this.idDietaEditando = -1;
+        this.limparCampos();
+        this.habilitarCampos(false);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        idDietaEditando = -1;
+        
+        this.habilitarCampos(false);
+        this.limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -576,6 +613,7 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
         dlgCRUDRefeicao.setVisible(true);
         
         refeicoes.add(refeicao);
+        refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
     }//GEN-LAST:event_btnCriarRefeicaoActionPerformed
 
     private void btnEditarRefeicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarRefeicaoActionPerformed

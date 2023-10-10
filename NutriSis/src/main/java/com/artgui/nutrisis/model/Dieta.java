@@ -38,4 +38,18 @@ public class Dieta implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
+    
+    // construtor sem id
+    
+    public Dieta( String nome,String descricao,int diasDuracao,List<Refeicao> refeicoes,Nutricionista nutricionista){
+    
+        this.nome = nome;
+        this.descricao = descricao;
+        this.diasDuracao = diasDuracao;
+        this.refeicoes = refeicoes;
+        this.nutricionista = nutricionista;
+        
+    }
+   
+    
 }

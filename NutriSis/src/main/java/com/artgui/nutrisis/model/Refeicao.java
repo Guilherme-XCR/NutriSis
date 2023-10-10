@@ -41,4 +41,21 @@ public class Refeicao implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_nutricionista")    
     private Nutricionista nutricionista;
+    
+    //construtor sem id
+    public Refeicao(
+            String nome,
+            String horario,
+            float calorias,
+            List<Receita> receitas,
+            Dieta dieta,
+            Nutricionista nutricionista
+    ){
+        this.nome = nome;
+        this.horario = horario;
+        this.calorias = calorias;
+        this.receitas = receitas;
+        this.dieta = dieta;
+        this.nutricionista = nutricionista;
+    }
 }

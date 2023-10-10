@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -31,14 +32,17 @@ public class Receita {
     private int porcoes;
     private String categoria;
 
-    @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Refeicao> refeicoes;
+    
+    @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
     private List<Ingrediente> ingredientes;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
     
-    //construtor sem id
+    //construtor sem id e sem refeicao
     public Receita(String nome, String modoPreparo, String tempoPreparo, int porcoes, String categoria, List<Ingrediente> ingredientes, Nutricionista nutricionista){
         this.nome = nome;
         this.modoPreparo = modoPreparo;
@@ -48,6 +52,11 @@ public class Receita {
         this.ingredientes = ingredientes;
         this.nutricionista = nutricionista;
         
+    }
+    
+    //add refeicao
+    public void addRefeicao(Refeicao refeicao){
+        this.refeicoes.add(refeicao);
     }
     
 }

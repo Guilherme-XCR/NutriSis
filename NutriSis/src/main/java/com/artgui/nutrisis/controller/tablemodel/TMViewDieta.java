@@ -9,8 +9,6 @@ public class TMViewDieta extends AbstractTableModel{
     
     private final int COL_ID = 0;
     private final int COL_NOME = 1;
-    private final int COL_DESCRICAO = 2;
-    private final int COL_DIASDURACAO = 3;
     
     public TMViewDieta(List<Object> lst){
         this.lista = lst;
@@ -23,7 +21,7 @@ public class TMViewDieta extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 2;
     }
 
     @Override
@@ -44,10 +42,6 @@ public class TMViewDieta extends AbstractTableModel{
                 return aux.getId();
             case COL_NOME:
                 return aux.getNome();
-            case COL_DESCRICAO:
-                return aux.getDescricao();
-            case COL_DIASDURACAO:
-                return aux.getDiasDuracao();
             
             default:
                 break;
@@ -68,10 +62,6 @@ public class TMViewDieta extends AbstractTableModel{
                 return "Id";
             case COL_NOME:
                 return "Nome";
-            case COL_DESCRICAO:
-                return "Descricao";
-            case COL_DIASDURACAO:
-                return "Dias Duracao";
             
             default:
                 break;

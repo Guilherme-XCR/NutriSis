@@ -2,16 +2,15 @@ package com.artgui.nutrisis.model.valid;
 
 import com.artgui.nutrisis.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
+import com.artgui.nutrisis.model.Nutricionista;
+import com.artgui.nutrisis.model.Refeicao;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ValidateDieta {
 
-    public Dieta validaCamposEntrada(int idNutricionista, String nome, String descricao, int diasDuracao) {
+    public Dieta validaCamposEntrada ( String nome,String descricao,int diasDuracao,List<Refeicao> refeicoes,Nutricionista nutricionista){
         // Realize as validações necessárias aqui
-
-        if (idNutricionista <= -1) {
-            throw new DietaException("Id de nutricionista inválido.");
-        }
         
         if (nome == null || nome.isEmpty()) {
             throw new DietaException("Nome da dieta não pode estar em branco.");
@@ -26,7 +25,7 @@ public class ValidateDieta {
         }
 
         // Se todas as validações passarem, crie um novo objeto Dieta
-        return new Dieta();
+        return new Dieta(nome, descricao, diasDuracao, refeicoes, nutricionista);
     }
 }
 

@@ -20,19 +20,6 @@ public class ReceitaDAO implements IDao{
     
     @Override
     public void save(Object obj) {
-       
-        Receita r = (Receita) obj;
-        System.out.println("==============================================================");
-        System.out.println("Nome: " + r.getNome());
-        System.out.println("ID: " + r.getId());
-        
-        for(Ingrediente i: r.getIngredientes()){
-            System.out.println("Nome: " + i.getNome());
-            System.out.println("ID: " + i.getId());
-        }
-        
-        System.out.println("==============================================================");
-        
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
        
         this.entityManager.getTransaction().begin();       

@@ -45,11 +45,13 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
         panDiasDuracao = new javax.swing.JPanel();
         lblCalorias = new javax.swing.JLabel();
         fEdtQuantidade = new javax.swing.JFormattedTextField();
-        jPanel1 = new javax.swing.JPanel();
+        panButtons = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        panPrincipal.setBackground(new java.awt.Color(51, 51, 51));
 
         lblTitulo.setBackground(new java.awt.Color(51, 51, 51));
         lblTitulo.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
@@ -59,7 +61,7 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
 
         panInputs.setBackground(new java.awt.Color(40, 40, 40));
 
-        panNome.setBackground(new java.awt.Color(51, 51, 51));
+        panNome.setBackground(new java.awt.Color(50, 50, 50));
 
         lblNome.setBackground(new java.awt.Color(51, 51, 51));
         lblNome.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -87,7 +89,7 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
             .addComponent(edtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        panDescricao.setBackground(new java.awt.Color(51, 51, 51));
+        panDescricao.setBackground(new java.awt.Color(50, 50, 50));
 
         lblHorario.setBackground(new java.awt.Color(51, 51, 51));
         lblHorario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -115,7 +117,7 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
             .addComponent(edtUnidadeMedida, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        panDiasDuracao.setBackground(new java.awt.Color(51, 51, 51));
+        panDiasDuracao.setBackground(new java.awt.Color(50, 50, 50));
         panDiasDuracao.setPreferredSize(new java.awt.Dimension(364, 50));
 
         lblCalorias.setBackground(new java.awt.Color(51, 51, 51));
@@ -144,6 +146,8 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
             .addComponent(fEdtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
+        panButtons.setBackground(new java.awt.Color(50, 50, 50));
+
         btnCancelar.setBackground(new java.awt.Color(51, 51, 51));
         btnCancelar.setForeground(new java.awt.Color(255, 153, 0));
         btnCancelar.setText("Cancelar");
@@ -168,22 +172,22 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panButtonsLayout = new javax.swing.GroupLayout(panButtons);
+        panButtons.setLayout(panButtonsLayout);
+        panButtonsLayout.setHorizontalGroup(
+            panButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panButtonsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        panButtonsLayout.setVerticalGroup(
+            panButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panButtonsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -199,7 +203,7 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
                     .addComponent(panNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panDiasDuracao, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panInputsLayout.setVerticalGroup(
@@ -212,7 +216,7 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panDiasDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -274,11 +278,11 @@ public class DlgCRUDIngrediente extends javax.swing.JDialog {
     private javax.swing.JTextField edtNome;
     private javax.swing.JTextField edtUnidadeMedida;
     private javax.swing.JFormattedTextField fEdtQuantidade;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCalorias;
     private javax.swing.JLabel lblHorario;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel panButtons;
     private javax.swing.JPanel panDescricao;
     private javax.swing.JPanel panDiasDuracao;
     private javax.swing.JPanel panInputs;
