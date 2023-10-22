@@ -21,10 +21,10 @@ public class DietaController {
         repositorio = new DietaDAO();
     }
     
-    public void cadastrar(String nome, String modoPreparo, String tempoPreparo, int porcoes, String categoria, List<Refeicao> refeicoes, Nutricionista nutricionista){
+    public void cadastrar(String nome, String descricao, int diasDuracao, List<Refeicao> refeicoes, Nutricionista nutricionista){
         
         ValidateDieta valid = new ValidateDieta();
-        Dieta dieta = valid.validaCamposEntrada(nome, categoria, porcoes, refeicoes, nutricionista);
+        Dieta dieta = valid.validaCamposEntrada(nome, descricao, diasDuracao, refeicoes, nutricionista);
         
         for (Refeicao r : dieta.getRefeicoes()){
             r.setDieta(dieta);
@@ -37,9 +37,9 @@ public class DietaController {
         return (Receita) this.repositorio.findById(id);
     }
     
-    public void atualizar(int id, String nome, String modoPreparo, String tempoPreparo, int porcoes, String categoria, List<Refeicao> refeicoes, Nutricionista nutricionista){
+    public void atualizar(int id, String nome, String descricao, int diasDuracao, List<Refeicao> refeicoes, Nutricionista nutricionista){
         ValidateDieta valid = new ValidateDieta();
-        Dieta dieta = valid.validaCamposEntrada(nome, categoria, porcoes, refeicoes, nutricionista);
+        Dieta dieta = valid.validaCamposEntrada(nome, descricao, diasDuracao, refeicoes, nutricionista);
         dieta.setId(id);
         
         for (Refeicao r : dieta.getRefeicoes()){

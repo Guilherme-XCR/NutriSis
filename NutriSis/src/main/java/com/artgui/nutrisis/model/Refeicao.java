@@ -42,20 +42,13 @@ public class Refeicao implements Serializable {
     @JoinColumn(name = "id_nutricionista")    
     private Nutricionista nutricionista;
     
-    //construtor sem id
-    public Refeicao(
-            String nome,
-            String horario,
-            float calorias,
-            List<Receita> receitas,
-            Dieta dieta,
-            Nutricionista nutricionista
-    ){
-        this.nome = nome;
-        this.horario = horario;
-        this.calorias = calorias;
-        this.receitas = receitas;
-        this.dieta = dieta;
-        this.nutricionista = nutricionista;
+   public void copy(Refeicao outro){
+        this.id = outro.getId();
+        this.nome = outro.getNome();
+        this.horario = outro.getHorario();
+        this.calorias = outro.getCalorias();
+        this.receitas = outro.getReceitas();
+        this.dieta = outro.getDieta();
+        this.nutricionista = outro.getNutricionista();
     }
 }

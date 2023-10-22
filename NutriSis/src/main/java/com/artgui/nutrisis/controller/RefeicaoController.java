@@ -20,16 +20,9 @@ private RefeicaoDAO repositorio;
         repositorio = new RefeicaoDAO();
     }
     
-    public void cadastrar(
-            String nome,
-            String horario,
-            float calorias,
-            List<Receita> receitas,
-            Dieta dieta,
-            Nutricionista nutricionista
-    ){
+    public void cadastrar(int id,String nome,String horario,float calorias,List<Receita> receitas,Dieta dieta,Nutricionista nutricionista){
         ValidateRefeicao valid = new ValidateRefeicao();
-        Refeicao refeicao = valid.validaCamposEntrada(nome, horario, calorias, receitas, dieta, nutricionista);
+        Refeicao refeicao = valid.validaCamposEntrada(id,nome, horario, calorias, receitas, dieta, nutricionista);
         
         for (Receita r : refeicao.getReceitas()){
             r.addRefeicao(refeicao);
@@ -38,22 +31,14 @@ private RefeicaoDAO repositorio;
         repositorio.save(refeicao);
     }
     
-    public Receita buscar(int id){
-        return (Receita) this.repositorio.findById(id);
+    public Refeicao buscar(Object obj){
+        return (Refeicao) this.repositorio.find(obj);
     }
     
-    public void atualizar(
-            int id,
-            String nome,
-            String horario,
-            float calorias,
-            List<Receita> receitas,
-            Dieta dieta,
-            Nutricionista nutricionista
-    ){
+    public void atualizar(int id,String nome,String horario,float calorias,List<Receita> receitas,Dieta dieta,Nutricionista nutricionista){
 
         ValidateRefeicao valid = new ValidateRefeicao();
-        Refeicao refeicao = valid.validaCamposEntrada(nome, horario, calorias, receitas, dieta, nutricionista);
+        Refeicao refeicao = valid.validaCamposEntrada(id, nome, horario, calorias, receitas, dieta, nutricionista);
         
         for (Receita r : refeicao.getReceitas()){
             r.addRefeicao(refeicao);
