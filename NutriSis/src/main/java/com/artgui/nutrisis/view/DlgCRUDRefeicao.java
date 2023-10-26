@@ -1,7 +1,6 @@
 package com.artgui.nutrisis.view;
 
 import com.artgui.nutrisis.controller.ReceitaController;
-import com.artgui.nutrisis.controller.RefeicaoController;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
@@ -30,6 +29,8 @@ public class DlgCRUDRefeicao extends javax.swing.JDialog {
                 
         this.refeicaoRetornar = refeicaoRetornar;
         
+        initComponents();
+        
         if(isEditando){
             this.idRefeicaoEditando = refeicaoRetornar.getId();
             this.preencherFormulario(refeicaoRetornar);
@@ -37,38 +38,36 @@ public class DlgCRUDRefeicao extends javax.swing.JDialog {
             this.idRefeicaoEditando = -1;
             
         }
-        
-        initComponents();
-        
-        adicionarMascaraNosCampos();
+
+//        adicionarMascaraNosCampos();
     }
     
     // Não preciso habilitar ou desabilitar
     // Não preciso limpar os campos
     
-    public void adicionarMascaraNosCampos() {
-      
-        try {
-            MaskFormatter horarioFormatter = new MaskFormatter("##:##");
-            MaskFormatter idNutricionistaFormatter = new MaskFormatter("########");
-            
-            horarioFormatter.install(fEdtHorario);
-            idNutricionistaFormatter.install(fEdtIdNutricionista);
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(DlgCRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public void adicionarMascaraNosCampos() {
+//      
+//        try {
+//            //MaskFormatter horarioFormatter = new MaskFormatter("##:##");
+//            //MaskFormatter idNutricionistaFormatter = new MaskFormatter("########");
+//            
+//            //horarioFormatter.install(fEdtHorario);
+//            //idNutricionistaFormatter.install(fEdtIdNutricionista);
+//            
+//        } catch (ParseException ex) {
+//            Logger.getLogger(DlgCRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
     public void preencherFormulario(Refeicao r) {
-    
+        
         edtNome.setText(r.getNome());
         fEdtHorario.setText(r.getHorario());
         edtCalorias.setText(r.getCalorias() + "");
         fEdtIdNutricionista.setText(r.getNutricionista().getId() + "");
         
         receitas = r.getReceitas();
-        //atualiza tabela
+        receitaController.atualizarTabela(grdReceita, receitas);
     }
     
     private Object getObjetoSelecionadoNaGrid() {

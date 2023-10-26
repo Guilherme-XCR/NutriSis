@@ -2,8 +2,6 @@ package com.artgui.nutrisis.model.dao;
 
 import com.artgui.nutrisis.factory.DatabaseJPA;
 import com.artgui.nutrisis.interfaces.IDao;
-import com.artgui.nutrisis.model.Cliente;
-import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
 import java.util.List;
 import javax.persistence.EntityManager;

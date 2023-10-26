@@ -1,6 +1,9 @@
 package com.artgui.nutrisis.controller;
 
+import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.dao.NutricionistaDAO;
+import com.artgui.nutrisis.model.valid.ValidateNutricionista;
 
 public class NutricionistaController {
     
@@ -10,60 +13,61 @@ private NutricionistaDAO repositorio;
         repositorio = new NutricionistaDAO();
     }
     
-//    public void cadastrar(
-//            String nome, 
-//            String modoPreparo, 
-//            String tempoPreparo, 
-//            int porcoes, 
-//            String categoria, 
-//            List<Ingrediente> ingredientes, 
-//            Nutricionista nutricionista
-//    ){
-//        ValidateReceita valid = new ValidateReceita();
-//        Receita receita = valid.validaCamposEntrada(nome, modoPreparo, tempoPreparo, porcoes, categoria, ingredientes, nutricionista);
-//        
-//        for (Ingrediente i : receita.getIngredientes()){
-//            i.setReceita(receita);
-//        }
-//        
-//        repositorio.save(receita);
-//    }
-//    
-//    public Receita buscar(int id){
-//        return (Receita) this.repositorio.findById(id);
-//    }
-//    
-//    public void atualizar(int id, String nome, String modoPreparo, String tempoPreparo, int porcoes, String categoria, List<Ingrediente> ingredientes, Nutricionista nutricionista){
-//        ValidateReceita valid = new ValidateReceita();
-//        Receita receita = valid.validaCamposEntrada(nome, modoPreparo, tempoPreparo, porcoes, categoria, ingredientes, nutricionista);
-//        receita.setId(id);
-//        for (Ingrediente i : receita.getIngredientes()){
-//            i.setReceita(receita);
-//        }
-//        
-//        repositorio.update(receita);
-//    }
-//    
-//    public void excluir(Receita receita){
-//        if (receita != null) {
-//            repositorio.delete(receita);
-//        } else {
-//            throw new ReceitaException("Error - Receita inexistente.");
-//        }
-//    }
-//    
-//    public void atualizarTabela(JTable grd){
-//        List<Object> lst = repositorio.findAll();
-//        
-//        TMViewReceita tmReceita = new TMViewReceita(lst);
-//        grd.setModel(tmReceita);
-//    }
-//    
-//    public void atualizarTabela(JTable grd, List<Receita> receitas){
-//
-//        List<Object> lst = new ArrayList<>(receitas);
-//        
-//        TMViewReceita tmReceita = new TMViewReceita(lst);
-//        grd.setModel(tmReceita);
-//    }
-}
+   public void cadastrar(
+            String nome, 
+            String email, 
+            String senha, 
+            String cpf, 
+            String telefone, 
+            String crn,
+            String especializacao
+    ){
+        ValidateNutricionista valid = new ValidateNutricionista();
+        Nutricionista nutricionista = valid.validaCamposEntrada(
+                nome, 
+                email, 
+                senha,
+                cpf, 
+                telefone,
+                crn,
+                especializacao
+        );
+        repositorio.save(nutricionista);
+    }
+    
+    public Nutricionista buscar(Object nutircionista){
+        return (Nutricionista) this.repositorio.find(nutircionista);
+    }
+    
+     public void atualizar(
+            int id,
+            String nome, 
+            String email, 
+            String senha, 
+            String cpf, 
+            String telefone, 
+            String crn,
+            String especializacao
+    ){
+        ValidateNutricionista valid = new ValidateNutricionista();
+        Nutricionista nutricionista = valid.validaCamposEntrada(
+                nome, 
+                email, 
+                senha,
+                cpf, 
+                telefone,
+                crn,
+                especializacao
+        );
+        nutricionista.setId(id);
+        repositorio.update(nutricionista);
+    }
+    
+    public void excluir(Nutricionista nutricionista){
+        if (nutricionista != null) {
+            repositorio.delete(nutricionista);
+        } else {
+            throw new ClienteException("Error - Nutricionista inexistente.");
+        }
+    }
+ }

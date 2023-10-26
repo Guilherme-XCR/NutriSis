@@ -774,7 +774,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblTituloIngrediente" min="-2" pref="50" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" min="-2" pref="204" max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" min="-2" pref="133" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnCriarIngrediente" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>

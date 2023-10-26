@@ -11,11 +11,15 @@ import java.util.List;
 
 public class ValidateRefeicao {
     
-    public Refeicao validaCamposEntrada(int idRefeicao,String nome,String horario,float calorias,List<Receita> receitas, Dieta dieta,Nutricionista nutricionista){
-        if (idRefeicao <= 0) {
-            throw new RefeicaoException("Id de refeicao inválido.");
-        }
-
+    public Refeicao validaCamposEntrada(
+            String nome,
+            String horario,
+            float calorias,
+            List<Receita> receitas, 
+            Dieta dieta,
+            Nutricionista nutricionista
+    ){
+  
         if (nome == null || nome.isEmpty()) {
             throw new RefeicaoException("Nome do ingrediente não pode estar em branco.");
         }

@@ -1,5 +1,6 @@
 package com.artgui.nutrisis.model;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 
-public class Receita {
+public class Receita implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -32,10 +33,10 @@ public class Receita {
     private int porcoes;
     private String categoria;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "receitas")
     private List<Refeicao> refeicoes;
     
-    @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Ingrediente> ingredientes;
     
     @ManyToOne(cascade = CascadeType.ALL)
@@ -43,7 +44,15 @@ public class Receita {
     private Nutricionista nutricionista;
     
     //construtor sem id e sem refeicao
-    public Receita(String nome, String modoPreparo, String tempoPreparo, int porcoes, String categoria, List<Ingrediente> ingredientes, Nutricionista nutricionista){
+    public Receita(
+            String nome, 
+            String modoPreparo, 
+            String tempoPreparo, 
+            int porcoes, 
+            String categoria,
+            List<Ingrediente> ingredientes,
+            Nutricionista nutricionista
+    ){
         this.nome = nome;
         this.modoPreparo = modoPreparo;
         this.tempoPreparo = tempoPreparo;
@@ -58,5 +67,7 @@ public class Receita {
     public void addRefeicao(Refeicao refeicao){
         this.refeicoes.add(refeicao);
     }
-    
+    public void removeRefeicao(Refeicao refeicao){
+        this.refeicoes.remove(refeicao);
+    }
 }

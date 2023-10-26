@@ -5,12 +5,7 @@ import com.artgui.nutrisis.model.Ingrediente;
 
 public class ValidateIngrediente {
     
-    public Ingrediente validaCamposEntrada(int idReceita, String nome, String unidadeMedida, float quantidade, String descricao, String origem) {
-        // Realize as validações necessárias aqui
-
-        if (idReceita <= 0) {
-            throw new IngredienteException("Id de receita inválido.");
-        }
+    public Ingrediente validaCamposEntrada(String nome, String unidadeMedida, float quantidade) {
 
         if (nome == null || nome.isEmpty()) {
             throw new IngredienteException("Nome do ingrediente não pode estar em branco.");
@@ -24,15 +19,7 @@ public class ValidateIngrediente {
             throw new IngredienteException("Quantidade inválida.");
         }
 
-        if (descricao == null || descricao.isEmpty()) {
-            throw new IngredienteException("Descrição não pode estar em branco.");
-        }
-
-        if (origem == null || origem.isEmpty()) {
-            throw new IngredienteException("Origem não pode estar em branco.");
-        }
-
         // Se todas as validações passarem, crie um novo objeto Ingrediente
-        return new Ingrediente();
+        return new Ingrediente(nome, unidadeMedida, quantidade);
     }
 }

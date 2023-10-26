@@ -4,7 +4,6 @@ import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;

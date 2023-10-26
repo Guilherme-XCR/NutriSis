@@ -7,15 +7,18 @@ import java.util.regex.Pattern;
 
 public class ValidateNutricionista {
     
-    public Nutricionista validaCamposEntrada(String nome, String sobrenome, String email, String telefone, String cpf, Date dataNascimento, float salario, String crn, String especializacao, String descricao) {
-        // Realize as validações necessárias aqui
+    public Nutricionista validaCamposEntrada(
+            String nome,  
+            String email, 
+            String senha,
+            String cpf, 
+            String telefone,
+            String crn,
+            String especializacao
+    ) {
 
         if (nome == null || nome.isEmpty()) {
             throw new NutricionistaException("Nome não pode estar em branco.");
-        }
-
-        if (sobrenome == null || sobrenome.isEmpty()) {
-            throw new NutricionistaException("Sobrenome não pode estar em branco.");
         }
 
         if (email == null || !isValidEmail(email)) {
@@ -28,17 +31,8 @@ public class ValidateNutricionista {
 
         if (cpf == null || !isValidCPF(cpf)) {
             throw new NutricionistaException("CPF inválido.");
-        
         }
-            
-        if (dataNascimento == null) {
-            throw new NutricionistaException("Data de nascimento não pode ser nula.");
-        }
-        
-        if (salario < 0) {
-            throw new NutricionistaException("Salário não pode ser negativo.");
-        }
-
+      
         if (crn == null || crn.isEmpty()) {
             throw new NutricionistaException("CRN não pode estar em branco.");
         }
@@ -46,13 +40,16 @@ public class ValidateNutricionista {
         if (especializacao == null || especializacao.isEmpty()) {
             throw new NutricionistaException("Especialização não pode estar em branco.");
         }
-
-        if (descricao == null || descricao.isEmpty()) {
-            throw new NutricionistaException("Descrição não pode estar em branco.");
-        }
-
-        // Se todas as validações passarem, crie um novo objeto Nutricionista
-        return new Nutricionista();
+        
+        return new Nutricionista(
+                nome, 
+                email, 
+                senha, 
+                cpf, 
+                telefone, 
+                crn, 
+                especializacao
+        );
     }
         
     private boolean isValidCPF(String cpf) {

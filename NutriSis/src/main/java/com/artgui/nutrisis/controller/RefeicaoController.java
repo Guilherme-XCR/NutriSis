@@ -20,14 +20,26 @@ private RefeicaoDAO repositorio;
         repositorio = new RefeicaoDAO();
     }
     
-    public void cadastrar(int id,String nome,String horario,float calorias,List<Receita> receitas,Dieta dieta,Nutricionista nutricionista){
+    public void cadastrar(
+            String nome,
+            String horario,
+            float calorias,
+            List<Receita> receitas,
+            Dieta dieta,
+            Nutricionista nutricionista
+    ){
         ValidateRefeicao valid = new ValidateRefeicao();
-        Refeicao refeicao = valid.validaCamposEntrada(id,nome, horario, calorias, receitas, dieta, nutricionista);
-        
+        Refeicao refeicao = valid.validaCamposEntrada(
+                nome, 
+                horario, 
+                calorias, 
+                receitas, 
+                dieta, 
+                nutricionista
+        );
         for (Receita r : refeicao.getReceitas()){
             r.addRefeicao(refeicao);
         }
-        
         repositorio.save(refeicao);
     }
     
@@ -35,15 +47,27 @@ private RefeicaoDAO repositorio;
         return (Refeicao) this.repositorio.find(obj);
     }
     
-    public void atualizar(int id,String nome,String horario,float calorias,List<Receita> receitas,Dieta dieta,Nutricionista nutricionista){
-
+    public void atualizar(
+            int id,
+            String nome,
+            String horario,
+            float calorias,
+            List<Receita> receitas,
+            Dieta dieta,
+            Nutricionista nutricionista
+    ){
         ValidateRefeicao valid = new ValidateRefeicao();
-        Refeicao refeicao = valid.validaCamposEntrada(id, nome, horario, calorias, receitas, dieta, nutricionista);
-        
+        Refeicao refeicao = valid.validaCamposEntrada(
+                nome, 
+                horario, 
+                calorias, 
+                receitas, 
+                dieta, 
+                nutricionista
+        );
         for (Receita r : refeicao.getReceitas()){
             r.addRefeicao(refeicao);
         }
-        
         repositorio.update(refeicao);
     }
     
@@ -55,17 +79,16 @@ private RefeicaoDAO repositorio;
         }
     }
     
+    //Tabela que mostra todas as refeicoes sem restrição
     public void atualizarTabela(JTable grd){
         List<Object> lst = repositorio.findAll();
-        
         TMViewRefeicao tmRefeicao = new TMViewRefeicao(lst);
         grd.setModel(tmRefeicao);
     }
     
+    //tabela a ser usada no CRUD Dieta (para mostrar apenas refeicoes que pertencem a dieta escolhida)
     public void atualizarTabela(JTable grd, List<Refeicao> refeicoes){
-
         List<Object> lst = new ArrayList<>(refeicoes);
-        
         TMViewRefeicao tmRefeicao = new TMViewRefeicao(lst);
         grd.setModel(tmRefeicao);
     }

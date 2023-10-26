@@ -1,11 +1,13 @@
 package com.artgui.nutrisis.view;
 
 import com.artgui.nutrisis.controller.DietaController;
+import com.artgui.nutrisis.controller.ReceitaController;
 import com.artgui.nutrisis.controller.RefeicaoController;
 import com.artgui.nutrisis.exceptions.DietaException;
 import com.artgui.nutrisis.exceptions.RefeicaoException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
+import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
 
     DietaController dietaController;
     RefeicaoController refeicaoController;
+    ReceitaController receitaController;
     
     int idDietaEditando;
     
@@ -30,6 +33,7 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
         idDietaEditando = -1;
         dietaController = new DietaController();
         refeicaoController = new RefeicaoController();
+        receitaController = new ReceitaController();
         
         refeicoes = new ArrayList<>();
         
@@ -441,7 +445,7 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblTituloRefeicao, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panRefeicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCriarRefeicao, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -619,10 +623,25 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
             if (idDietaEditando > 0) {
                 dietaController.atualizar(idDietaEditando, edtNome.getText(), edtDescricao.getText(),Integer.parseInt(fEdtDiasDuracao.getText()), refeicoes, nutricionista);
             } else {
+                for(Refeicao ref: refeicoes){
+                    for(Receita rec: ref.getReceitas()){
+                        receitaController.atualizar(
+                                rec.getId(),
+                                rec.getNome(),
+                                rec.getModoPreparo(),
+                                rec.getTempoPreparo(),
+                                rec.getPorcoes(), 
+                                rec.getCategoria(),
+                                rec.getIngredientes(),
+                                rec.getNutricionista()
+                        );
+                    }
+                }
                 dietaController.cadastrar(edtNome.getText(), edtDescricao.getText(),Integer.parseInt(fEdtDiasDuracao.getText()), refeicoes, nutricionista);
+                
             }
             idDietaEditando = -1;
-            dietaController.atualizarTabela(grdRefeicoes);
+            dietaController.atualizarTabela(grdDietas);
             this.habilitarCampos(false);
             this.limparCampos();
         } catch (DietaException e) {
@@ -638,25 +657,27 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
         dlgCRUDRefeicao.setLocationRelativeTo(this);
         dlgCRUDRefeicao.setVisible(true);
         
+        if(refeicao != null){
         refeicoes.add(refeicao);
         refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
+        }else{
+            JOptionPane.showMessageDialog(this, "Criação cancelada!");
+        }
     }//GEN-LAST:event_btnCriarRefeicaoActionPerformed
 
     private void btnEditarRefeicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarRefeicaoActionPerformed
        Refeicao refeicaoEditando = (Refeicao) this.getObjetoSelecionadoNaGridRefeicao();
 
-       Refeicao refeicaoRetonar = new Refeicao();
-       refeicaoRetonar.copy(refeicaoEditando);
        
-       System.out.println("\n\n\n"
-               + "Nome edt: " + refeicaoEditando.getNome()
-               + "Nome ret: " + refeicaoRetonar.getNome()
-               + "\n\n\n");
-       
+     
         if (refeicaoEditando == null){
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         }else {
             
+            
+            Refeicao refeicaoRetonar = new Refeicao();
+            refeicaoRetonar.copy(refeicaoEditando);
+       
             DlgCRUDRefeicao dlgCRUDRefeicao = new DlgCRUDRefeicao(this, true, refeicaoRetonar, true);
             dlgCRUDRefeicao.setLocationRelativeTo(this);
             dlgCRUDRefeicao.setVisible(true);

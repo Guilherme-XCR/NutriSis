@@ -9,7 +9,7 @@ public class TMViewRefeicao extends AbstractTableModel{
     private List<Object> lista;
     
     private final int COL_ID = 0;
-    private final int COL_DETALHES = 1;
+    private final int COL_NOME = 1;
 
     public TMViewRefeicao(List<Object> lst){
         this.lista = lst;
@@ -41,13 +41,10 @@ public class TMViewRefeicao extends AbstractTableModel{
         switch (columnIndex) {
             case COL_ID:
                 return aux.getId();
-            case COL_DETALHES:
-                //return aux.getDetalhes();
-            
-                
+            case COL_NOME:
+                return aux.getNome();
             default:
                 break;
-
         }
         return aux;
     }
@@ -62,14 +59,11 @@ public class TMViewRefeicao extends AbstractTableModel{
         switch (columnIndex) {
             case COL_ID:
                 return "Id";
-            case COL_DETALHES:
-                return "Nome Receita";
-           
-                
+            case COL_NOME:
+                return "Nome";
             default:
                 break;
         }
         return "";
     }
-    
 }

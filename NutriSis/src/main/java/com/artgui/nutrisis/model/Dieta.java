@@ -12,12 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -32,24 +30,18 @@ public class Dieta implements Serializable {
     private String descricao;
     private int diasDuracao;
     
-    @OneToMany(mappedBy = "dieta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "dieta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)//
     private List<Refeicao> refeicoes;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
-    
-    // construtor sem id
-    
+
     public Dieta( String nome,String descricao,int diasDuracao,List<Refeicao> refeicoes,Nutricionista nutricionista){
-    
         this.nome = nome;
         this.descricao = descricao;
         this.diasDuracao = diasDuracao;
         this.refeicoes = refeicoes;
         this.nutricionista = nutricionista;
-        
     }
-   
-    
 }
