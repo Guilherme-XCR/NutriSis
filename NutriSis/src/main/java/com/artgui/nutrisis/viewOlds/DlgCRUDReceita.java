@@ -1,4 +1,4 @@
-package com.artgui.nutrisis.viewOlds;
+package com.artgui.nutrisis.view;
 
 import com.artgui.nutrisis.controller.IngredienteController;
 import com.artgui.nutrisis.controller.ReceitaController;

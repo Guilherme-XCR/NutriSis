@@ -1,4 +1,4 @@
-package com.artgui.nutrisis.viewOlds;
+package com.artgui.nutrisis.view;
 
 import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.exceptions.ClienteException;
