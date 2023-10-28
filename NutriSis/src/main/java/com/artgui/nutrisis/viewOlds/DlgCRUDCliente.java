@@ -1,4 +1,4 @@
-package com.artgui.nutrisis.view;
+package com.artgui.nutrisis.viewOlds;
 
 import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.exceptions.ClienteException;
@@ -148,7 +148,6 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
-        setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
 

@@ -1,6 +1,6 @@
 package com.artgui.nutrisis;
 
-import com.artgui.nutrisis.view.FrMenuTemporario;
+import com.artgui.nutrisis.viewOlds.FrMenuTemporario;
 
 
 /*
