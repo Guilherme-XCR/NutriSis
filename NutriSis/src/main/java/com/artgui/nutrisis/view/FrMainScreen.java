@@ -1,5 +1,6 @@
 package com.artgui.nutrisis.view;
 
+import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
 import com.artgui.nutrisis.view.Login.DlgLogin;
 import com.artgui.nutrisis.view.Register.DlgRegister;
 
@@ -28,10 +29,9 @@ public class FrMainScreen extends javax.swing.JFrame {
         panButtons.setPreferredSize(new java.awt.Dimension(1280, 170));
 
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogin.setFont(new java.awt.Font("Cascadia Mono", 1, 48)); // NOI18N
+        btnLogin.setFont(new java.awt.Font("Cascadia Code", 1, 48)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(0, 0, 0));
-        btnLogin.setText("Logar");
-        btnLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLogin.setText("Login");
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.setFocusable(false);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -41,13 +41,11 @@ public class FrMainScreen extends javax.swing.JFrame {
         });
 
         btnRegister.setBackground(new java.awt.Color(255, 255, 255));
-        btnRegister.setFont(new java.awt.Font("Cascadia Mono", 1, 48)); // NOI18N
+        btnRegister.setFont(new java.awt.Font("Cascadia Code", 1, 48)); // NOI18N
         btnRegister.setForeground(new java.awt.Color(0, 0, 0));
-        btnRegister.setText("Registrar");
-        btnRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnRegister.setText("Register");
         btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegister.setFocusable(false);
-        btnRegister.setPreferredSize(new java.awt.Dimension(238, 59));
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterActionPerformed(evt);
@@ -59,9 +57,9 @@ public class FrMainScreen extends javax.swing.JFrame {
         panButtonsLayout.setHorizontalGroup(
             panButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panButtonsLayout.createSequentialGroup()
-                .addGap(160, 160, 160)
+                .addGap(220, 220, 220)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(320, 320, 320)
+                .addGap(200, 200, 200)
                 .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -70,9 +68,9 @@ public class FrMainScreen extends javax.swing.JFrame {
             .addGroup(panButtonsLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(panButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(btnLogin)
+                    .addComponent(btnRegister))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
@@ -105,21 +103,27 @@ public class FrMainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
         DlgLogin dlgLogin = new DlgLogin(this, true);
+        
         this.setVisible(false);
         dlgLogin.setLocationRelativeTo(this);
         dlgLogin.setVisible(true);
         
         this.setVisible(true);
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        
         DlgRegister dlgRegister = new DlgRegister(this, true);
+        
         this.setVisible(false);
         dlgRegister.setLocationRelativeTo(this);
         dlgRegister.setVisible(true);
         
         this.setVisible(true);
+        
     }//GEN-LAST:event_btnRegisterActionPerformed
 
 

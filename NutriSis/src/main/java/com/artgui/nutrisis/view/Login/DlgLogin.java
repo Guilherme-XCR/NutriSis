@@ -1,6 +1,7 @@
 package com.artgui.nutrisis.view.Login;
 
 import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
+import com.artgui.nutrisis.view.Register.DlgRegister;
 
 public class DlgLogin extends javax.swing.JDialog {
 
@@ -20,7 +21,7 @@ public class DlgLogin extends javax.swing.JDialog {
         edtEmail = new javax.swing.JTextField();
         edtSenha = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -40,11 +41,6 @@ public class DlgLogin extends javax.swing.JDialog {
         edtEmail.setText("guilhermerodrigues.0721@gmail.com");
         edtEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         edtEmail.setPreferredSize(new java.awt.Dimension(294, 40));
-        edtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtEmailActionPerformed(evt);
-            }
-        });
 
         edtSenha.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
         edtSenha.setText("lugin12345");
@@ -73,30 +69,26 @@ public class DlgLogin extends javax.swing.JDialog {
         );
 
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogin.setFont(new java.awt.Font("Cascadia Mono", 1, 48)); // NOI18N
+        btnLogin.setFont(new java.awt.Font("Cascadia Code", 1, 48)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(0, 0, 0));
-        btnLogin.setText("Logar");
-        btnLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLogin.setText("Login");
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.setFocusable(false);
-        btnLogin.setPreferredSize(new java.awt.Dimension(238, 59));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
 
-        btnCancel.setBackground(new java.awt.Color(255, 255, 255));
-        btnCancel.setFont(new java.awt.Font("Cascadia Mono", 1, 24)); // NOI18N
-        btnCancel.setForeground(new java.awt.Color(0, 0, 0));
-        btnCancel.setText("Cancelar");
-        btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancel.setFocusable(false);
-        btnCancel.setPreferredSize(new java.awt.Dimension(238, 59));
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setBackground(new java.awt.Color(255, 255, 255));
+        btnSair.setFont(new java.awt.Font("Cascadia Code", 1, 24)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(0, 0, 0));
+        btnSair.setText("Sair");
+        btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSair.setFocusable(false);
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -108,18 +100,18 @@ public class DlgLogin extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panRegisterLayout.createSequentialGroup()
-                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panInputs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panRegisterLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(120, Short.MAX_VALUE)
                 .addGroup(panRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panRegisterLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)))
+                    .addGroup(panRegisterLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(120, 120, 120))
         );
         panRegisterLayout.setVerticalGroup(
@@ -130,9 +122,9 @@ public class DlgLogin extends javax.swing.JDialog {
                 .addGap(128, 128, 128)
                 .addComponent(panInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSair)
                 .addContainerGap())
         );
 
@@ -156,6 +148,7 @@ public class DlgLogin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+       
         DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true);
         
         this.setVisible(false);
@@ -163,20 +156,17 @@ public class DlgLogin extends javax.swing.JDialog {
         dlgMainCliente.setVisible(true);
         
         this.setVisible(true);
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void edtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtEmailActionPerformed
+    }//GEN-LAST:event_btnSairActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnSair;
     private javax.swing.JTextField edtEmail;
     private javax.swing.JPasswordField edtSenha;
     private javax.swing.JLabel lblBackground;
