@@ -2,14 +2,19 @@ package com.artgui.nutrisis.interfaces;
 
 import java.util.List;
 
-public interface IDao {
-    public void save(Object obj);
+public interface IDao<T> {
+    // C - create
+    void save(T obj);
     
-    public void update(Object obj);
+    // R - read
+    T find(int id);        
+    List<T> findAll();
     
-    public void delete(Object obj);
-            
-    public Object find(Object obj);
-        
-    public List<Object> findAll();
+    // U - update
+    void update(T obj);
+    
+    // D - delete
+    boolean delete(T obj);           
+    
+    
 }

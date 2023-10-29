@@ -83,7 +83,7 @@ public class ClienteController {
     }
     
     public void atualizarTabela(JTable grd){
-        List<Object> lst = repositorio.findAll();
+        List<Cliente> lst = repositorio.findAll();
         TMViewCliente tmCliente = new TMViewCliente(lst);
         grd.setModel(tmCliente);
     }

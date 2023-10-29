@@ -1,83 +1,37 @@
 package com.artgui.nutrisis.model.dao;
 
 import com.artgui.nutrisis.factory.DatabaseJPA;
-import com.artgui.nutrisis.interfaces.IDao;
 import com.artgui.nutrisis.model.Ingrediente;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
-public class IngredienteDAO implements IDao{
-
-    private EntityManager entityManager;
-    
-    private Query qry;
-    private String jpql;
+ public class IngredienteDAO extends Dao<Ingrediente> {
     
     public IngredienteDAO(){
     }
+
+    public Ingrediente find(int id) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        Ingrediente i = this.entityManager.find(Ingrediente.class, id);
+        this.entityManager.close();
+        return i;        
+    }
     
-    @Override
-    public void save(Object obj) {
+    public List<Ingrediente> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        this.entityManager.getTransaction().begin();       
-        this.entityManager.persist(obj);                    
-        this.entityManager.getTransaction().commit();        
-        
-        this.entityManager.close();
-    }
-
-    @Override
-    public void update(Object obj) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        this.entityManager.getTransaction().begin();       
-        this.entityManager.merge(obj);                    
-        this.entityManager.getTransaction().commit();     
-        
-        this.entityManager.close();
-    }
-
-    @Override
-    public void delete(Object obj) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        Ingrediente ingrediente = (Ingrediente) obj;
-
-        this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Ingrediente WHERE id=:id ");
-        qry.setParameter("id", ingrediente.getId());
-        qry.executeUpdate();
-        this.entityManager.getTransaction().commit();
-        this.entityManager.close();
-    }
-
-    @Override
-    public Object find(Object obj) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        Ingrediente ingrediente = (Ingrediente) obj;
-        
-        Ingrediente i = this.entityManager.find(Ingrediente.class, ingrediente.getId());
-        
-        this.entityManager.close();
-        
-        return i;
-    }
-
-    @Override
-    public List<Object> findAll() {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        jpql = " SELECT i "
-             + " FROM Ingrediente i ";
-
-        qry = this.entityManager.createQuery(jpql);
-        
+        jpql = " SELECT i FROM Ingrediente i ";
+        qry = this.entityManager.createQuery(jpql, Ingrediente.class);
         List lst = qry.getResultList();
-        
         this.entityManager.close();
-        return (List<Object>) lst;
+        return lst;
+    }
+    
+    public List<Ingrediente> filterByName(String nome) {
+        super.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = "SELECT i FROM Ingrediente i WHERE i.nome like :nome";
+        qry = super.entityManager.createQuery(jpql, Ingrediente.class);
+        qry.setParameter("nome", nome+"%");
+        List<Ingrediente> lst = qry.getResultList();
+        super.entityManager.close();
+        return lst;
     }
 }

@@ -7,79 +7,34 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-public class NutricionistaDAO implements IDao{
- 
-    private EntityManager entityManager;
-    
-    private Query qry;
-    private String jpql;
+ public class NutricionistaDAO extends Dao<Nutricionista> {
     
     public NutricionistaDAO(){
     }
+
+    public Nutricionista find(int id) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        Nutricionista r = this.entityManager.find(Nutricionista.class, id);
+        this.entityManager.close();
+        return r;        
+    }
     
-    @Override
-    public void save(Object obj) {
+    public List<Nutricionista> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        this.entityManager.getTransaction().begin();       
-        this.entityManager.persist(obj);                    
-        this.entityManager.getTransaction().commit();        
-        
-        this.entityManager.close();
-    }
-
-    @Override
-    public void update(Object obj) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        this.entityManager.getTransaction().begin();       
-        this.entityManager.merge(obj);                    
-        this.entityManager.getTransaction().commit();     
-        
-        this.entityManager.close();
-    }
-
-    @Override
-    public void delete(Object obj) {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        Nutricionista nutricionista = (Nutricionista) obj;
-        
-        this.entityManager.getTransaction().begin();
-        qry = this.entityManager.createQuery("DELETE FROM Nutricionista WHERE id=:id ");
-        qry.setParameter("id", nutricionista.getId());
-        qry.executeUpdate();
-        this.entityManager.getTransaction().commit();
-        this.entityManager.close();
-    }
-
-    @Override
-    public Object find(Object obj) {
-        
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-       
-        Nutricionista nutricionista = (Nutricionista) obj;
-        
-        Nutricionista n = this.entityManager.find(Nutricionista.class, nutricionista.getId());
-        
-        this.entityManager.close();
-        
-        return n;
-
-    }
-
-    @Override
-    public List<Object> findAll() {
-        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        
-        jpql = " SELECT n "
-             + " FROM Nutricionista n ";
-
-        qry = this.entityManager.createQuery(jpql);
-        
+        jpql = " SELECT n FROM Nutricionista n ";
+        qry = this.entityManager.createQuery(jpql, Nutricionista.class);
         List lst = qry.getResultList();
-        
         this.entityManager.close();
-        return (List<Object>) lst;
+        return lst;
+    }
+    
+    public List<Nutricionista> filterByName(String nome) {
+        super.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = "SELECT n FROM Nutricionista n WHERE n.nome like :nome";
+        qry = super.entityManager.createQuery(jpql, Nutricionista.class);
+        qry.setParameter("nome", nome+"%");
+        List<Nutricionista> lst = qry.getResultList();
+        super.entityManager.close();
+        return lst;
     }
 }
