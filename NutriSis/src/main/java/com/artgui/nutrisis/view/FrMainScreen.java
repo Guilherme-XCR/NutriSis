@@ -33,9 +33,7 @@ public class FrMainScreen extends javax.swing.JFrame {
         btnLogin.setText("Logar");
         btnLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogin.setFocusPainted(false);
         btnLogin.setFocusable(false);
-        btnLogin.setPreferredSize(new java.awt.Dimension(150, 59));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -48,7 +46,6 @@ public class FrMainScreen extends javax.swing.JFrame {
         btnRegister.setText("Registrar");
         btnRegister.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegister.setFocusPainted(false);
         btnRegister.setFocusable(false);
         btnRegister.setPreferredSize(new java.awt.Dimension(238, 59));
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
