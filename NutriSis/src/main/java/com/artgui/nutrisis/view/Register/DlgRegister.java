@@ -1,5 +1,7 @@
 package com.artgui.nutrisis.view.Register;
 
+import com.artgui.nutrisis.view.Nutricionista.DlgMainNutricionista;
+
 public class DlgRegister extends javax.swing.JDialog {
 
     public DlgRegister(java.awt.Frame parent, boolean modal) {
@@ -240,7 +242,13 @@ public class DlgRegister extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        DlgMainNutricionista dlgMainNutricionista = new DlgMainNutricionista(this, true);
+        
+        this.setVisible(false);
+        dlgMainNutricionista.setLocationRelativeTo(this);
+        dlgMainNutricionista.setVisible(true);
+        
+        this.setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

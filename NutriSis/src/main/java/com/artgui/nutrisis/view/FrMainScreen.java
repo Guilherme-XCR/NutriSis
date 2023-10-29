@@ -1,6 +1,5 @@
 package com.artgui.nutrisis.view;
 
-import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
 import com.artgui.nutrisis.view.Login.DlgLogin;
 import com.artgui.nutrisis.view.Register.DlgRegister;
 

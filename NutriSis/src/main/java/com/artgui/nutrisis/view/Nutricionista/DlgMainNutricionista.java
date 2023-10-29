@@ -6,6 +6,11 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public DlgMainNutricionista(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -15,7 +20,6 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
         panHeader = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         panUser = new javax.swing.JPanel();
-        btnConta = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         lblIconUser = new javax.swing.JLabel();
         lblNomeUser = new javax.swing.JLabel();
@@ -43,19 +47,17 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
         panUser.setBackground(new java.awt.Color(237, 249, 253));
         panUser.setForeground(new java.awt.Color(0, 0, 0));
 
-        btnConta.setBackground(new java.awt.Color(255, 255, 255));
-        btnConta.setFont(new java.awt.Font("Cascadia Code", 1, 14)); // NOI18N
-        btnConta.setForeground(new java.awt.Color(0, 0, 0));
-        btnConta.setText("Conta");
-        btnConta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConta.setFocusable(false);
-
         btnLogout.setBackground(new java.awt.Color(255, 255, 255));
         btnLogout.setFont(new java.awt.Font("Cascadia Code", 1, 14)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(0, 0, 0));
         btnLogout.setText("Deslogar");
         btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogout.setFocusable(false);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         lblIconUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IconNutri.png"))); // NOI18N
 
@@ -67,20 +69,16 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblIconUser)
                 .addGap(18, 18, 18)
-                .addGroup(panUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panUserLayout.setVerticalGroup(
             panUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panUserLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(btnConta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(lblIconUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panUserLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
 
         lblNomeUser.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -389,10 +387,13 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
         this.setVisible(true);
     }//GEN-LAST:event_btnAcompanhamentosActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcompanhamentos;
     private javax.swing.JButton btnConsultas;
-    private javax.swing.JButton btnConta;
     private javax.swing.JButton btnDietas;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnReceitas;
