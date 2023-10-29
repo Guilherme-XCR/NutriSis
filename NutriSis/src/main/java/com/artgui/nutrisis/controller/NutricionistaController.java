@@ -35,10 +35,6 @@ private NutricionistaDAO repositorio;
         repositorio.save(nutricionista);
     }
     
-    public Nutricionista buscar(Object nutircionista){
-        return (Nutricionista) this.repositorio.find(nutircionista);
-    }
-    
      public void atualizar(
             int id,
             String nome, 

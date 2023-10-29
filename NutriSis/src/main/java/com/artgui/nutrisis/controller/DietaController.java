@@ -41,11 +41,7 @@ public class DietaController {
         }
         repositorio.save(dieta);
     }
-    
-    public Receita buscar(int id){
-        return (Receita) this.repositorio.findById(id);
-    }
-    
+        
     public void atualizar(
             int id,
             String nome,
@@ -78,14 +74,12 @@ public class DietaController {
     }
     
     public void atualizarTabela(JTable grd){
-        List<Object> lst = repositorio.findAll();
-        TMViewDieta tmDieta = new TMViewDieta(lst);
+        TMViewDieta tmDieta = new TMViewDieta(repositorio.findAll());
         grd.setModel(tmDieta);
     }
     
     public void atualizarTabela(JTable grd, List<Dieta> dietas){
-        List<Object> lst = new ArrayList<>(dietas);
-        TMViewDieta tmDieta = new TMViewDieta(lst);
+        TMViewDieta tmDieta = new TMViewDieta(dietas);
         grd.setModel(tmDieta);
     }
     

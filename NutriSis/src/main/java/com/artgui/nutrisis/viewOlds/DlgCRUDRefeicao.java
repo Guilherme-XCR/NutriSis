@@ -425,15 +425,15 @@ public class DlgCRUDRefeicao extends javax.swing.JDialog {
 
     private void btnAdicionarReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarReceitaActionPerformed
         
-        String idReceita = JOptionPane.showInputDialog(this ,"Informe o id da receita a ser adicionada:", "");
-        Receita receita = receitaController.buscar(Integer.parseInt(idReceita));
-
-        if (receita == null) {
-            JOptionPane.showMessageDialog(this, "Receita " + idReceita + " não existe!");
-        } else {
-            receitas.add(receita);
-            receitaController.atualizarTabela(grdReceita, receitas);
-        }
+//        String idReceita = JOptionPane.showInputDialog(this ,"Informe o id da receita a ser adicionada:", "");
+//        Receita receita = receitaController.buscar(Integer.parseInt(idReceita));
+//
+//        if (receita == null) {
+//            JOptionPane.showMessageDialog(this, "Receita " + idReceita + " não existe!");
+//        } else {
+//            receitas.add(receita);
+//            receitaController.atualizarTabela(grdReceita, receitas);
+//        }
     }//GEN-LAST:event_btnAdicionarReceitaActionPerformed
 
     private void btnRemoverReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverReceitaActionPerformed

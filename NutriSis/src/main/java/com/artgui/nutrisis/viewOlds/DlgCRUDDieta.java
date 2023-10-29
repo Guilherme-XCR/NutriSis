@@ -698,25 +698,25 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditarRefeicaoActionPerformed
 
     private void btnExcluirRefeicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirRefeicaoActionPerformed
-        Refeicao refeicao = (Refeicao) this.getObjetoSelecionadoNaGridRefeicao();
-
-        if (refeicao == null)
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
-            try {   
-                Refeicao r = refeicaoController.buscar(refeicao);
-                if(r != null){
-                    refeicaoController.excluir(refeicao);
-                }
-                JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-            } catch (RefeicaoException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            }
-            refeicoes.remove(refeicao);                refeicoes.remove(refeicao);
-
-            refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
-
-        }  
+//        Refeicao refeicao = (Refeicao) this.getObjetoSelecionadoNaGridRefeicao();
+//
+//        if (refeicao == null)
+//            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+//        else {
+//            try {   
+//                Refeicao r = refeicaoController.buscar(refeicao);
+//                if(r != null){
+//                    refeicaoController.excluir(refeicao);
+//                }
+//                JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+//            } catch (RefeicaoException ex) {
+//                JOptionPane.showMessageDialog(this, ex.getMessage());
+//            }
+//            refeicoes.remove(refeicao);                refeicoes.remove(refeicao);
+//
+//            refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
+//
+//        }  
     }//GEN-LAST:event_btnExcluirRefeicaoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

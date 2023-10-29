@@ -31,11 +31,7 @@ public class IngredienteController {
         );
         repositorio.save(ingrediente);
     }
-    
-    public Ingrediente buscar(Object obj){
-        return (Ingrediente) this.repositorio.find(obj);
-    }
-    
+  
     // este metodo não é utilizado, deixo para o propio Hibernate para fazer isso;
     public void atualizar(
             int id,
@@ -62,17 +58,12 @@ public class IngredienteController {
     }
     
     public void atualizarTabela(JTable grd){
-        List<Object> lst = repositorio.findAll();
-        
-        TMViewIngrediente tmIngrediente = new TMViewIngrediente(lst);
+        TMViewIngrediente tmIngrediente = new TMViewIngrediente(repositorio.findAll());
         grd.setModel(tmIngrediente);
     }
     
     public void atualizarTabela(JTable grd, List<Ingrediente> ingredientes){
-
-        List<Object> lst = new ArrayList<>(ingredientes);
-        
-        TMViewIngrediente tmIngrediente = new TMViewIngrediente(lst);
+        TMViewIngrediente tmIngrediente = new TMViewIngrediente(ingredientes);
         grd.setModel(tmIngrediente);
     }
 }

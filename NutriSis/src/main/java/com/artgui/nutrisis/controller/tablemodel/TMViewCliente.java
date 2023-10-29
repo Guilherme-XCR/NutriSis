@@ -6,12 +6,13 @@ import javax.swing.table.AbstractTableModel;
 
 public class TMViewCliente extends AbstractTableModel {
 
-    private List<Object> lista;
+    private List<Cliente> lista;
     
-    private final int COL_ID = 0;
-    private final int COL_NOME = 1;
-    
-    public TMViewCliente(List<Object> lst){
+    private final int COL_NOME = 0;
+    private final int COL_EMAIL = 1;
+    private final int COL_TELEFONE = 2;
+
+    public TMViewCliente(List<Cliente> lst){
         this.lista = lst;
     }
     
@@ -22,33 +23,28 @@ public class TMViewCliente extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-
         Cliente aux = new Cliente();
         if (lista.isEmpty()){
             return aux;
         }else{
-            
+            aux = (Cliente) lista.get(rowIndex);
+            switch (columnIndex) {
+                case COL_NOME:
+                    return aux.getNome();
+                case COL_EMAIL:
+                    return aux.getEmail();
+                case COL_TELEFONE:
+                    return aux.getTelefone();
+                default:
+                    break;
+            }
+            return aux;
         }
-        
-        aux = (Cliente) lista.get(rowIndex);
-
-        //verifica qual valor deve ser retornado
-        switch (columnIndex) {
-            case COL_ID:
-                return aux.getId();
-            case COL_NOME:
-                return aux.getNome();
-            
-            default:
-                break;
-
-        }
-        return aux;
     }
     
     @Override
@@ -59,14 +55,15 @@ public class TMViewCliente extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex){
         switch (columnIndex) {
-            case COL_ID:
-                return "Id";
-            case COL_NOME:
-                return "Nome";
-            
-            default:
-                break;
-        }
-        return "";
+                case COL_NOME:
+                    return "Nome";
+                case COL_EMAIL:
+                    return "Email";
+                case COL_TELEFONE:
+                    return "Telefone";
+                default:
+                    break;
+            }
+            return "";
     }
 }

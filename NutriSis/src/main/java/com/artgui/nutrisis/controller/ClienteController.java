@@ -41,11 +41,7 @@ public class ClienteController {
         );
         repositorio.save(cliente);
     }
-    
-    public Cliente buscar(String cpf){
-        return (Cliente) this.repositorio.findByCpf(cpf);
-    }
-    
+
     public void atualizar(
             int id, 
             String nome, 
@@ -83,8 +79,7 @@ public class ClienteController {
     }
     
     public void atualizarTabela(JTable grd){
-        List<Cliente> lst = repositorio.findAll();
-        TMViewCliente tmCliente = new TMViewCliente(lst);
+        TMViewCliente tmCliente = new TMViewCliente(repositorio.findAll());
         grd.setModel(tmCliente);
     }
 }

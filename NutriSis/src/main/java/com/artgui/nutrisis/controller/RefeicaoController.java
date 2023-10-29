@@ -42,11 +42,7 @@ private RefeicaoDAO repositorio;
         }
         repositorio.save(refeicao);
     }
-    
-    public Refeicao buscar(Object obj){
-        return (Refeicao) this.repositorio.find(obj);
-    }
-    
+        
     public void atualizar(
             int id,
             String nome,
@@ -81,15 +77,13 @@ private RefeicaoDAO repositorio;
     
     //Tabela que mostra todas as refeicoes sem restrição
     public void atualizarTabela(JTable grd){
-        List<Object> lst = repositorio.findAll();
-        TMViewRefeicao tmRefeicao = new TMViewRefeicao(lst);
+        TMViewRefeicao tmRefeicao = new TMViewRefeicao(repositorio.findAll());
         grd.setModel(tmRefeicao);
     }
     
     //tabela a ser usada no CRUD Dieta (para mostrar apenas refeicoes que pertencem a dieta escolhida)
     public void atualizarTabela(JTable grd, List<Refeicao> refeicoes){
-        List<Object> lst = new ArrayList<>(refeicoes);
-        TMViewRefeicao tmRefeicao = new TMViewRefeicao(lst);
+        TMViewRefeicao tmRefeicao = new TMViewRefeicao(refeicoes);
         grd.setModel(tmRefeicao);
     }
 }

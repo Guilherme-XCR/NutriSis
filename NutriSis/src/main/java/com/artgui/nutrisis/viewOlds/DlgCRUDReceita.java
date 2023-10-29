@@ -766,25 +766,25 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
 
     private void btnExcluirIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirIngredienteActionPerformed
      
-        Ingrediente ingrediente = (Ingrediente) this.getObjetoSelecionadoNaGridIngrediente();
-
-        if (ingrediente == null)
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        else {
-            try {   
-                Ingrediente i = ingredienteController.buscar(ingrediente);
-                if(i != null){
-                    ingredienteController.excluir(ingrediente);
-                }
-                JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-            } catch (ClienteException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            }
-            ingredientes.remove(ingrediente);                ingredientes.remove(ingrediente);
-
-            ingredienteController.atualizarTabela(grdIngredientes, ingredientes);
-
-        }  
+//        Ingrediente ingrediente = (Ingrediente) this.getObjetoSelecionadoNaGridIngrediente();
+//
+//        if (ingrediente == null)
+//            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+//        else {
+//            try {   
+//                Ingrediente i = ingredienteController.buscar(ingrediente);
+//                if(i != null){
+//                    ingredienteController.excluir(ingrediente);
+//                }
+//                JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+//            } catch (ClienteException ex) {
+//                JOptionPane.showMessageDialog(this, ex.getMessage());
+//            }
+//            ingredientes.remove(ingrediente);                ingredientes.remove(ingrediente);
+//
+//            ingredienteController.atualizarTabela(grdIngredientes, ingredientes);
+//
+//        }  
     }//GEN-LAST:event_btnExcluirIngredienteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

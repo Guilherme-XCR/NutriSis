@@ -4,17 +4,16 @@ import com.artgui.nutrisis.model.Receita;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class TMViewReceita extends AbstractTableModel{
+public class TMViewReceita extends AbstractTableModel {
 
-    private List<Object> lista;
-    
-    private final int COL_ID = 0;
-    private final int COL_NOME = 1;
-    
-    public TMViewReceita(List<Object> lst){
+    private List<Receita> lista;
+
+    private final int COL_NOME = 0;
+
+    public TMViewReceita(List<Receita> lst) {
         this.lista = lst;
     }
-    
+
     @Override
     public int getRowCount() {
         return lista.size();
@@ -22,52 +21,39 @@ public class TMViewReceita extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 1;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-
         Receita aux = new Receita();
-        if (lista.isEmpty()){
+        if (lista.isEmpty()) {
             return aux;
-        }else{
-            
+        } else {
+            aux = (Receita) lista.get(rowIndex);
+            switch (columnIndex) {
+                case COL_NOME:
+                    return aux.getNome();
+                default:
+                    break;
+            }
+            return aux;
         }
-        
-        aux = (Receita) lista.get(rowIndex);
-
-        //verifica qual valor deve ser retornado
-        switch (columnIndex) {
-            case COL_ID:
-                return aux.getId();
-            case COL_NOME:
-                return aux.getNome();
-                
-            default:
-                break;
-
-        }
-        return aux;
     }
-    
+
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
-        
+
     @Override
-    public String getColumnName(int columnIndex){
+    public String getColumnName(int columnIndex) {
         switch (columnIndex) {
-            case COL_ID:
-                return "Id";
             case COL_NOME:
                 return "Nome";
-                
             default:
                 break;
         }
         return "";
     }
-    
 }
