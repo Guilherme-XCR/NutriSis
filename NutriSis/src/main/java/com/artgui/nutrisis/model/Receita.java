@@ -29,7 +29,7 @@ public class Receita implements Serializable {
     
     private String nome;
     private String modoPreparo;
-    private String tempoPreparo;
+    private int tempoPreparo;
     private int porcoes;
     private String categoria;
 
@@ -47,7 +47,7 @@ public class Receita implements Serializable {
     public Receita(
             String nome, 
             String modoPreparo, 
-            String tempoPreparo, 
+            int tempoPreparo, 
             int porcoes, 
             String categoria,
             List<Ingrediente> ingredientes,

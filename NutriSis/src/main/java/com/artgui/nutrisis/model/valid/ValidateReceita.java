@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ValidateReceita {
     
-    public Receita validaCamposEntrada(String nome, String modoPreparo, String tempoPreparo, int porcoes, String categoria, List<Ingrediente> ingredientes, Nutricionista nutricionista) {
+    public Receita validaCamposEntrada(String nome, String modoPreparo, int tempoPreparo, int porcoes, String categoria, List<Ingrediente> ingredientes, Nutricionista nutricionista) {
      
         return new Receita(nome, modoPreparo, tempoPreparo, porcoes, categoria, ingredientes, nutricionista);
     }

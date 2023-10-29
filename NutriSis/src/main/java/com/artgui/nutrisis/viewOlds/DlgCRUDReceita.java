@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
+
+
 public class DlgCRUDReceita extends javax.swing.JDialog {
 
     ReceitaController receitaController = new ReceitaController();
@@ -79,7 +81,7 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
     public void preencherFormulario(Receita r) {
     
         edtNome.setText(r.getNome());
-        fEdtTempoPreparo.setText(r.getTempoPreparo());
+        fEdtTempoPreparo.setText(r.getTempoPreparo() + "");
         fEdtPorcoes.setText(r.getPorcoes() + "");
         edtCategoria.setText(r.getCategoria());
         fEdtIdNutricionista.setText(r.getNutricionista().getId() + "");
@@ -702,9 +704,9 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
         
         try {
             if (idReceitaEditando > 0) {
-                receitaController.atualizar(idReceitaEditando, edtNome.getText(), edtModoDePreparo.getText(), fEdtTempoPreparo.getText(), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
+                receitaController.atualizar(idReceitaEditando, edtNome.getText(), edtModoDePreparo.getText(),  Integer.parseInt(fEdtTempoPreparo.getText()), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
             } else {
-                receitaController.cadastrar(edtNome.getText(), edtModoDePreparo.getText(), fEdtTempoPreparo.getText(), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
+                receitaController.cadastrar(edtNome.getText(), edtModoDePreparo.getText(),  Integer.parseInt(fEdtTempoPreparo.getText()), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
             }
             idReceitaEditando = -1;
             receitaController.atualizarTabela(grdReceitas);

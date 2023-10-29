@@ -1,5 +1,6 @@
 package com.artgui.nutrisis.view.Register;
 
+import com.artgui.nutrisis.view.DlgCRUDReceita;
 import com.artgui.nutrisis.view.Nutricionista.DlgMainNutricionista;
 
 public class DlgRegister extends javax.swing.JDialog {
@@ -243,7 +244,7 @@ public class DlgRegister extends javax.swing.JDialog {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         DlgMainNutricionista dlgMainNutricionista = new DlgMainNutricionista(this, true);
-        
+    
         this.setVisible(false);
         dlgMainNutricionista.setLocationRelativeTo(this);
         dlgMainNutricionista.setVisible(true);
