@@ -339,9 +339,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         grdIngredientes.setGridColor(new java.awt.Color(0, 0, 0));
         grdIngredientes.setShowGrid(true);
         jScrollPane2.setViewportView(grdIngredientes);
-        if (grdIngredientes.getColumnModel().getColumnCount() > 0) {
-            grdIngredientes.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         javax.swing.GroupLayout panReceitaInfoLayout = new javax.swing.GroupLayout(panReceitaInfo);
         panReceitaInfo.setLayout(panReceitaInfoLayout);
@@ -437,7 +434,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             this.limparCampos();
-            this.habilitarCampos(true);
             this.preencherFormulario(receita);
         }   
     }//GEN-LAST:event_btnVerReceitaActionPerformed
