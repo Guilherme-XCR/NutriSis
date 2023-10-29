@@ -1,5 +1,7 @@
 package com.artgui.nutrisis.view.Cliente;
 
+import com.artgui.nutrisis.view.Register.DlgRegister;
+
 public class DlgMainCliente extends javax.swing.JDialog {
 
     public DlgMainCliente(java.awt.Frame parent, boolean modal) {
@@ -54,6 +56,11 @@ public class DlgMainCliente extends javax.swing.JDialog {
         btnConta.setText("Conta");
         btnConta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConta.setFocusable(false);
+        btnConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContaActionPerformed(evt);
+            }
+        });
 
         btnLogout.setBackground(new java.awt.Color(255, 255, 255));
         btnLogout.setFont(new java.awt.Font("Cascadia Code", 1, 14)); // NOI18N
@@ -61,6 +68,11 @@ public class DlgMainCliente extends javax.swing.JDialog {
         btnLogout.setText("Deslogar");
         btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogout.setFocusable(false);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         lblIconUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/userIcon.png"))); // NOI18N
 
@@ -341,20 +353,58 @@ public class DlgMainCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceitasActionPerformed
-        // TODO add your handling code here:
+        DlgReceitaCliente dlgReceitaCliente = new DlgReceitaCliente(this, true);
+        
+        this.setVisible(false);
+        dlgReceitaCliente.setLocationRelativeTo(this);
+        dlgReceitaCliente.setVisible(true);
+        
+        this.setVisible(true);
     }//GEN-LAST:event_btnReceitasActionPerformed
 
     private void btnDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDietasActionPerformed
-        // TODO add your handling code here:
+        DlgDietaCliente dlgDietaCliente = new DlgDietaCliente(this, true);
+        
+        this.setVisible(false);
+        dlgDietaCliente.setLocationRelativeTo(this);
+        dlgDietaCliente.setVisible(true);
+        
+        this.setVisible(true);
     }//GEN-LAST:event_btnDietasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        DlgConsultaCliente dlgConsultaCliente = new DlgConsultaCliente(this, true);
+        
+        this.setVisible(false);
+        dlgConsultaCliente.setLocationRelativeTo(this);
+        dlgConsultaCliente.setVisible(true);
+        
+        this.setVisible(true);
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnAcompanhamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcompanhamentosActionPerformed
-        // TODO add your handling code here:
+        DlgAcompanhamentoCliente dlgAcompanhamentoCliente = new DlgAcompanhamentoCliente(this, true);
+        
+        this.setVisible(false);
+        dlgAcompanhamentoCliente.setLocationRelativeTo(this);
+        dlgAcompanhamentoCliente.setVisible(true);
+        
+        this.setVisible(true);
     }//GEN-LAST:event_btnAcompanhamentosActionPerformed
+
+    private void btnContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContaActionPerformed
+        DlgContaCliente dlgContaCliente = new DlgContaCliente(this, true);
+        
+        this.setVisible(false);
+        dlgContaCliente.setLocationRelativeTo(this);
+        dlgContaCliente.setVisible(true);
+        
+        this.setVisible(true);
+    }//GEN-LAST:event_btnContaActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcompanhamentos;

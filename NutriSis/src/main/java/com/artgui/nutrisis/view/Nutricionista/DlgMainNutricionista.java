@@ -350,19 +350,43 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceitasActionPerformed
-        // TODO add your handling code here:
+        DlgReceitaNutricionista dlgReceitaNutricionista = new DlgReceitaNutricionista(this, true);
+        
+        this.setVisible(false);
+        dlgReceitaNutricionista.setLocationRelativeTo(this);
+        dlgReceitaNutricionista.setVisible(true);
+        
+        this.setVisible(true);
     }//GEN-LAST:event_btnReceitasActionPerformed
 
     private void btnDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDietasActionPerformed
-        // TODO add your handling code here:
+        DlgDietaNutricionista dlgDietaNutricionista = new DlgDietaNutricionista(this, true);
+        
+        this.setVisible(false);
+        dlgDietaNutricionista.setLocationRelativeTo(this);
+        dlgDietaNutricionista.setVisible(true);
+        
+        this.setVisible(true);
     }//GEN-LAST:event_btnDietasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        DlgConsultaNutricionista dlgConsultaNutricionista = new DlgConsultaNutricionista(this, true);
+        
+        this.setVisible(false);
+        dlgConsultaNutricionista.setLocationRelativeTo(this);
+        dlgConsultaNutricionista.setVisible(true);
+        
+        this.setVisible(true);
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnAcompanhamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcompanhamentosActionPerformed
-        // TODO add your handling code here:
+        DlgAcompanhamentoNutricionista AcompanhamentoNutricionista = new DlgAcompanhamentoNutricionista(this, true);
+        
+        this.setVisible(false);
+        AcompanhamentoNutricionista.setLocationRelativeTo(this);
+        AcompanhamentoNutricionista.setVisible(true);
+        
+        this.setVisible(true);
     }//GEN-LAST:event_btnAcompanhamentosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

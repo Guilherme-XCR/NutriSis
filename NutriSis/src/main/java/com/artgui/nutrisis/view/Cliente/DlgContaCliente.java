@@ -1,13 +1,13 @@
 package com.artgui.nutrisis.view.Cliente;
 
-public class DlgDietaCliente extends javax.swing.JDialog {
+public class DlgContaCliente extends javax.swing.JDialog {
 
-    public DlgDietaCliente(java.awt.Frame parent, boolean modal) {
+    public DlgContaCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
     
-    public DlgDietaCliente(java.awt.Dialog parent, boolean modal) {
+    public DlgContaCliente(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -31,6 +31,7 @@ public class DlgDietaCliente extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
