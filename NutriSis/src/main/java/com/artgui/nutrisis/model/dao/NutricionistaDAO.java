@@ -1,11 +1,8 @@
 package com.artgui.nutrisis.model.dao;
 
 import com.artgui.nutrisis.factory.DatabaseJPA;
-import com.artgui.nutrisis.interfaces.IDao;
 import com.artgui.nutrisis.model.Nutricionista;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
  public class NutricionistaDAO extends Dao<Nutricionista> {
     
@@ -36,5 +33,17 @@ import javax.persistence.Query;
         List<Nutricionista> lst = qry.getResultList();
         super.entityManager.close();
         return lst;
+    }
+    
+    public Nutricionista findByEmail(String email){
+        super.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = "SELECT n FROM Nutricionista n WHERE n.email like :email";
+        qry = super.entityManager.createQuery(jpql, Nutricionista.class);
+        qry.setParameter("email", email+"%");
+        List<Nutricionista> lst = qry.getResultList();
+        super.entityManager.close();
+        if(!lst.isEmpty())
+            return lst.get(0);
+        return null;
     }
 }

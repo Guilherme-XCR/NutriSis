@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 
 public class Cliente extends Usuario implements Serializable{
-    private float altura;
+    private int altura;
     private float peso;
     private String genero;
     private String dataNascimento;
@@ -27,7 +27,7 @@ public class Cliente extends Usuario implements Serializable{
             String senha,
             String cpf,
             String telefone,
-            float altura, 
+            int altura, 
             float peso,
             String genero, 
             String dataNascimento

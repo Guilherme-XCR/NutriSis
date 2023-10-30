@@ -5,7 +5,6 @@ import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.model.dao.ClienteDAO;
 import com.artgui.nutrisis.model.valid.ValidateCliente;
-import java.util.List;
 import javax.swing.JTable;
 
 public class ClienteController {
@@ -22,7 +21,7 @@ public class ClienteController {
             String senha, 
             String cpf, 
             String telefone, 
-            float altura, 
+            int altura, 
             float peso, 
             String genero, 
             String dataNascimento
@@ -42,6 +41,13 @@ public class ClienteController {
         repositorio.save(cliente);
     }
 
+    public Cliente buscarPorEmail(String email){
+        
+        return repositorio.findByEmail(email);
+        
+        
+    }
+    
     public void atualizar(
             int id, 
             String nome, 
@@ -49,7 +55,7 @@ public class ClienteController {
             String senha,
             String cpf,
             String telefone,
-            float altura,
+            int altura,
             float peso,
             String genero,
             String dataNascimento
@@ -81,5 +87,14 @@ public class ClienteController {
     public void atualizarTabela(JTable grd){
         TMViewCliente tmCliente = new TMViewCliente(repositorio.findAll());
         grd.setModel(tmCliente);
+    }
+    
+    public Cliente login(String email, String senha){
+        Cliente cliente = this.buscarPorEmail(email);
+
+        if (cliente != null && senha.equals(cliente.getSenha())) {
+            return cliente;
+        }
+        return null;
     }
 }

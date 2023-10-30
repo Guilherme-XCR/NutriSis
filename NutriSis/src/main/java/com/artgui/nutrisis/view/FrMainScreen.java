@@ -1,5 +1,7 @@
 package com.artgui.nutrisis.view;
 
+import com.artgui.nutrisis.model.Cliente;
+import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
 import com.artgui.nutrisis.view.Login.DlgLogin;
 import com.artgui.nutrisis.view.Register.DlgRegister;
 
@@ -115,8 +117,8 @@ public class FrMainScreen extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         
+        Cliente cliente = new Cliente();
         DlgRegister dlgRegister = new DlgRegister(this, true);
-        
         this.setVisible(false);
         dlgRegister.setLocationRelativeTo(this);
         dlgRegister.setVisible(true);

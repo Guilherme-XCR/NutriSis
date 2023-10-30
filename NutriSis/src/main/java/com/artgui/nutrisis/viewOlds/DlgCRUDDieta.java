@@ -1,21 +1,17 @@
-package com.artgui.nutrisis.view;
+package com.artgui.nutrisis.viewOlds;
 
 import com.artgui.nutrisis.controller.DietaController;
 import com.artgui.nutrisis.controller.ReceitaController;
 import com.artgui.nutrisis.controller.RefeicaoController;
 import com.artgui.nutrisis.exceptions.DietaException;
-import com.artgui.nutrisis.exceptions.RefeicaoException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
-import java.text.ParseException;
+import com.artgui.nutrisis.view.DlgCRUDRefeicao;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
 
 public class DlgCRUDDieta extends javax.swing.JDialog {
 
@@ -66,16 +62,16 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
 
     public void adicionarMascaraNosCampos() {
       
-        try {
-            MaskFormatter diasDuracaoFormatter = new MaskFormatter("###");
-            MaskFormatter idNutricionistaFormatter = new MaskFormatter("#########");
-            
-            diasDuracaoFormatter.install(fEdtDiasDuracao);
-            idNutricionistaFormatter.install(fEdtIdNutricionista);
-                    
-        } catch (ParseException ex) {
-            Logger.getLogger(DlgCRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            MaskFormatter diasDuracaoFormatter = new MaskFormatter("###");
+//            MaskFormatter idNutricionistaFormatter = new MaskFormatter("#########");
+//            
+//            diasDuracaoFormatter.install(fEdtDiasDuracao);
+//            idNutricionistaFormatter.install(fEdtIdNutricionista);
+//                    
+//        } catch (ParseException ex) {
+//            Logger.getLogger(DlgCRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
     
     public void preencherFormulario(Dieta d) {

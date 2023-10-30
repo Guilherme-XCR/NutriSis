@@ -1,13 +1,15 @@
 package com.artgui.nutrisis.view.Nutricionista;
 
+import com.artgui.nutrisis.model.Nutricionista;
+
 public class DlgMainNutricionista extends javax.swing.JDialog {
 
-    public DlgMainNutricionista(java.awt.Frame parent, boolean modal) {
+    public DlgMainNutricionista(java.awt.Frame parent, boolean modal, Nutricionista nutricionista) {
         super(parent, modal);
         initComponents();
     }
     
-    public DlgMainNutricionista(java.awt.Dialog parent, boolean modal) {
+    public DlgMainNutricionista(java.awt.Dialog parent, boolean modal, Nutricionista nutricionista) {
         super(parent, modal);
         initComponents();
     }

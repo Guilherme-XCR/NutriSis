@@ -2,15 +2,14 @@ package com.artgui.nutrisis.model.valid;
 
 import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 public class ValidateCliente {
 
-    public Cliente validaCamposEntrada(String nome, String email, String senha, String cpf, String telefone, float altura, float peso, String genero, String dataNascimento) {
+    public Cliente validaCamposEntrada(String nome, String email, String senha, String cpf, String telefone, int altura, float peso, String genero, String dataNascimento) {
         // Realize as validações necessárias aqui
 
-        if (altura <= 0 || altura > 3.0) {
+        if (altura < 0 || altura > 300) {
             throw new ClienteException("Altura inválida.");
         }
 

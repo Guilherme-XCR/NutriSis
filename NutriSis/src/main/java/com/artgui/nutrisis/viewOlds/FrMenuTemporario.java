@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package com.artgui.nutrisis.view;
+package com.artgui.nutrisis.viewOlds;
+
+
 
 import com.artgui.nutrisis.viewOlds.DlgCRUDReceita;
 
@@ -134,10 +132,10 @@ public class FrMenuTemporario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDietaActionPerformed
-        DlgCRUDDieta dlgCRUDDieta = new DlgCRUDDieta(this, true);
-        
-        dlgCRUDDieta.setLocationRelativeTo(this);
-        dlgCRUDDieta.setVisible(true);
+//        DlgCRUDDieta dlgCRUDDieta = new DlgCRUDDieta(this, true);
+//        
+//        dlgCRUDDieta.setLocationRelativeTo(this);
+//        dlgCRUDDieta.setVisible(true);
     }//GEN-LAST:event_btnDietaActionPerformed
 
     private void btnReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceitaActionPerformed

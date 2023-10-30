@@ -76,7 +76,6 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                           <Component id="btnSair" min="-2" pref="160" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btnLogin" alignment="0" min="-2" pref="320" max="-2" attributes="0"/>
                   </Group>

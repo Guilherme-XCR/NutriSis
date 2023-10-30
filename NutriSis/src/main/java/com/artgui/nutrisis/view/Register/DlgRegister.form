@@ -152,7 +152,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="lblGenero" min="-2" pref="80" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="CBoxGenero" pref="0" max="32767" attributes="0"/>
+                                      <Component id="comboBoxGenero" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="fEdtDataNascimento" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -180,7 +180,7 @@
                               <Component id="fEdtTelefone" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
                           <Component id="lblGenero" alignment="0" max="32767" attributes="0"/>
-                          <Component id="CBoxGenero" alignment="0" max="32767" attributes="0"/>
+                          <Component id="comboBoxGenero" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -289,7 +289,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="CBoxGenero">
+            <Component class="javax.swing.JComboBox" name="comboBoxGenero">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>

@@ -1,5 +1,5 @@
-package com.artgui.nutrisis.view;
-
+package com.artgui.nutrisis.viewOlds;
+        
 import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
@@ -725,7 +725,7 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
                         pasEdtSenha.getText(), 
                         fEdtCpf.getText(), 
                         fEdtTelefone.getText(), 
-                        Float.parseFloat(fEdtAltura.getText()), 
+                        Integer.parseInt(fEdtAltura.getText()), 
                         Float.parseFloat(fEdtPeso.getText()), 
                         edtGenero.getText(), 
                         fEdtDataNascimento.getText()
@@ -737,7 +737,7 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
                         pasEdtSenha.getText(), 
                         fEdtCpf.getText(), 
                         fEdtTelefone.getText(), 
-                        Float.parseFloat(fEdtAltura.getText()), 
+                        Integer.parseInt(fEdtAltura.getText()), 
                         Float.parseFloat(fEdtPeso.getText()), 
                         edtGenero.getText(), 
                         fEdtDataNascimento.getText()

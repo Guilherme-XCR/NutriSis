@@ -1,12 +1,24 @@
 package com.artgui.nutrisis.view.Login;
 
+import com.artgui.nutrisis.controller.ClienteController;
+import com.artgui.nutrisis.controller.NutricionistaController;
+import com.artgui.nutrisis.model.Cliente;
+import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
-import com.artgui.nutrisis.view.Register.DlgRegister;
+import com.artgui.nutrisis.view.Nutricionista.DlgMainNutricionista;
+import javax.swing.JOptionPane;
 
 public class DlgLogin extends javax.swing.JDialog {
 
+    private ClienteController clienteController;
+    private NutricionistaController nutricionistaController;
+
     public DlgLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+
+        clienteController = new ClienteController();
+        nutricionistaController = new NutricionistaController();
+
         initComponents();
     }
 
@@ -148,15 +160,28 @@ public class DlgLogin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-       
-        DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true);
-        
-        this.setVisible(false);
-        dlgMainCliente.setLocationRelativeTo(this);
-        dlgMainCliente.setVisible(true);
-        
-        this.setVisible(true);
-        
+
+        Nutricionista nutricionista = nutricionistaController.login(edtEmail.getText(), edtSenha.getText());
+        if (nutricionista != null) {
+            DlgMainNutricionista dlgMainNutricionista = new DlgMainNutricionista(this, true, nutricionista);
+            this.setVisible(false);
+            dlgMainNutricionista.setLocationRelativeTo(this);
+            dlgMainNutricionista.setVisible(true);
+
+            this.dispose();
+        } else {
+            Cliente cliente = clienteController.login(edtEmail.getText(), edtSenha.getText());
+            if (cliente != null) {
+                DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true, cliente);
+                this.setVisible(false);
+                dlgMainCliente.setLocationRelativeTo(this);
+                dlgMainCliente.setVisible(true);
+
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Email ou Senha Inválidos!");
+            }
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

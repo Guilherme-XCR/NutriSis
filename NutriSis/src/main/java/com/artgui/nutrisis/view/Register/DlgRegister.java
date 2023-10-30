@@ -1,14 +1,27 @@
 package com.artgui.nutrisis.view.Register;
 
-import com.artgui.nutrisis.viewOlds.DlgCRUDReceita;
-import com.artgui.nutrisis.view.Nutricionista.DlgMainNutricionista;
+import com.artgui.nutrisis.controller.ClienteController;
+import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.model.Cliente;
+import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
+import javax.swing.JOptionPane;
 
 public class DlgRegister extends javax.swing.JDialog {
 
+    private ClienteController clienteController;
+    private Cliente cliente;
+    
+    
     public DlgRegister(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        
+        this.clienteController = new ClienteController();
+        
         initComponents();
     }
+    
+
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -24,7 +37,7 @@ public class DlgRegister extends javax.swing.JDialog {
         edtSenha = new javax.swing.JPasswordField();
         edtConfirmarSenha = new javax.swing.JPasswordField();
         lblGenero = new javax.swing.JLabel();
-        CBoxGenero = new javax.swing.JComboBox<>();
+        comboBoxGenero = new javax.swing.JComboBox<>();
         fEdtCpf = new javax.swing.JFormattedTextField();
         fEdtTelefone = new javax.swing.JFormattedTextField();
         fEdtAltura = new javax.swing.JFormattedTextField();
@@ -77,11 +90,11 @@ public class DlgRegister extends javax.swing.JDialog {
         lblGenero.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblGenero.setPreferredSize(new java.awt.Dimension(150, 40));
 
-        CBoxGenero.setBackground(new java.awt.Color(255, 255, 255));
-        CBoxGenero.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        CBoxGenero.setForeground(new java.awt.Color(0, 0, 0));
-        CBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha", "Masculino", "Feminino", "Outro" }));
-        CBoxGenero.setPreferredSize(new java.awt.Dimension(294, 40));
+        comboBoxGenero.setBackground(new java.awt.Color(255, 255, 255));
+        comboBoxGenero.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        comboBoxGenero.setForeground(new java.awt.Color(0, 0, 0));
+        comboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha", "Masculino", "Feminino", "Outro" }));
+        comboBoxGenero.setPreferredSize(new java.awt.Dimension(294, 40));
 
         fEdtCpf.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CPF", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         fEdtCpf.setText("111.222.333-62");
@@ -134,7 +147,7 @@ public class DlgRegister extends javax.swing.JDialog {
                             .addGroup(panInputsLayout.createSequentialGroup()
                                 .addComponent(lblGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CBoxGenero, 0, 0, Short.MAX_VALUE))
+                                .addComponent(comboBoxGenero, 0, 0, Short.MAX_VALUE))
                             .addComponent(fEdtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -155,7 +168,7 @@ public class DlgRegister extends javax.swing.JDialog {
                         .addComponent(fEdtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(fEdtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CBoxGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(comboBoxGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fEdtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,13 +256,35 @@ public class DlgRegister extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        DlgMainNutricionista dlgMainNutricionista = new DlgMainNutricionista(this, true);
-    
-        this.setVisible(false);
-        dlgMainNutricionista.setLocationRelativeTo(this);
-        dlgMainNutricionista.setVisible(true);
         
-        this.setVisible(true);
+        try {
+            clienteController.cadastrar(
+                        edtNomeCompleto.getText(), 
+                        edtEmail.getText(), 
+                        edtSenha.getText(), 
+                        fEdtCpf.getText(), 
+                        fEdtTelefone.getText(), 
+                        Integer.parseInt(fEdtAltura.getText()), 
+                        Float.parseFloat(fEdtPeso.getText()), 
+                        comboBoxGenero.getSelectedItem() + "", 
+                        fEdtDataNascimento.getText()
+                );
+            
+            this.cliente = clienteController.buscarPorEmail(edtEmail.getText());
+            
+            DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true, cliente);
+            this.setVisible(false);
+            dlgMainCliente.setLocationRelativeTo(this);
+            dlgMainCliente.setVisible(true);
+            
+            this.dispose();
+            
+        } catch (ClienteException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -259,9 +294,9 @@ public class DlgRegister extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CBoxGenero;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSair;
+    private javax.swing.JComboBox<String> comboBoxGenero;
     private javax.swing.JPasswordField edtConfirmarSenha;
     private javax.swing.JTextField edtEmail;
     private javax.swing.JTextField edtNomeCompleto;

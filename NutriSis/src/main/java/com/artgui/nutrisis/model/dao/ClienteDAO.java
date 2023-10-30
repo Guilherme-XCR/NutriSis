@@ -35,4 +35,16 @@ public class ClienteDAO extends Dao<Cliente> {
         super.entityManager.close();
         return lst;
     }
+    
+    public Cliente findByEmail(String email){
+        super.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = "SELECT c FROM Cliente c WHERE c.email like :email";
+        qry = super.entityManager.createQuery(jpql, Cliente.class);
+        qry.setParameter("email", email+"%");
+        List<Cliente> lst = qry.getResultList();
+        super.entityManager.close();
+        if(!lst.isEmpty())
+            return lst.get(0);
+        return null;
+    }
 }

@@ -1,16 +1,24 @@
 package com.artgui.nutrisis.view.Cliente;
 
-import com.artgui.nutrisis.view.Register.DlgRegister;
+import com.artgui.nutrisis.model.Cliente;
 
 public class DlgMainCliente extends javax.swing.JDialog {
 
-    public DlgMainCliente(java.awt.Frame parent, boolean modal) {
+    Cliente cliente;
+    
+    public DlgMainCliente(java.awt.Frame parent, boolean modal, Cliente cliente) {
         super(parent, modal);
+        
+        this.cliente = cliente;
+        
         initComponents();
     }
     
-    public DlgMainCliente(java.awt.Dialog parent, boolean modal) {
+    public DlgMainCliente(java.awt.Dialog parent, boolean modal, Cliente cliente) {
         super(parent, modal);
+        
+        this.cliente = cliente;
+        
         initComponents();
     }
     
