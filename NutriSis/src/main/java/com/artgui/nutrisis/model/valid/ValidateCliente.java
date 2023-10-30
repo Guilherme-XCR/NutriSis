@@ -6,43 +6,61 @@ import java.util.regex.Pattern;
 
 public class ValidateCliente {
 
-    public Cliente validaCamposEntrada(String nome, String email, String senha, String cpf, String telefone, int altura, float peso, String genero, String dataNascimento) {
-        // Realize as validações necessárias aqui
+    public Cliente validaCamposEntrada(String nome, String email, String senha, String confirmarSenha, String cpf, String telefone, int altura, float peso, String genero, String dataNascimento) {
 
-        if (altura < 0 || altura > 300) {
-            throw new ClienteException("Altura inválida.");
-        }
-
-        if (peso <= 0 || peso > 500.0) {
-            throw new ClienteException("Peso inválido.");
-        }
-
-        if (genero == null || genero.isEmpty()) {
-            throw new ClienteException("Gênero não pode estar em branco.");
-        }
-
-        // Validações para campos herdados da classe Usuario
         if (nome == null || nome.isEmpty()) {
             throw new ClienteException("Nome não pode estar em branco.");
         }
-
+        
+        if (nome == null || !nome.matches("^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$")) {
+            throw new ClienteException("Nome inválido.");
+        }
+                
         if (email == null || !isValidEmail(email)) {
             throw new ClienteException("Email inválido.");
         }
-
-        if (telefone == null || telefone.isEmpty()) {
-            throw new ClienteException("Telefone não pode estar em branco.");
+                
+        // String senha
+        if (senha == null || senha.isEmpty()){
+            throw new ClienteException("Senha não pode estar em branco.");
         }
-
+        
+        if (!senha.equals(confirmarSenha)){
+            throw new ClienteException("Confirmação de senha incorreta.");
+        }
+                
         if (cpf == null || !isValidCPF(cpf)) {
             throw new ClienteException("CPF inválido.");
         }
         
-        if (dataNascimento == null || dataNascimento.isEmpty()) {
-            throw new ClienteException("Data Nascimento inválido.");
+        if (telefone == null || telefone.isEmpty()) {
+            throw new ClienteException("Telefone não pode estar em branco.");
+        }        
+        
+        if (!telefone.replaceAll("[^0-9]", "").matches("^\\d+$")) {
+            throw new ClienteException("Telefone inválido.");
+        }
+                
+        if (altura < 0 || altura > 300) {
+            throw new ClienteException("Altura inválida.");
         }
         
-        // Se todas as validações passarem, crie um novo objeto Cliente
+        if (peso <= 0 || peso > 500.0) {
+            throw new ClienteException("Peso inválido.");
+        }    
+                
+        if (genero.equals("Escolha")) {
+            throw new ClienteException("Você precisa escolher um gênero.");
+        }
+        
+        if (dataNascimento == null || dataNascimento.isEmpty()) {
+            throw new ClienteException("Data Nascimento não pode estar em branco.");
+        }
+        
+        if (!dataNascimento.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
+            throw new ClienteException("Data de Nascimento inválida.");
+        }
+        
         return new Cliente(nome, email, senha, cpf, telefone, altura, peso, genero, dataNascimento);
     }
 
