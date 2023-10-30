@@ -1,6 +1,6 @@
 package com.artgui.nutrisis.view.Register;
 
-import com.artgui.nutrisis.view.DlgCRUDReceita;
+import com.artgui.nutrisis.viewOlds.DlgCRUDReceita;
 import com.artgui.nutrisis.view.Nutricionista.DlgMainNutricionista;
 
 public class DlgRegister extends javax.swing.JDialog {

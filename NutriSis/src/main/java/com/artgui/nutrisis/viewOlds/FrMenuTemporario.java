@@ -4,6 +4,8 @@
  */
 package com.artgui.nutrisis.view;
 
+import com.artgui.nutrisis.viewOlds.DlgCRUDReceita;
+
 /**
  *
  * @author Guilherme
