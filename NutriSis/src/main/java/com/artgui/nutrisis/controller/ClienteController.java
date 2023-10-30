@@ -19,6 +19,7 @@ public class ClienteController {
             String nome, 
             String email, 
             String senha, 
+            String confirmarSenha, 
             String cpf, 
             String telefone, 
             int altura, 
@@ -31,6 +32,7 @@ public class ClienteController {
                 nome, 
                 email, 
                 senha,
+                confirmarSenha,
                 cpf, 
                 telefone,
                 altura, 
@@ -45,7 +47,6 @@ public class ClienteController {
         
         return repositorio.findByEmail(email);
         
-        
     }
     
     public void atualizar(
@@ -53,6 +54,7 @@ public class ClienteController {
             String nome, 
             String email,
             String senha,
+            String confirmarSenha,
             String cpf,
             String telefone,
             int altura,
@@ -65,6 +67,7 @@ public class ClienteController {
                 nome,
                 email,
                 senha,
+                confirmarSenha,
                 cpf,
                 telefone,
                 altura, 
@@ -90,10 +93,12 @@ public class ClienteController {
     }
     
     public Cliente login(String email, String senha){
-        Cliente cliente = this.buscarPorEmail(email);
-
-        if (cliente != null && senha.equals(cliente.getSenha())) {
-            return cliente;
+        
+        if (email != null && email.matches("^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+)\\.([A-Za-z]{2,4})$")) {
+            Cliente cliente = this.buscarPorEmail(email);
+            if (cliente != null && senha.equals(cliente.getSenha())) {
+                return cliente;
+            }
         }
         return null;
     }

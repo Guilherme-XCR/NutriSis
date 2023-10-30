@@ -723,6 +723,7 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
                         edtNome.getText(), 
                         edtEmail.getText(), 
                         pasEdtSenha.getText(), 
+                        pasEdtSenha.getText(), 
                         fEdtCpf.getText(), 
                         fEdtTelefone.getText(), 
                         Integer.parseInt(fEdtAltura.getText()), 
@@ -734,6 +735,7 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
                 clienteController.cadastrar(
                         edtNome.getText(), 
                         edtEmail.getText(), 
+                        pasEdtSenha.getText(),
                         pasEdtSenha.getText(), 
                         fEdtCpf.getText(), 
                         fEdtTelefone.getText(), 

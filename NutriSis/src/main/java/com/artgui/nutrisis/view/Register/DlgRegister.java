@@ -4,24 +4,47 @@ import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
+import com.artgui.nutrisis.viewOlds.DlgCRUDCliente;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 
 public class DlgRegister extends javax.swing.JDialog {
 
     private ClienteController clienteController;
     private Cliente cliente;
-    
-    
+
     public DlgRegister(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        
+
         this.clienteController = new ClienteController();
-        
+
         initComponents();
+
+        adicionarMascaraNosCampos();
     }
-    
 
+    public void adicionarMascaraNosCampos() {
 
+        try {
+            MaskFormatter cpfFormatter = new MaskFormatter("###.###.###-##");
+            MaskFormatter telefoneFormatter = new MaskFormatter("(##) #####-####");
+            MaskFormatter alturaFormatter = new MaskFormatter("###");
+            MaskFormatter pesoFormatter = new MaskFormatter("###.##");
+            MaskFormatter dataNascimentoFormatter = new MaskFormatter("##/##/####");
+
+            cpfFormatter.install(fEdtCpf);
+            alturaFormatter.install(fEdtAltura);
+            telefoneFormatter.install(fEdtTelefone);
+            pesoFormatter.install(fEdtPeso);
+            dataNascimentoFormatter.install(fEdtDataNascimento);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(DlgCRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -64,22 +87,18 @@ public class DlgRegister extends javax.swing.JDialog {
         panInputs.setBackground(new java.awt.Color(71, 71, 71));
 
         edtNomeCompleto.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        edtNomeCompleto.setText("Guilherme Xavier Costa Rodrigues");
         edtNomeCompleto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome Completo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         edtNomeCompleto.setPreferredSize(new java.awt.Dimension(294, 40));
 
         edtEmail.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        edtEmail.setText("guilhermerodrigues.0721@gmail.com");
         edtEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         edtEmail.setPreferredSize(new java.awt.Dimension(294, 40));
 
         edtSenha.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        edtSenha.setText("lugin12345");
         edtSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Code", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         edtSenha.setPreferredSize(new java.awt.Dimension(294, 40));
 
         edtConfirmarSenha.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        edtConfirmarSenha.setText("lugin12345");
         edtConfirmarSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Confirmar senha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Code", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         edtConfirmarSenha.setPreferredSize(new java.awt.Dimension(294, 40));
 
@@ -97,30 +116,30 @@ public class DlgRegister extends javax.swing.JDialog {
         comboBoxGenero.setPreferredSize(new java.awt.Dimension(294, 40));
 
         fEdtCpf.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CPF", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
-        fEdtCpf.setText("111.222.333-62");
         fEdtCpf.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        fEdtCpf.setName(""); // NOI18N
         fEdtCpf.setPreferredSize(new java.awt.Dimension(294, 40));
 
         fEdtTelefone.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Telefone", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
-        fEdtTelefone.setText("(33)93333-3333");
         fEdtTelefone.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        fEdtTelefone.setName(""); // NOI18N
         fEdtTelefone.setPreferredSize(new java.awt.Dimension(294, 40));
 
         fEdtAltura.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Altura - cm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         fEdtAltura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fEdtAltura.setText("176");
         fEdtAltura.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        fEdtAltura.setName(""); // NOI18N
         fEdtAltura.setPreferredSize(new java.awt.Dimension(294, 40));
 
         fEdtPeso.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Peso (Kg)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         fEdtPeso.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fEdtPeso.setText("100.5");
         fEdtPeso.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        fEdtPeso.setName(""); // NOI18N
         fEdtPeso.setPreferredSize(new java.awt.Dimension(294, 40));
 
         fEdtDataNascimento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Nascimento (dd/mm/aaaa)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Code", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
-        fEdtDataNascimento.setText("21/07/2001");
         fEdtDataNascimento.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        fEdtDataNascimento.setName(""); // NOI18N
         fEdtDataNascimento.setPreferredSize(new java.awt.Dimension(294, 40));
 
         javax.swing.GroupLayout panInputsLayout = new javax.swing.GroupLayout(panInputs);
@@ -256,42 +275,44 @@ public class DlgRegister extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
-        try {
-            clienteController.cadastrar(
-                        edtNomeCompleto.getText(), 
-                        edtEmail.getText(), 
-                        edtSenha.getText(), 
-                        fEdtCpf.getText(), 
-                        fEdtTelefone.getText(), 
-                        Integer.parseInt(fEdtAltura.getText()), 
-                        Float.parseFloat(fEdtPeso.getText()), 
-                        comboBoxGenero.getSelectedItem() + "", 
+        if (fEdtAltura.getText() == null || !fEdtAltura.getText().matches("^\\d{3}$")
+                || fEdtPeso.getText() == null || !fEdtPeso.getText().matches("^\\d{3}\\.\\d{2}$")) {
+            JOptionPane.showMessageDialog(this, "Dados inválido! \npreencha corretamente!");
+        } else {
+            try {
+                clienteController.cadastrar(
+                        edtNomeCompleto.getText(),
+                        edtEmail.getText(),
+                        edtSenha.getText(),
+                        edtConfirmarSenha.getText(),
+                        fEdtCpf.getText(),
+                        fEdtTelefone.getText(),
+                        Integer.parseInt(fEdtAltura.getText()),
+                        Float.parseFloat(fEdtPeso.getText()),
+                        comboBoxGenero.getSelectedItem() + "",
                         fEdtDataNascimento.getText()
                 );
-            
-            this.cliente = clienteController.buscarPorEmail(edtEmail.getText());
-            
-            DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true, cliente);
-            this.setVisible(false);
-            dlgMainCliente.setLocationRelativeTo(this);
-            dlgMainCliente.setVisible(true);
-            
-            this.dispose();
-            
-        } catch (ClienteException e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage());
+
+                this.cliente = clienteController.buscarPorEmail(edtEmail.getText());
+
+                DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true, cliente);
+                this.setVisible(false);
+                dlgMainCliente.setLocationRelativeTo(this);
+                dlgMainCliente.setVisible(true);
+
+                this.dispose();
+
+            } catch (ClienteException e) {
+                System.err.println(e.getMessage());
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
         }
-        
-        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;

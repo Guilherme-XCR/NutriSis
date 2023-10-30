@@ -50,12 +50,10 @@ public class DlgLogin extends javax.swing.JDialog {
         panInputs.setBackground(new java.awt.Color(71, 71, 71));
 
         edtEmail.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        edtEmail.setText("guilhermerodrigues.0721@gmail.com");
         edtEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         edtEmail.setPreferredSize(new java.awt.Dimension(294, 40));
 
         edtSenha.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        edtSenha.setText("lugin12345");
         edtSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Code", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
         edtSenha.setPreferredSize(new java.awt.Dimension(294, 40));
 
@@ -121,8 +119,7 @@ public class DlgLogin extends javax.swing.JDialog {
                 .addGroup(panRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panRegisterLayout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80))
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(120, 120, 120))
         );
