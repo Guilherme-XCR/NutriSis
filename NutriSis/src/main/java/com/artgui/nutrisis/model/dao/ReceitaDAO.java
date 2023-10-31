@@ -1,11 +1,8 @@
 package com.artgui.nutrisis.model.dao;
 
 import com.artgui.nutrisis.factory.DatabaseJPA;
-import com.artgui.nutrisis.interfaces.IDao;
 import com.artgui.nutrisis.model.Receita;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
  public class ReceitaDAO extends Dao<Receita> {
     
@@ -32,7 +29,7 @@ import javax.persistence.Query;
         super.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = "SELECT r FROM Receita r WHERE r.nome like :nome";
         qry = super.entityManager.createQuery(jpql, Receita.class);
-        qry.setParameter("nome", nome+"%");
+        qry.setParameter("nome", nome);
         List<Receita> lst = qry.getResultList();
         super.entityManager.close();
         return lst;

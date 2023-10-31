@@ -241,7 +241,11 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         edtPesquisa.setBackground(new java.awt.Color(204, 204, 204));
         edtPesquisa.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtPesquisa.setForeground(new java.awt.Color(0, 0, 0));
-        edtPesquisa.setText("IMPLEMENTAR");
+        edtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                edtPesquisaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panPesquisaLayout = new javax.swing.GroupLayout(panPesquisa);
         panPesquisa.setLayout(panPesquisaLayout);
@@ -624,6 +628,14 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
             ingredienteController.atualizarTabela(grdIngredientes, ingredientes);
         }
     }//GEN-LAST:event_btnAdicionarIngredienteActionPerformed
+
+    private void edtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtPesquisaKeyReleased
+        String nomeDigitado = edtPesquisa.getText();
+        if(!nomeDigitado.isEmpty())
+            this.receitaController.atualizarTabela(grdReceitas, nomeDigitado);
+        else
+            this.receitaController.atualizarTabela(grdReceitas);
+    }//GEN-LAST:event_edtPesquisaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

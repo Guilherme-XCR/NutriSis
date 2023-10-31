@@ -87,4 +87,11 @@ public class ReceitaController {
         TMViewReceita tmReceita = new TMViewReceita(receitas);
         grd.setModel(tmReceita);
     }
+    
+    public void atualizarTabela(JTable grd, String nome) {
+        List lst = repositorio.filterByName(nome);
+
+        TMViewReceita tableModel = new TMViewReceita(lst);
+        grd.setModel(tableModel);
+    }
 }
