@@ -4,7 +4,6 @@ import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
-import com.artgui.nutrisis.viewOlds.DlgCRUDCliente;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -276,37 +275,33 @@ public class DlgRegister extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if (fEdtAltura.getText() == null || !fEdtAltura.getText().matches("^\\d{3}$")
-                || fEdtPeso.getText() == null || !fEdtPeso.getText().matches("^\\d{3}\\.\\d{2}$")) {
-            JOptionPane.showMessageDialog(this, "Dados inválido! \npreencha corretamente!");
-        } else {
-            try {
-                clienteController.cadastrar(
-                        edtNomeCompleto.getText(),
-                        edtEmail.getText(),
-                        edtSenha.getText(),
-                        edtConfirmarSenha.getText(),
-                        fEdtCpf.getText(),
-                        fEdtTelefone.getText(),
-                        Integer.parseInt(fEdtAltura.getText()),
-                        Float.parseFloat(fEdtPeso.getText()),
-                        comboBoxGenero.getSelectedItem() + "",
-                        fEdtDataNascimento.getText()
-                );
 
-                this.cliente = clienteController.buscarPorEmail(edtEmail.getText());
+        try {
+            clienteController.cadastrar(
+                    edtNomeCompleto.getText(),
+                    edtEmail.getText(),
+                    edtSenha.getText(),
+                    edtConfirmarSenha.getText(),
+                    fEdtCpf.getText(),
+                    fEdtTelefone.getText(),
+                    fEdtAltura.getText(),
+                    fEdtPeso.getText(),
+                    comboBoxGenero.getSelectedItem() + "",
+                    fEdtDataNascimento.getText()
+            );
 
-                DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true, cliente);
-                this.setVisible(false);
-                dlgMainCliente.setLocationRelativeTo(this);
-                dlgMainCliente.setVisible(true);
+            this.cliente = clienteController.buscarPorEmail(edtEmail.getText());
 
-                this.dispose();
+            DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true, cliente);
+            this.setVisible(false);
+            dlgMainCliente.setLocationRelativeTo(this);
+            dlgMainCliente.setVisible(true);
 
-            } catch (ClienteException e) {
-                System.err.println(e.getMessage());
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
+            this.dispose();
+
+        } catch (ClienteException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

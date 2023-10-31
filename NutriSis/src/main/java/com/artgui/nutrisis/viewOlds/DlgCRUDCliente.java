@@ -715,44 +715,44 @@ public class DlgCRUDCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        try {
-                     
-            if (idClienteEditando > 0) {
-                clienteController.atualizar(
-                        idClienteEditando,
-                        edtNome.getText(), 
-                        edtEmail.getText(), 
-                        pasEdtSenha.getText(), 
-                        pasEdtSenha.getText(), 
-                        fEdtCpf.getText(), 
-                        fEdtTelefone.getText(), 
-                        Integer.parseInt(fEdtAltura.getText()), 
-                        Float.parseFloat(fEdtPeso.getText()), 
-                        edtGenero.getText(), 
-                        fEdtDataNascimento.getText()
-                );
-            } else {
-                clienteController.cadastrar(
-                        edtNome.getText(), 
-                        edtEmail.getText(), 
-                        pasEdtSenha.getText(),
-                        pasEdtSenha.getText(), 
-                        fEdtCpf.getText(), 
-                        fEdtTelefone.getText(), 
-                        Integer.parseInt(fEdtAltura.getText()), 
-                        Float.parseFloat(fEdtPeso.getText()), 
-                        edtGenero.getText(), 
-                        fEdtDataNascimento.getText()
-                );
-            }
-            idClienteEditando = -1;
-            clienteController.atualizarTabela(grdClientes);
-            this.habilitarCampos(false);
-            this.limparCampos();
-        } catch (ClienteException e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
+//        try {
+//                     
+//            if (idClienteEditando > 0) {
+//                clienteController.atualizar(
+//                        idClienteEditando,
+//                        edtNome.getText(), 
+//                        edtEmail.getText(), 
+//                        pasEdtSenha.getText(), 
+//                        pasEdtSenha.getText(), 
+//                        fEdtCpf.getText(), 
+//                        fEdtTelefone.getText(), 
+//                        Integer.parseInt(fEdtAltura.getText()), 
+//                        Float.parseFloat(fEdtPeso.getText()), 
+//                        edtGenero.getText(), 
+//                        fEdtDataNascimento.getText()
+//                );
+//            } else {
+//                clienteController.cadastrar(
+//                        edtNome.getText(), 
+//                        edtEmail.getText(), 
+//                        pasEdtSenha.getText(),
+//                        pasEdtSenha.getText(), 
+//                        fEdtCpf.getText(), 
+//                        fEdtTelefone.getText(), 
+//                        Integer.parseInt(fEdtAltura.getText()), 
+//                        Float.parseFloat(fEdtPeso.getText()), 
+//                        edtGenero.getText(), 
+//                        fEdtDataNascimento.getText()
+//                );
+//            }
+//            idClienteEditando = -1;
+//            clienteController.atualizarTabela(grdClientes);
+//            this.habilitarCampos(false);
+//            this.limparCampos();
+//        } catch (ClienteException e) {
+//            System.err.println(e.getMessage());
+//            JOptionPane.showMessageDialog(this, e.getMessage());
+//        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -701,23 +701,23 @@ public class DlgCRUDReceita extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
-        Nutricionista nutricionista = new Nutricionista("teste", "teste@teste", "senhateste", "cpfTeste", "teste", "teste", "teste");
-        
-        try {
-            if (idReceitaEditando > 0) {
-                receitaController.atualizar(idReceitaEditando, edtNome.getText(), edtModoDePreparo.getText(),  Integer.parseInt(fEdtTempoPreparo.getText()), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
-            } else {
-                receitaController.cadastrar(edtNome.getText(), edtModoDePreparo.getText(),  Integer.parseInt(fEdtTempoPreparo.getText()), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
-            }
-            idReceitaEditando = -1;
-            receitaController.atualizarTabela(grdReceitas);
-            this.habilitarCampos(false);
-            this.limparCampos();
-        } catch (ClienteException e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } 
+//        
+//        Nutricionista nutricionista = new Nutricionista("teste", "teste@teste", "senhateste", "cpfTeste", "teste", "teste", "teste");
+//        
+//        try {
+//            if (idReceitaEditando > 0) {
+//                receitaController.atualizar(idReceitaEditando, edtNome.getText(), edtModoDePreparo.getText(),  Integer.parseInt(fEdtTempoPreparo.getText()), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
+//            } else {
+//                receitaController.cadastrar(edtNome.getText(), edtModoDePreparo.getText(),  Integer.parseInt(fEdtTempoPreparo.getText()), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
+//            }
+//            idReceitaEditando = -1;
+//            receitaController.atualizarTabela(grdReceitas);
+//            this.habilitarCampos(false);
+//            this.limparCampos();
+//        } catch (ClienteException e) {
+//            System.err.println(e.getMessage());
+//            JOptionPane.showMessageDialog(this, e.getMessage());
+//        } 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCriarIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarIngredienteActionPerformed

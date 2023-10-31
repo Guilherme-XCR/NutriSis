@@ -19,7 +19,7 @@ public class IngredienteController {
     public void cadastrar(
             String nome, 
             String unidadeMedida, 
-            float quantidade
+            String quantidade
     ){
         ValidateIngrediente valid = new ValidateIngrediente();
         Ingrediente ingrediente = valid.validaCamposEntrada(
@@ -35,7 +35,7 @@ public class IngredienteController {
             int id,
             String nome, 
             String unidadeMedida, 
-            float quantidade
+            String quantidade
     ){
         ValidateIngrediente valid = new ValidateIngrediente();
         Ingrediente ingrediente = valid.validaCamposEntrada(
@@ -65,7 +65,7 @@ public class IngredienteController {
         grd.setModel(tmIngrediente);
     }
     
-    public Ingrediente criar(String nome, String unidadeMedida, float quantidade){
+    public Ingrediente criar(String nome, String unidadeMedida, String quantidade){
         ValidateIngrediente valid = new ValidateIngrediente();
         return valid.validaCamposEntrada(nome, unidadeMedida, quantidade);
     }        

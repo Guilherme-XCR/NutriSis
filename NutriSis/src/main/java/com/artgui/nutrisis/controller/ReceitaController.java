@@ -21,8 +21,8 @@ public class ReceitaController {
     public void cadastrar(
             String nome, 
             String modoPreparo, 
-            int tempoPreparo, 
-            int porcoes, 
+            String tempoPreparo, 
+            String porcoes, 
             String categoria, 
             List<Ingrediente> ingredientes, 
             Nutricionista nutricionista
@@ -47,8 +47,8 @@ public class ReceitaController {
             int id, 
             String nome, 
             String modoPreparo, 
-            int tempoPreparo, 
-            int porcoes, 
+            String tempoPreparo, 
+            String porcoes, 
             String categoria, 
             List<Ingrediente> ingredientes, 
             Nutricionista nutricionista

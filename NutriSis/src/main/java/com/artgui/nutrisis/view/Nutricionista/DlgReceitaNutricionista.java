@@ -81,16 +81,15 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         try {
             MaskFormatter tempoPreparoFormatter = new MaskFormatter("########");
             MaskFormatter porcoesFormatter = new MaskFormatter("########");
-            
+
             tempoPreparoFormatter.install(fEdtTempoPreparo);
             porcoesFormatter.install(fEdtPorcoes);
-            
 
         } catch (ParseException ex) {
             Logger.getLogger(DlgReceitaNutricionista.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private Object getObjetoSelecionadoNaGridReceita() {
         int rowCliked = this.grdReceitas.getSelectedRow();
         Object obj = null;
@@ -570,40 +569,34 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Nutricionista nutricionista = new Nutricionista("teste", "teste@teste", "senhateste", "cpfTeste", "teste", "teste", "teste");
 
-        if (fEdtTempoPreparo.getText() == null || !fEdtTempoPreparo.getText().replaceAll("\\s", "").matches("^[0-9]{1,8}$")
-                || fEdtPorcoes.getText() == null || !fEdtPorcoes.getText().replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
-            JOptionPane.showMessageDialog(this, "Preencha Corretamente tempo de preparo ou poções");
-
-        } else {
-
-            try {
-                if (idReceitaEditando > 0) {
-                    receitaController.atualizar(
-                            idReceitaEditando,
-                            edtNome.getText(), edtModoPreparo.getText(),
-                            Integer.parseInt(fEdtTempoPreparo.getText()),
-                            Integer.parseInt(fEdtPorcoes.getText()),
-                            edtCategoria.getText(),
-                            ingredientes, nutricionista
-                    );
-                } else {
-                    receitaController.cadastrar(
-                            edtNome.getText(),
-                            edtModoPreparo.getText(),
-                            Integer.parseInt(fEdtTempoPreparo.getText()),
-                            Integer.parseInt(fEdtPorcoes.getText()),
-                            edtCategoria.getText(),
-                            ingredientes, nutricionista
-                    );
-                }
-                idReceitaEditando = -1;
-                receitaController.atualizarTabela(grdReceitas);
-                this.habilitarCampos(false);
-                this.limparCampos();
-            } catch (ReceitaException e) {
-                System.err.println(e.getMessage());
-                JOptionPane.showMessageDialog(this, e.getMessage());
+        try {
+            if (idReceitaEditando > 0) {
+                receitaController.atualizar(
+                        idReceitaEditando,
+                        edtNome.getText(), edtModoPreparo.getText(),
+                        fEdtTempoPreparo.getText(),
+                        fEdtPorcoes.getText(),
+                        edtCategoria.getText(),
+                        ingredientes, nutricionista
+                );
+            } else {
+                receitaController.cadastrar(
+                        edtNome.getText(),
+                        edtModoPreparo.getText(),
+                        fEdtTempoPreparo.getText(),
+                        fEdtPorcoes.getText(),
+                        edtCategoria.getText(),
+                        ingredientes,
+                        nutricionista
+                );
             }
+            idReceitaEditando = -1;
+            receitaController.atualizarTabela(grdReceitas);
+            this.habilitarCampos(false);
+            this.limparCampos();
+        } catch (ReceitaException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

@@ -613,37 +613,37 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Nutricionista nutricionista = new Nutricionista("teste", "teste@teste", "senhateste", "cpfTeste", "teste", "teste", "teste");
-        
-        try {
-            if (idDietaEditando > 0) {
-                dietaController.atualizar(idDietaEditando, edtNome.getText(), edtDescricao.getText(),Integer.parseInt(fEdtDiasDuracao.getText()), refeicoes, nutricionista);
-            } else {
-                for(Refeicao ref: refeicoes){
-                    for(Receita rec: ref.getReceitas()){
-                        receitaController.atualizar(
-                                rec.getId(),
-                                rec.getNome(),
-                                rec.getModoPreparo(),
-                                rec.getTempoPreparo(),
-                                rec.getPorcoes(), 
-                                rec.getCategoria(),
-                                rec.getIngredientes(),
-                                rec.getNutricionista()
-                        );
-                    }
-                }
-                dietaController.cadastrar(edtNome.getText(), edtDescricao.getText(),Integer.parseInt(fEdtDiasDuracao.getText()), refeicoes, nutricionista);
-                
-            }
-            idDietaEditando = -1;
-            dietaController.atualizarTabela(grdDietas);
-            this.habilitarCampos(false);
-            this.limparCampos();
-        } catch (DietaException e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } 
+//        Nutricionista nutricionista = new Nutricionista("teste", "teste@teste", "senhateste", "cpfTeste", "teste", "teste", "teste");
+//        
+//        try {
+//            if (idDietaEditando > 0) {
+//                dietaController.atualizar(idDietaEditando, edtNome.getText(), edtDescricao.getText(),Integer.parseInt(fEdtDiasDuracao.getText()), refeicoes, nutricionista);
+//            } else {
+//                for(Refeicao ref: refeicoes){
+//                    for(Receita rec: ref.getReceitas()){
+//                        receitaController.atualizar(
+//                                rec.getId(),
+//                                rec.getNome(),
+//                                rec.getModoPreparo(),
+//                                rec.getTempoPreparo(),
+//                                rec.getPorcoes(), 
+//                                rec.getCategoria(),
+//                                rec.getIngredientes(),
+//                                rec.getNutricionista()
+//                        );
+//                    }
+//                }
+//                dietaController.cadastrar(edtNome.getText(), edtDescricao.getText(),Integer.parseInt(fEdtDiasDuracao.getText()), refeicoes, nutricionista);
+//                
+//            }
+//            idDietaEditando = -1;
+//            dietaController.atualizarTabela(grdDietas);
+//            this.habilitarCampos(false);
+//            this.limparCampos();
+//        } catch (DietaException e) {
+//            System.err.println(e.getMessage());
+//            JOptionPane.showMessageDialog(this, e.getMessage());
+//        } 
     }//GEN-LAST:event_btnSalvarActionPerformed
     
     private void btnCriarRefeicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarRefeicaoActionPerformed

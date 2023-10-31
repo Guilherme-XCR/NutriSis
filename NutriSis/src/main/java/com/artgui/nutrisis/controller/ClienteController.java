@@ -22,8 +22,8 @@ public class ClienteController {
             String confirmarSenha, 
             String cpf, 
             String telefone, 
-            int altura, 
-            float peso, 
+            String altura, 
+            String peso, 
             String genero, 
             String dataNascimento
     ){
@@ -57,8 +57,8 @@ public class ClienteController {
             String confirmarSenha,
             String cpf,
             String telefone,
-            int altura,
-            float peso,
+            String altura,
+            String peso,
             String genero,
             String dataNascimento
     ){

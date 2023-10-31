@@ -6,7 +6,18 @@ import java.util.regex.Pattern;
 
 public class ValidateCliente {
 
-    public Cliente validaCamposEntrada(String nome, String email, String senha, String confirmarSenha, String cpf, String telefone, int altura, float peso, String genero, String dataNascimento) {
+    public Cliente validaCamposEntrada(
+            String nome, 
+            String email, 
+            String senha, 
+            String confirmarSenha, 
+            String cpf, 
+            String telefone, 
+            String altura, 
+            String peso, 
+            String genero, 
+            String dataNascimento
+    ) {
 
         if (nome == null || nome.isEmpty()) {
             throw new ClienteException("Nome não pode estar em branco.");
@@ -40,12 +51,22 @@ public class ValidateCliente {
         if (!telefone.replaceAll("[^0-9]", "").matches("^\\d+$")) {
             throw new ClienteException("Telefone inválido.");
         }
-                
-        if (altura < 0 || altura > 300) {
+        
+        if (altura.matches("^\\d{3}$")) {
+            throw new ClienteException("Altura não pode estar vazia.");
+        }
+        
+        int a = Integer.parseInt(altura);
+        if (a < 0 || a > 300) {
             throw new ClienteException("Altura inválida.");
         }
         
-        if (peso <= 0 || peso > 500.0) {
+        if (peso.matches("^\\d{3}\\.\\d{2}$")) {
+            throw new ClienteException("Peso  não pode estar vazia.");
+        }
+ 
+        float p = Float.parseFloat(peso);
+        if (p <= 0 || p > 500.0) {
             throw new ClienteException("Peso inválido.");
         }    
                 
@@ -61,7 +82,17 @@ public class ValidateCliente {
             throw new ClienteException("Data de Nascimento inválida.");
         }
         
-        return new Cliente(nome, email, senha, cpf, telefone, altura, peso, genero, dataNascimento);
+        return new Cliente(
+                nome, 
+                email, 
+                senha, 
+                cpf, 
+                telefone, 
+                a, 
+                p, 
+                genero, 
+                dataNascimento
+        );
     }
 
     private boolean isValidCPF(String cpf) {

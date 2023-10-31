@@ -165,7 +165,7 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
                         ingredienteController.criar(
                                 edtNome.getText(),
                                 edtUnidadeMedida.getText(),
-                                Float.parseFloat(fEdtQuantidade.getText())
+                                fEdtQuantidade.getText()
                         )
                 );
                 dispose();
