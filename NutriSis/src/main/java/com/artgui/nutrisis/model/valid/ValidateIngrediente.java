@@ -16,11 +16,11 @@ public class ValidateIngrediente {
             throw new IngredienteException("Unidade de medida não pode estar em branco.");
         }
 
-        if (quantidade.replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
+        if (!quantidade.replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
             throw new ReceitaException("Insira um valor no Tempo de Preparo.");
         }
 
-        int q = Integer.parseInt(quantidade);
+        int q = Integer.parseInt(quantidade.replaceAll("\\s", ""));
         if (q <= 0) {
             throw new IngredienteException("Quantidade inválida.");
         }

@@ -27,10 +27,10 @@ public class ValidateReceita {
         }
 
         if (tempoPreparo == null || nome.isEmpty()) {
-            throw new ReceitaException("Nome não pode estar em branco.");
+            throw new ReceitaException("Tempo de preparo não pode estar em branco.");
         }
 
-        if (tempoPreparo.replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
+        if (!tempoPreparo.replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
             throw new ReceitaException("Insira um valor no Tempo de Preparo.");
         }
 
@@ -38,7 +38,7 @@ public class ValidateReceita {
             throw new ReceitaException("Nome não pode estar em branco.");
         }
 
-        if (porcoes.replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
+        if (!porcoes.replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
             throw new ReceitaException("Nome não pode estar em branco.");
         }
 
@@ -52,8 +52,8 @@ public class ValidateReceita {
         return new Receita(
                 nome,
                 modoPreparo,
-                Integer.parseInt(tempoPreparo),
-                Integer.parseInt(porcoes),
+                Integer.parseInt(tempoPreparo.replaceAll("\\s", "")),
+                Integer.parseInt(porcoes.replaceAll("\\s", "")),
                 categoria,
                 ingredientes,
                 nutricionista

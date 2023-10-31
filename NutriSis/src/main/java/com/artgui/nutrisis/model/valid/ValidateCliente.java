@@ -52,20 +52,20 @@ public class ValidateCliente {
             throw new ClienteException("Telefone inválido.");
         }
         
-        if (altura.matches("^\\d{3}$")) {
+        if (!altura.matches("^\\d{3}$")) {
             throw new ClienteException("Altura não pode estar vazia.");
         }
         
-        int a = Integer.parseInt(altura);
+        int a = Integer.parseInt(altura.replaceAll("\\s", ""));
         if (a < 0 || a > 300) {
             throw new ClienteException("Altura inválida.");
         }
         
-        if (peso.matches("^\\d{3}\\.\\d{2}$")) {
+        if (!peso.matches("^\\d{3}\\.\\d{2}$")) {
             throw new ClienteException("Peso  não pode estar vazia.");
         }
  
-        float p = Float.parseFloat(peso);
+        float p = Float.parseFloat(peso.replaceAll("\\s", ""));
         if (p <= 0 || p > 500.0) {
             throw new ClienteException("Peso inválido.");
         }    
