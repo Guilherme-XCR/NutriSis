@@ -1,9 +1,9 @@
 package com.artgui.nutrisis.view;
 
 import com.artgui.nutrisis.model.Cliente;
-import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
 import com.artgui.nutrisis.view.Login.DlgLogin;
 import com.artgui.nutrisis.view.Register.DlgRegister;
+import com.artgui.nutrisis.view.provisoria.DlgGerarNutricionista;
 
 public class FrMainScreen extends javax.swing.JFrame {
 
@@ -20,6 +20,7 @@ public class FrMainScreen extends javax.swing.JFrame {
         panButtons = new javax.swing.JPanel();
         btnLogin = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -53,6 +54,18 @@ public class FrMainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Gerar Nutricionista");
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panButtonsLayout = new javax.swing.GroupLayout(panButtons);
         panButtons.setLayout(panButtonsLayout);
         panButtonsLayout.setHorizontalGroup(
@@ -63,6 +76,10 @@ public class FrMainScreen extends javax.swing.JFrame {
                 .addGap(200, 200, 200)
                 .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panButtonsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         panButtonsLayout.setVerticalGroup(
             panButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,7 +88,9 @@ public class FrMainScreen extends javax.swing.JFrame {
                 .addGroup(panButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(btnRegister))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
@@ -127,10 +146,20 @@ public class FrMainScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    // Esse botão leva para um tela de cadastro provisorio de um nutricionista
+    // No sistema real o nutricionista deve ser cadastrado direto no BD, ou por outro
+    // Programa operado por um administrador do jogo
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DlgGerarNutricionista dlgGerarNutricionista = new DlgGerarNutricionista(this, true);
+        dlgGerarNutricionista.setLocationRelativeTo(this);
+        dlgGerarNutricionista.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JPanel panButtons;
     private javax.swing.JPanel panMain;
