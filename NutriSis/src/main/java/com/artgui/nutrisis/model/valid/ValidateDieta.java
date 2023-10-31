@@ -9,8 +9,7 @@ import java.util.List;
 
 public class ValidateDieta {
 
-    public Dieta validaCamposEntrada ( String nome,String descricao,int diasDuracao,List<Refeicao> refeicoes,Nutricionista nutricionista){
-        // Realize as validações necessárias aqui
+    public Dieta validaCamposEntrada ( String nome,String descricao,String diasDuracao,List<Refeicao> refeicoes,Nutricionista nutricionista){
         
         if (nome == null || nome.isEmpty()) {
             throw new DietaException("Nome da dieta não pode estar em branco.");
@@ -19,13 +18,19 @@ public class ValidateDieta {
         if (descricao == null || descricao.isEmpty()) {
             throw new DietaException("Descrição da dieta não pode estar em branco.");
         }
-
-        if (diasDuracao <= 0) {
+        
+        
+        if (!diasDuracao.replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
+            throw new DietaException("Dieta não pode estar vazia.");
+        }
+        
+        int dD = Integer.parseInt(diasDuracao.replaceAll("\\s", ""));
+        if (dD <= 0) {
             throw new DietaException("A duração da dieta deve ser maior que zero.");
         }
 
         // Se todas as validações passarem, crie um novo objeto Dieta
-        return new Dieta(nome, descricao, diasDuracao, refeicoes, nutricionista);
+        return new Dieta(nome, descricao, dD, refeicoes, nutricionista);
     }
 }
 

@@ -29,7 +29,7 @@ import java.util.List;
         super.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = "SELECT r FROM Receita r WHERE r.nome like :nome";
         qry = super.entityManager.createQuery(jpql, Receita.class);
-        qry.setParameter("nome", nome);
+        qry.setParameter("nome", nome+"%");
         List<Receita> lst = qry.getResultList();
         super.entityManager.close();
         return lst;

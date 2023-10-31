@@ -4,11 +4,9 @@ import com.artgui.nutrisis.controller.tablemodel.TMViewDieta;
 import com.artgui.nutrisis.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
-import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
 import com.artgui.nutrisis.model.dao.DietaDAO;
 import com.artgui.nutrisis.model.valid.ValidateDieta;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 
@@ -23,7 +21,7 @@ public class DietaController {
     public void cadastrar(
             String nome, 
             String descricao, 
-            int diasDuracao, 
+            String diasDuracao, 
             List<Refeicao> refeicoes, 
             Nutricionista nutricionista
     ){
@@ -46,7 +44,7 @@ public class DietaController {
             int id,
             String nome,
             String descricao,
-            int diasDuracao,
+            String diasDuracao,
             List<Refeicao> refeicoes,
             Nutricionista nutricionista
     ){
@@ -83,4 +81,10 @@ public class DietaController {
         grd.setModel(tmDieta);
     }
     
+    public void atualizarTabela(JTable grd, String nome) {
+        List lst = repositorio.filterByName(nome);
+
+        TMViewDieta tableModel = new TMViewDieta(lst);
+        grd.setModel(tableModel);
+    }
 }

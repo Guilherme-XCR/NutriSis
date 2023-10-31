@@ -5,8 +5,6 @@ import com.artgui.nutrisis.controller.ReceitaController;
 import com.artgui.nutrisis.controller.RefeicaoController;
 import com.artgui.nutrisis.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
-import com.artgui.nutrisis.model.Nutricionista;
-import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
 import com.artgui.nutrisis.view.DlgCRUDRefeicao;
 import java.util.ArrayList;

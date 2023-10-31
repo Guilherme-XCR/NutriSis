@@ -45,8 +45,8 @@ public class ValidateReceita {
         if (categoria == null || categoria.isEmpty()) {
             throw new ReceitaException("Categoria não pode estar em branco.");
         }
-        if (ingredientes == null || nome.isEmpty()) {
-            throw new ReceitaException("Adicione pelo menos um ingrediente.");
+        if (ingredientes == null || ingredientes.isEmpty()) {
+            throw new ReceitaException("Adicione pelo menos UM ingrediente.");
         }
 
         return new Receita(
