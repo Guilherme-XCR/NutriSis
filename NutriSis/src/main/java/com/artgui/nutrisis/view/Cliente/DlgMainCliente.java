@@ -50,6 +50,7 @@ public class DlgMainCliente extends javax.swing.JDialog {
         lblAcompanhamentos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         panHeader.setBackground(new java.awt.Color(237, 249, 253));
 
@@ -358,6 +359,7 @@ public class DlgMainCliente extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceitasActionPerformed

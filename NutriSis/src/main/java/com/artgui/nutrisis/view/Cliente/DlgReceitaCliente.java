@@ -96,6 +96,7 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         grdIngredientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
 
         panHeader1.setBackground(new java.awt.Color(237, 249, 253));
@@ -425,6 +426,7 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerReceitaActionPerformed

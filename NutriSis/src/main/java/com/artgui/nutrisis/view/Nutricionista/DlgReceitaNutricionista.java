@@ -119,6 +119,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 51));
+        setResizable(false);
 
         panHeader.setBackground(new java.awt.Color(237, 249, 253));
 
@@ -502,6 +503,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed

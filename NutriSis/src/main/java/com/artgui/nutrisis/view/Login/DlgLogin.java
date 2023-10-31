@@ -36,6 +36,7 @@ public class DlgLogin extends javax.swing.JDialog {
         btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ImgReistro-Login.png"))); // NOI18N
 
@@ -154,6 +155,7 @@ public class DlgLogin extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
