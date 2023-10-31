@@ -42,7 +42,7 @@ public class DlgRegister extends javax.swing.JDialog {
             dataNascimentoFormatter.install(fEdtDataNascimento);
 
         } catch (ParseException ex) {
-            Logger.getLogger(DlgCRUDCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DlgRegister.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

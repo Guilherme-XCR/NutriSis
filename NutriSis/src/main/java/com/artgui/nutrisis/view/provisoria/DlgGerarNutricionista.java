@@ -1,7 +1,7 @@
 package com.artgui.nutrisis.view.provisoria;
 
 import com.artgui.nutrisis.controller.NutricionistaController;
-import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.exceptions.NutricionistaException;
 import javax.swing.JOptionPane;
 
 public class DlgGerarNutricionista extends javax.swing.JDialog {
@@ -219,7 +219,7 @@ public class DlgGerarNutricionista extends javax.swing.JDialog {
 
             this.dispose();
 
-        } catch (ClienteException e) {
+        } catch (NutricionistaException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

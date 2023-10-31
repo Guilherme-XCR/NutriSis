@@ -2,15 +2,18 @@ package com.artgui.nutrisis.view.Nutricionista;
 
 import com.artgui.nutrisis.controller.IngredienteController;
 import com.artgui.nutrisis.controller.ReceitaController;
-import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.exceptions.ReceitaException;
 import com.artgui.nutrisis.model.Ingrediente;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Receita;
-import com.artgui.nutrisis.view.DlgCRUDIngrediente;
+import com.artgui.nutrisis.view.Register.DlgRegister;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 
 public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
@@ -33,6 +36,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
         this.habilitarCampos(false);
         this.limparCampos();
+        this.adicionarMascaraNosCampos();
         receitaController.atualizarTabela(grdReceitas);
         ingredienteController.atualizarTabela(grdIngredientes, ingredientes);
 
@@ -72,6 +76,21 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         this.ingredienteController.atualizarTabela(grdIngredientes, receita.getIngredientes());
     }
 
+    public void adicionarMascaraNosCampos() {
+
+        try {
+            MaskFormatter tempoPreparoFormatter = new MaskFormatter("########");
+            MaskFormatter porcoesFormatter = new MaskFormatter("########");
+            
+            tempoPreparoFormatter.install(fEdtTempoPreparo);
+            porcoesFormatter.install(fEdtPorcoes);
+            
+
+        } catch (ParseException ex) {
+            Logger.getLogger(DlgReceitaNutricionista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private Object getObjetoSelecionadoNaGridReceita() {
         int rowCliked = this.grdReceitas.getSelectedRow();
         Object obj = null;
@@ -223,7 +242,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         edtPesquisa.setBackground(new java.awt.Color(204, 204, 204));
         edtPesquisa.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtPesquisa.setForeground(new java.awt.Color(0, 0, 0));
-        edtPesquisa.setText("jTextField1");
+        edtPesquisa.setText("IMPLEMENTAR");
 
         javax.swing.GroupLayout panPesquisaLayout = new javax.swing.GroupLayout(panPesquisa);
         panPesquisa.setLayout(panPesquisaLayout);
@@ -298,25 +317,21 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         edtNome.setBackground(new java.awt.Color(204, 204, 204));
         edtNome.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtNome.setForeground(new java.awt.Color(0, 0, 0));
-        edtNome.setText("jTextField2");
         edtNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
 
         fEdtTempoPreparo.setBackground(new java.awt.Color(204, 204, 204));
         fEdtTempoPreparo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tempo (Min)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         fEdtTempoPreparo.setForeground(new java.awt.Color(0, 0, 0));
-        fEdtTempoPreparo.setText("jFormattedTextField1");
         fEdtTempoPreparo.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
 
         fEdtPorcoes.setBackground(new java.awt.Color(204, 204, 204));
         fEdtPorcoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Porções", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         fEdtPorcoes.setForeground(new java.awt.Color(0, 0, 0));
-        fEdtPorcoes.setText("jFormattedTextField2");
         fEdtPorcoes.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
 
         edtCategoria.setBackground(new java.awt.Color(204, 204, 204));
         edtCategoria.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtCategoria.setForeground(new java.awt.Color(0, 0, 0));
-        edtCategoria.setText("jTextField3");
         edtCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
 
         edtModoPreparo.setBackground(new java.awt.Color(204, 204, 204));
@@ -376,7 +391,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
                     .addGroup(panInputsLayout.createSequentialGroup()
                         .addComponent(btnAdicionarIngrediente, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -554,21 +569,42 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Nutricionista nutricionista = new Nutricionista("teste", "teste@teste", "senhateste", "cpfTeste", "teste", "teste", "teste");
-        
-        try {
-            if (idReceitaEditando > 0) {
-                receitaController.atualizar(idReceitaEditando, edtNome.getText(), edtModoPreparo.getText(),  Integer.parseInt(fEdtTempoPreparo.getText()), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
-            } else {
-                receitaController.cadastrar(edtNome.getText(), edtModoPreparo.getText(),  Integer.parseInt(fEdtTempoPreparo.getText()), Integer.parseInt(fEdtPorcoes.getText()), edtCategoria.getText(), ingredientes, nutricionista);
+
+        if (fEdtTempoPreparo.getText() == null || !fEdtTempoPreparo.getText().replaceAll("\\s", "").matches("^[0-9]{1,8}$")
+                || fEdtPorcoes.getText() == null || !fEdtPorcoes.getText().replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
+            JOptionPane.showMessageDialog(this, "Preencha Corretamente tempo de preparo ou poções");
+
+        } else {
+
+            try {
+                if (idReceitaEditando > 0) {
+                    receitaController.atualizar(
+                            idReceitaEditando,
+                            edtNome.getText(), edtModoPreparo.getText(),
+                            Integer.parseInt(fEdtTempoPreparo.getText()),
+                            Integer.parseInt(fEdtPorcoes.getText()),
+                            edtCategoria.getText(),
+                            ingredientes, nutricionista
+                    );
+                } else {
+                    receitaController.cadastrar(
+                            edtNome.getText(),
+                            edtModoPreparo.getText(),
+                            Integer.parseInt(fEdtTempoPreparo.getText()),
+                            Integer.parseInt(fEdtPorcoes.getText()),
+                            edtCategoria.getText(),
+                            ingredientes, nutricionista
+                    );
+                }
+                idReceitaEditando = -1;
+                receitaController.atualizarTabela(grdReceitas);
+                this.habilitarCampos(false);
+                this.limparCampos();
+            } catch (ReceitaException e) {
+                System.err.println(e.getMessage());
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
-            idReceitaEditando = -1;
-            receitaController.atualizarTabela(grdReceitas);
-            this.habilitarCampos(false);
-            this.limparCampos();
-        } catch (ClienteException e) {
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } 
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -584,16 +620,16 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
     private void btnAdicionarIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarIngredienteActionPerformed
         Ingrediente ingrediente = new Ingrediente();
 
-        DlgCRUDIngrediente dlgCRUDIngrediente = new DlgCRUDIngrediente(this, true, ingrediente, false);
-        dlgCRUDIngrediente.setLocationRelativeTo(this);
-        dlgCRUDIngrediente.setVisible(true);
-        
-        if (ingrediente.getId() == -1){
+        DlgIngredienteNutricionista dlgIngredienteNutricionista = new DlgIngredienteNutricionista(this, true, ingrediente, false);
+        dlgIngredienteNutricionista.setLocationRelativeTo(this);
+        dlgIngredienteNutricionista.setVisible(true);
+
+        if (ingrediente.getId() == -1) {
             JOptionPane.showMessageDialog(this, "Criação cancelada");
-        }else{
+        } else {
             ingredientes.add(ingrediente);
             ingredienteController.atualizarTabela(grdIngredientes, ingredientes);
-        } 
+        }
     }//GEN-LAST:event_btnAdicionarIngredienteActionPerformed
 
 

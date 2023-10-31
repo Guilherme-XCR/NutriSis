@@ -7,7 +7,6 @@ import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.dao.ReceitaDAO;
 import com.artgui.nutrisis.model.valid.ValidateReceita;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 

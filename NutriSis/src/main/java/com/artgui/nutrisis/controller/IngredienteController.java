@@ -5,8 +5,6 @@ import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Ingrediente;
 import com.artgui.nutrisis.model.dao.IngredienteDAO;
 import com.artgui.nutrisis.model.valid.ValidateIngrediente;
-import com.artgui.nutrisis.model.valid.ValidateReceita;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 
@@ -66,4 +64,9 @@ public class IngredienteController {
         TMViewIngrediente tmIngrediente = new TMViewIngrediente(ingredientes);
         grd.setModel(tmIngrediente);
     }
+    
+    public Ingrediente criar(String nome, String unidadeMedida, float quantidade){
+        ValidateIngrediente valid = new ValidateIngrediente();
+        return valid.validaCamposEntrada(nome, unidadeMedida, quantidade);
+    }        
 }

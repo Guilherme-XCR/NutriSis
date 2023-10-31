@@ -20,12 +20,7 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         
         this.limparCampos();
         this.habilitarCampos(false);
-        
-        //******
         this.receitaController.atualizarTabela(grdReceitas);
-        //******
-        
-        
     }
     
     public void habilitarCampos(boolean flag) {
