@@ -1,16 +1,14 @@
-package com.artgui.nutrisis.view;
+package com.artgui.nutrisis.viewOlds;
+
+
 
 import com.artgui.nutrisis.controller.ReceitaController;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
 
 public class DlgCRUDRefeicao extends javax.swing.JDialog {
 
@@ -64,7 +62,7 @@ public class DlgCRUDRefeicao extends javax.swing.JDialog {
         edtNome.setText(r.getNome());
         fEdtHorario.setText(r.getHorario());
         edtCalorias.setText(r.getCalorias() + "");
-        fEdtIdNutricionista.setText(r.getNutricionista().getId() + "");
+//        fEdtIdNutricionista.setText(r.getNutricionista().getId() + "");
         
         receitas = r.getReceitas();
         receitaController.atualizarTabela(grdReceita, receitas);
@@ -455,7 +453,7 @@ public class DlgCRUDRefeicao extends javax.swing.JDialog {
         
         //pegar o nutricionista quando tiver o Login
         Nutricionista nutricionista = new Nutricionista("Teste", "Teste@teste.com", "teste", "teste", "teste", "teste", "teste");
-        refeicaoRetornar.setNutricionista(nutricionista);
+//        refeicaoRetornar.setNutricionista(nutricionista);
         
         refeicaoRetornar.setReceitas(receitas);
         

@@ -4,7 +4,6 @@ import com.artgui.nutrisis.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Refeicao;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ValidateDieta {
@@ -21,12 +20,12 @@ public class ValidateDieta {
         
         
         if (!diasDuracao.replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
-            throw new DietaException("Dieta não pode estar vazia.");
+            throw new DietaException("Dias não pode estar vazia.");
         }
         
         int dD = Integer.parseInt(diasDuracao.replaceAll("\\s", ""));
         if (dD <= 0) {
-            throw new DietaException("A duração da dieta deve ser maior que zero.");
+            throw new DietaException("A Dias deve ser maior que zero.");
         }
 
         // Se todas as validações passarem, crie um novo objeto Dieta

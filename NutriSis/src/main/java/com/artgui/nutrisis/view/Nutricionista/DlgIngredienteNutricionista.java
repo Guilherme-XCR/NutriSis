@@ -157,22 +157,20 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (fEdtQuantidade.getText() == null || !fEdtQuantidade.getText().replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
-            JOptionPane.showMessageDialog(this, "Preencha o campo quantidade.");
-        } else {
-            try {
-                ingrediente.copy(
-                        ingredienteController.criar(
-                                edtNome.getText(),
-                                edtUnidadeMedida.getText(),
-                                fEdtQuantidade.getText()
-                        )
-                );
-                dispose();
-            } catch (IngredienteException e) {
-                System.err.println(e.getMessage());
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
+
+        try {
+            ingrediente.copy(
+                    ingredienteController.criar(
+                    edtNome.getText(),
+                    edtUnidadeMedida.getText(),
+                    fEdtQuantidade.getText()
+                    )
+            );
+            dispose();
+        } catch (IngredienteException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

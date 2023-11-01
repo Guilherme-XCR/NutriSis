@@ -553,18 +553,18 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
     }//GEN-LAST:event_edtPesquisaKeyReleased
 
     private void btnAdicionarRefeicoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarRefeicoesActionPerformed
-//        Ingrediente ingrediente = new Ingrediente();
-//
-//        DlgIngredienteNutricionista dlgIngredienteNutricionista = new DlgIngredienteNutricionista(this, true, ingrediente, false);
-//        dlgIngredienteNutricionista.setLocationRelativeTo(this);
-//        dlgIngredienteNutricionista.setVisible(true);
-//
-//        if (ingrediente.getId() == -1) {
-//            JOptionPane.showMessageDialog(this, "Criação cancelada");
-//        } else {
-//            ingredientes.add(ingrediente);
-//            ingredienteController.atualizarTabela(grdRefeicoes, ingredientes);
-//        }
+        Refeicao refeicao = new Refeicao();
+
+        DlgRefeicaoNutricionista dlgRefeicaoNutricionista = new DlgRefeicaoNutricionista(this, true, refeicao, false);
+        dlgRefeicaoNutricionista.setLocationRelativeTo(this);
+        dlgRefeicaoNutricionista.setVisible(true);
+        
+        if (refeicao.getId() == -1) {
+            JOptionPane.showMessageDialog(this, "Criação cancelada");
+        } else {
+            refeicoes.add(refeicao);
+            refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
+        }
     }//GEN-LAST:event_btnAdicionarRefeicoesActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -593,6 +593,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
             dietaController.atualizarTabela(grdDietas);
             this.habilitarCampos(false);
             this.limparCampos();
+            this.tabsDados.setSelectedComponent(this.panTodasAsDietas);
         } catch (DietaException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());

@@ -43,11 +43,22 @@ public class Refeicao implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_dieta")
     private Dieta dieta;
+       
+    //sem id e sem dieta
+    public Refeicao(
+            String nome,
+            String horario,
+            float calorias,
+            List<Receita> receitas,
+            Nutricionista nutricionista
+    ){
+            this.nome = nome;
+            this.horario = horario;
+            this.calorias = calorias;
+            this.receitas = receitas;
+    }
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_nutricionista")    
-    private Nutricionista nutricionista;
-    
+    //sem id
     public Refeicao(
             String nome,
             String horario,
@@ -61,7 +72,6 @@ public class Refeicao implements Serializable {
             this.calorias = calorias;
             this.receitas = receitas;
             this.dieta = dieta;
-            this.nutricionista = nutricionista;
     }
     
     public void copy(Refeicao outro){
@@ -71,6 +81,5 @@ public class Refeicao implements Serializable {
         this.calorias = outro.getCalorias();
         this.receitas = outro.getReceitas();
         this.dieta = outro.getDieta();
-        this.nutricionista = outro.getNutricionista();
     }
 }

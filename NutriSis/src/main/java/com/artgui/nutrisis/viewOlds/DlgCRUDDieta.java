@@ -6,7 +6,6 @@ import com.artgui.nutrisis.controller.RefeicaoController;
 import com.artgui.nutrisis.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Refeicao;
-import com.artgui.nutrisis.view.DlgCRUDRefeicao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -676,18 +675,18 @@ public class DlgCRUDDieta extends javax.swing.JDialog {
             dlgCRUDRefeicao.setLocationRelativeTo(this);
             dlgCRUDRefeicao.setVisible(true);
 
-            if (refeicaoRetonar.getId() == -1){
-                JOptionPane.showMessageDialog(this, "Edição cancelada");
-            }else{
-                refeicaoEditando.setNome(refeicaoRetonar.getNome());
-                refeicaoEditando.setHorario(refeicaoRetonar.getHorario());
-                refeicaoEditando.setCalorias(refeicaoRetonar.getCalorias());
-                refeicaoEditando.setReceitas(refeicaoRetonar.getReceitas());
-                refeicaoEditando.setDieta(refeicaoRetonar.getDieta());
-                refeicaoEditando.setNutricionista(refeicaoRetonar.getNutricionista());
-                
-                refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
-            }
+//            if (refeicaoRetonar.getId() == -1){
+//                JOptionPane.showMessageDialog(this, "Edição cancelada");
+//            }else{
+//                refeicaoEditando.setNome(refeicaoRetonar.getNome());
+//                refeicaoEditando.setHorario(refeicaoRetonar.getHorario());
+//                refeicaoEditando.setCalorias(refeicaoRetonar.getCalorias());
+//                refeicaoEditando.setReceitas(refeicaoRetonar.getReceitas());
+//                refeicaoEditando.setDieta(refeicaoRetonar.getDieta());
+//                refeicaoEditando.setNutricionista(refeicaoRetonar.getNutricionista());
+//                
+//                refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
+//            }
         }
     }//GEN-LAST:event_btnEditarRefeicaoActionPerformed
 

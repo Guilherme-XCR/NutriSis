@@ -63,6 +63,17 @@ public class Receita implements Serializable {
         
     }
     
+    public void copy(Receita outro){
+        this.id = outro.getId();
+        this.nome = outro.getNome();
+        this.modoPreparo = outro.getModoPreparo();
+        this.tempoPreparo = outro.getTempoPreparo();
+        this.porcoes = outro.getPorcoes();
+        this.categoria = outro.getCategoria();
+        this.ingredientes = outro.getIngredientes();
+        this.nutricionista = outro.getNutricionista();
+    }
+    
     //add refeicao
     public void addRefeicao(Refeicao refeicao){
         this.refeicoes.add(refeicao);
