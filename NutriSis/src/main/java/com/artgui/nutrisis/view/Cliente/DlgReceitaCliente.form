@@ -287,13 +287,13 @@
             <Component class="javax.swing.JTextField" name="edtPesquisar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="47" green="47" red="47" type="rgb"/>
+                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Cascadia Mono" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
               <Events>

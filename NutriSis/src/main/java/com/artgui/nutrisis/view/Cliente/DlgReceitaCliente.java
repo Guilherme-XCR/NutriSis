@@ -13,10 +13,11 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         
     public DlgReceitaCliente(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        initComponents();
         
         ingredienteController = new IngredienteController();
         receitaController = new ReceitaController();
+        
+        initComponents();
         
         this.limparCampos();
         this.habilitarCampos(false);
@@ -60,6 +61,15 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         this.edtCategoriaReceita.setText(receita.getCategoria());
         this.edtModoPreparoReceita.setText(receita.getModoPreparo());
         this.ingredienteController.atualizarTabela(grdIngredientes, receita.getIngredientes());
+    }
+    
+    private Object getObjetoSelecionadoNaGrid() {
+        int rowCliked = grdReceitas.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdReceitas.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
     }
     
     @SuppressWarnings("unchecked")
@@ -181,9 +191,9 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         lblPesquisar.setForeground(new java.awt.Color(0, 204, 51));
         lblPesquisar.setText("Pesquisar");
 
-        edtPesquisar.setBackground(new java.awt.Color(71, 71, 71));
+        edtPesquisar.setBackground(new java.awt.Color(204, 204, 204));
         edtPesquisar.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtPesquisar.setForeground(new java.awt.Color(255, 255, 255));
+        edtPesquisar.setForeground(new java.awt.Color(0, 0, 0));
         edtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 edtPesquisarKeyReleased(evt);
@@ -449,16 +459,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
             this.preencherFormulario(receita);
         }   
     }//GEN-LAST:event_btnVerReceitaActionPerformed
-
-    private Object getObjetoSelecionadoNaGrid() {
-        int rowCliked = grdReceitas.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grdReceitas.getModel().getValueAt(rowCliked, -1);
-        }
-        return obj;
-    }
-    
 
     private void grdAlunosMouseClicked(java.awt.event.MouseEvent evt) {                                       
         if (evt.getClickCount() == 2) {
