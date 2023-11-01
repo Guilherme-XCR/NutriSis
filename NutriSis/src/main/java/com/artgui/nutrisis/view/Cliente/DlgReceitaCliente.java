@@ -75,6 +75,8 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         grdReceitas = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
         btnVerReceita = new javax.swing.JButton();
+        lblPesquisar = new javax.swing.JLabel();
+        edtPesquisar = new javax.swing.JTextField();
         panVizualizar = new javax.swing.JPanel();
         panAutorNutricionista = new javax.swing.JPanel();
         edtNomeAutor = new javax.swing.JTextField();
@@ -110,8 +112,7 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
             .addGroup(panHeader1Layout.createSequentialGroup()
                 .addComponent(lblLogo1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panHeader1Layout.setVerticalGroup(
             panHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +129,7 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
 
         grdReceitas.setBackground(new java.awt.Color(71, 71, 71));
         grdReceitas.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        grdReceitas.setForeground(new java.awt.Color(255, 153, 0));
+        grdReceitas.setForeground(new java.awt.Color(255, 255, 255));
         grdReceitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -176,25 +177,50 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
             }
         });
 
+        lblPesquisar.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
+        lblPesquisar.setForeground(new java.awt.Color(0, 204, 51));
+        lblPesquisar.setText("Pesquisar");
+
+        edtPesquisar.setBackground(new java.awt.Color(71, 71, 71));
+        edtPesquisar.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtPesquisar.setForeground(new java.awt.Color(255, 255, 255));
+        edtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                edtPesquisarKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout panEscolhaLayout = new javax.swing.GroupLayout(panEscolha);
         panEscolha.setLayout(panEscolhaLayout);
         panEscolhaLayout.setHorizontalGroup(
             panEscolhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panEscolhaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(panEscolhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panEscolhaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(panEscolhaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edtPesquisar))
+                    .addGroup(panEscolhaLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(btnVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                        .addComponent(btnVerReceita)
+                        .addGap(12, 12, 12)))
                 .addContainerGap())
-            .addGroup(panEscolhaLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btnVoltar)
-                .addGap(18, 18, 18)
-                .addComponent(btnVerReceita)
-                .addContainerGap(25, Short.MAX_VALUE))
         );
         panEscolhaLayout.setVerticalGroup(
             panEscolhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panEscolhaLayout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+                .addContainerGap()
+                .addGroup(panEscolhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edtPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panEscolhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,7 +236,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         edtNomeAutor.setBackground(new java.awt.Color(71, 71, 71));
         edtNomeAutor.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtNomeAutor.setForeground(new java.awt.Color(0, 0, 0));
-        edtNomeAutor.setText("Nome Nutricionista");
         edtNomeAutor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtNomeAutor.setDisabledTextColor(new java.awt.Color(204, 255, 255));
         edtNomeAutor.setEnabled(false);
@@ -219,7 +244,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         edtEmailAutor.setBackground(new java.awt.Color(71, 71, 71));
         edtEmailAutor.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtEmailAutor.setForeground(new java.awt.Color(0, 0, 0));
-        edtEmailAutor.setText("Email");
         edtEmailAutor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtEmailAutor.setDisabledTextColor(new java.awt.Color(204, 255, 255));
         edtEmailAutor.setEnabled(false);
@@ -228,7 +252,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         edtEspecializacaoAutor.setBackground(new java.awt.Color(71, 71, 71));
         edtEspecializacaoAutor.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtEspecializacaoAutor.setForeground(new java.awt.Color(0, 0, 0));
-        edtEspecializacaoAutor.setText("Especialização");
         edtEspecializacaoAutor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Especialização", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtEspecializacaoAutor.setDisabledTextColor(new java.awt.Color(204, 255, 255));
         edtEspecializacaoAutor.setEnabled(false);
@@ -240,11 +263,11 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
             panAutorNutricionistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panAutorNutricionistaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(edtNomeAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(edtNomeAutor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtEmailAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(edtEspecializacaoAutor, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addComponent(edtEmailAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtEspecializacaoAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panAutorNutricionistaLayout.setVerticalGroup(
@@ -264,7 +287,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         edtNomeReceita.setBackground(new java.awt.Color(71, 71, 71));
         edtNomeReceita.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtNomeReceita.setForeground(new java.awt.Color(0, 0, 0));
-        edtNomeReceita.setText("jTextField4");
         edtNomeReceita.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtNomeReceita.setDisabledTextColor(new java.awt.Color(204, 255, 255));
         edtNomeReceita.setEnabled(false);
@@ -273,7 +295,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         edtTempoPreparoReceita.setBackground(new java.awt.Color(71, 71, 71));
         edtTempoPreparoReceita.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtTempoPreparoReceita.setForeground(new java.awt.Color(0, 0, 0));
-        edtTempoPreparoReceita.setText("jTextField4");
         edtTempoPreparoReceita.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tempo Preparo (Min)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51)))); // NOI18N
         edtTempoPreparoReceita.setDisabledTextColor(new java.awt.Color(204, 255, 255));
         edtTempoPreparoReceita.setEnabled(false);
@@ -282,7 +303,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         edtPorcoesReceita.setBackground(new java.awt.Color(71, 71, 71));
         edtPorcoesReceita.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtPorcoesReceita.setForeground(new java.awt.Color(0, 0, 0));
-        edtPorcoesReceita.setText("jTextField4");
         edtPorcoesReceita.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Porções", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtPorcoesReceita.setDisabledTextColor(new java.awt.Color(204, 255, 255));
         edtPorcoesReceita.setEnabled(false);
@@ -291,7 +311,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         edtCategoriaReceita.setBackground(new java.awt.Color(71, 71, 71));
         edtCategoriaReceita.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtCategoriaReceita.setForeground(new java.awt.Color(0, 0, 0));
-        edtCategoriaReceita.setText("jTextField4");
         edtCategoriaReceita.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtCategoriaReceita.setDisabledTextColor(new java.awt.Color(204, 255, 255));
         edtCategoriaReceita.setEnabled(false);
@@ -301,7 +320,6 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         edtModoPreparoReceita.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modo de Preparo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtModoPreparoReceita.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtModoPreparoReceita.setForeground(new java.awt.Color(0, 0, 0));
-        edtModoPreparoReceita.setText("Modo de preparo");
         edtModoPreparoReceita.setDisabledTextColor(new java.awt.Color(204, 255, 255));
         edtModoPreparoReceita.setEnabled(false);
         jScrollPane3.setViewportView(edtModoPreparoReceita);
@@ -340,19 +358,19 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         panReceitaInfo.setLayout(panReceitaInfoLayout);
         panReceitaInfoLayout.setHorizontalGroup(
             panReceitaInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panReceitaInfoLayout.createSequentialGroup()
+            .addGroup(panReceitaInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panReceitaInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
+                .addGroup(panReceitaInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panReceitaInfoLayout.createSequentialGroup()
-                        .addComponent(edtNomeReceita)
+                        .addComponent(edtNomeReceita, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtTempoPreparoReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edtTempoPreparoReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtPorcoesReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edtPorcoesReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtCategoriaReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(edtCategoriaReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         panReceitaInfoLayout.setVerticalGroup(
@@ -375,11 +393,8 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         panVizualizar.setLayout(panVizualizarLayout);
         panVizualizarLayout.setHorizontalGroup(
             panVizualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panVizualizarLayout.createSequentialGroup()
-                .addGroup(panVizualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panReceitaInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panAutorNutricionista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+            .addComponent(panAutorNutricionista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panReceitaInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panVizualizarLayout.setVerticalGroup(
             panVizualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,11 +409,11 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         panMain.setLayout(panMainLayout);
         panMainLayout.setHorizontalGroup(
             panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(panHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panMainLayout.createSequentialGroup()
                 .addComponent(panEscolha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panVizualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panVizualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panHeader1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panMainLayout.setVerticalGroup(
             panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,6 +470,15 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void edtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtPesquisarKeyReleased
+        String nomeDigitado = edtPesquisar.getText();
+        if(!nomeDigitado.isEmpty())
+            this.receitaController.atualizarTabela(grdReceitas, nomeDigitado);
+        else
+            this.receitaController.atualizarTabela(grdReceitas);
+
+    }//GEN-LAST:event_edtPesquisarKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVerReceita;
     private javax.swing.JButton btnVoltar;
@@ -464,6 +488,7 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
     private javax.swing.JTextPane edtModoPreparoReceita;
     private javax.swing.JTextField edtNomeAutor;
     private javax.swing.JTextField edtNomeReceita;
+    private javax.swing.JTextField edtPesquisar;
     private javax.swing.JTextField edtPorcoesReceita;
     private javax.swing.JTextField edtTempoPreparoReceita;
     private javax.swing.JTable grdIngredientes;
@@ -472,6 +497,7 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblLogo1;
+    private javax.swing.JLabel lblPesquisar;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel panAutorNutricionista;
     private javax.swing.JPanel panEscolha;
