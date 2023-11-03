@@ -2,11 +2,11 @@ package com.artgui.nutrisis.view.Nutricionista;
 
 import com.artgui.nutrisis.controller.IngredienteController;
 import com.artgui.nutrisis.controller.ReceitaController;
+import com.artgui.nutrisis.exceptions.IngredienteException;
 import com.artgui.nutrisis.exceptions.ReceitaException;
 import com.artgui.nutrisis.model.Ingrediente;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Receita;
-import com.artgui.nutrisis.view.Register.DlgRegister;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         this.limparCampos();
         this.adicionarMascaraNosCampos();
         receitaController.atualizarTabela(grdReceitas);
-        ingredienteController.atualizarTabela(grdIngredientes, ingredientes);
+        ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, ingredientes);
 
     }
 
@@ -63,7 +63,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         this.edtCategoria.setText("");
         this.edtModoPreparo.setText("");
 
-        this.ingredienteController.atualizarTabela(grdIngredientes, new ArrayList<>());
+        this.ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, new ArrayList<>());
     }
 
     public void preencherFormulario(Receita receita) {
@@ -73,7 +73,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         this.edtCategoria.setText(receita.getCategoria());
         this.edtModoPreparo.setText(receita.getModoPreparo());
 
-        this.ingredienteController.atualizarTabela(grdIngredientes, receita.getIngredientes());
+        this.ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, receita.getIngredientes());
     }
 
     public void adicionarMascaraNosCampos() {
@@ -99,6 +99,54 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         return obj;
     }
 
+    private Object getObjetoSelecionadoNaGridIngrediente() {
+        int rowCliked = this.grdIngredientes.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = this.grdIngredientes.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+
+    private void editarIngrediente() {
+        Ingrediente ingrediente = (Ingrediente) this.getObjetoSelecionadoNaGridIngrediente();
+        Ingrediente ingredienteRetonar = new Ingrediente();
+        ingredienteRetonar.copy(ingrediente);
+        if (ingrediente == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+            DlgIngredienteNutricionista dlgIngredienteNutricionista = new DlgIngredienteNutricionista(this, true, ingredienteRetonar, true);
+            dlgIngredienteNutricionista.setLocationRelativeTo(this);
+            dlgIngredienteNutricionista.setVisible(true);
+            if (ingredienteRetonar.getId() == -1) {
+                JOptionPane.showMessageDialog(this, "Edição cancelada");
+            } else {
+                ingrediente.setNome(ingredienteRetonar.getNome());
+                ingrediente.setUnidadeMedida(ingredienteRetonar.getUnidadeMedida());
+                ingrediente.setQuantidade(ingredienteRetonar.getQuantidade());
+                ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, ingredientes);
+            }
+        }
+        tabsDados.setSelectedComponent(panFormulario);
+    }
+
+    private void excluirIngrediente() {
+        Ingrediente ingrediente = (Ingrediente) this.getObjetoSelecionadoNaGridIngrediente();
+        if (ingrediente == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+            try {
+                ingredienteController.excluir(ingrediente);
+                ingredientes.remove(ingrediente);
+                ingredientes.remove(ingrediente);
+                ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, ingredientes);
+            } catch (IngredienteException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
+        tabsDados.setSelectedComponent(panFormulario);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -356,6 +404,11 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        grdIngredientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdIngredientesMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(grdIngredientes);
 
         lblIngredientes.setFont(new java.awt.Font("Cascadia Mono", 0, 36)); // NOI18N
@@ -581,7 +634,8 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
                         fEdtTempoPreparo.getText(),
                         fEdtPorcoes.getText(),
                         edtCategoria.getText(),
-                        ingredientes, nutricionista
+                        ingredientes,
+                        nutricionista
                 );
             } else {
                 receitaController.cadastrar(
@@ -625,17 +679,30 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Criação cancelada");
         } else {
             ingredientes.add(ingrediente);
-            ingredienteController.atualizarTabela(grdIngredientes, ingredientes);
+            ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, ingredientes);
         }
     }//GEN-LAST:event_btnAdicionarIngredienteActionPerformed
 
     private void edtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtPesquisaKeyReleased
         String nomeDigitado = edtPesquisa.getText();
-        if(!nomeDigitado.isEmpty())
+        if (!nomeDigitado.isEmpty())
             this.receitaController.atualizarTabela(grdReceitas, nomeDigitado);
         else
             this.receitaController.atualizarTabela(grdReceitas);
     }//GEN-LAST:event_edtPesquisaKeyReleased
+
+    private void grdIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdIngredientesMouseClicked
+
+        if (evt.getClickCount() == 2) {
+            int aux = grdIngredientes.getSelectedColumn();
+            if (aux == 3){
+                editarIngrediente();
+            }else if (aux == 4){
+                excluirIngrediente();
+            }
+        }
+
+    }//GEN-LAST:event_grdIngredientesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

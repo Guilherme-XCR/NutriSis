@@ -4,6 +4,7 @@ import com.artgui.nutrisis.controller.DietaController;
 import com.artgui.nutrisis.controller.RefeicaoController;
 import com.artgui.nutrisis.exceptions.DietaException;
 import com.artgui.nutrisis.exceptions.ReceitaException;
+import com.artgui.nutrisis.exceptions.RefeicaoException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Refeicao;
@@ -19,33 +20,32 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
 
     private RefeicaoController refeicaoController;
     private DietaController dietaController;
-    
+
     int idDietaEditando;
     List<Refeicao> refeicoes;
-    
-    
+
     public DlgDietaNutricionista(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        
+
         this.refeicaoController = new RefeicaoController();
         this.dietaController = new DietaController();
         this.idDietaEditando = -1;
         this.refeicoes = new ArrayList<>();
-        
+
         initComponents();
-        
+
         this.habilitarCampos(false);
         this.limparCampos();
         this.adicionarMascaraNosCampos();
         dietaController.atualizarTabela(grdDietas);
         refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
     }
-    
+
     public void habilitarCampos(boolean flag) {
         this.edtNome.setEnabled(flag);
         this.fEdtDiasDuracao.setEnabled(flag);
         this.edtDescricao.setEnabled(flag);
-        
+
         this.grdRefeicoes.setEnabled(flag);
 
         this.btnAdicionarRefeicoes.setEnabled(flag);
@@ -59,7 +59,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         this.edtDescricao.setText("");
 
         this.refeicaoController.atualizarTabela(grdRefeicoes, new ArrayList<>());
-        }
+    }
 
     public void preencherFormulario(Dieta dieta) {
         this.edtNome.setText(dieta.getNome());
@@ -89,7 +89,67 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         }
         return obj;
     }
-    
+
+    private Object getObjetoSelecionadoNaGridRefeicao() {
+        int rowCliked = this.grdRefeicoes.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = this.grdRefeicoes.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+
+    private void editarRefeicao() {
+        Refeicao refeicaoEditando = (Refeicao) this.getObjetoSelecionadoNaGridRefeicao();
+
+        if (refeicaoEditando == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+
+            Refeicao refeicaoRetonar = new Refeicao();
+            refeicaoRetonar.copy(refeicaoEditando);
+
+            DlgReceitaNutricionista dlgReceitaNutricionista = new DlgReceitaNutricionista(this, true);
+            dlgReceitaNutricionista.setLocationRelativeTo(this);
+            dlgReceitaNutricionista.setVisible(true);
+
+            if (refeicaoRetonar.getId() == -1) {
+                JOptionPane.showMessageDialog(this, "Edição cancelada");
+            } else {
+                refeicaoEditando.setNome(refeicaoRetonar.getNome());
+                refeicaoEditando.setHorario(refeicaoRetonar.getHorario());
+                refeicaoEditando.setCalorias(refeicaoRetonar.getCalorias());
+                refeicaoEditando.setReceitas(refeicaoRetonar.getReceitas());
+                refeicaoEditando.setDieta(refeicaoRetonar.getDieta());
+
+                refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
+            }
+        }
+    }
+
+    private void excluirRefeicao() {
+        Refeicao refeicao = (Refeicao) this.getObjetoSelecionadoNaGridRefeicao();
+
+        if (refeicao == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+//            try {
+//                Refeicao r = refeicaoController.buscar(refeicao);
+//                if (r != null) {
+//                    refeicaoController.excluir(refeicao);
+//                }
+//                JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+//            } catch (RefeicaoException ex) {
+//                JOptionPane.showMessageDialog(this, ex.getMessage());
+//            }
+            refeicoes.remove(refeicao);
+            refeicoes.remove(refeicao);
+
+            refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
+
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -334,6 +394,11 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        grdRefeicoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdRefeicoesMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(grdRefeicoes);
 
         lblRefeicoes.setFont(new java.awt.Font("Cascadia Mono", 0, 36)); // NOI18N
@@ -505,7 +570,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         Dieta dieta = (Dieta) this.getObjetoSelecionadoNaGridDieta();
 
         if (dieta == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             this.limparCampos();
             this.habilitarCampos(true);
@@ -516,17 +581,17 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-       Dieta dieta = (Dieta) this.getObjetoSelecionadoNaGridDieta();
+        Dieta dieta = (Dieta) this.getObjetoSelecionadoNaGridDieta();
 
         if (dieta == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
 
             int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir a Dieta  \n(" + dieta.getNome() + ") ?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                    "Deseja exlcuir a Dieta  \n(" + dieta.getNome() + ") ?",
+                    "Confirmar exclusão",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.OK_OPTION) {
 
                 try {
@@ -546,10 +611,10 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
 
     private void edtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtPesquisaKeyReleased
         String nomeDigitado = edtPesquisa.getText();
-        if(!nomeDigitado.isEmpty())
-        this.dietaController.atualizarTabela(grdDietas, nomeDigitado);
+        if (!nomeDigitado.isEmpty())
+            this.dietaController.atualizarTabela(grdDietas, nomeDigitado);
         else
-        this.dietaController.atualizarTabela(grdDietas);
+            this.dietaController.atualizarTabela(grdDietas);
     }//GEN-LAST:event_edtPesquisaKeyReleased
 
     private void btnAdicionarRefeicoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarRefeicoesActionPerformed
@@ -558,7 +623,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         DlgRefeicaoNutricionista dlgRefeicaoNutricionista = new DlgRefeicaoNutricionista(this, true, refeicao, false);
         dlgRefeicaoNutricionista.setLocationRelativeTo(this);
         dlgRefeicaoNutricionista.setVisible(true);
-        
+
         if (refeicao.getId() == -1) {
             JOptionPane.showMessageDialog(this, "Criação cancelada");
         } else {
@@ -573,7 +638,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         try {
             if (idDietaEditando > 0) {
                 dietaController.atualizar(
-                        idDietaEditando, 
+                        idDietaEditando,
                         edtNome.getText(),
                         edtDescricao.getText(),
                         fEdtDiasDuracao.getText(),
@@ -582,7 +647,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
                 );
             } else {
                 dietaController.cadastrar(
-                    edtNome.getText(),
+                        edtNome.getText(),
                         edtDescricao.getText(),
                         fEdtDiasDuracao.getText(),
                         refeicoes,
@@ -605,6 +670,17 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         this.habilitarCampos(false);
         this.tabsDados.setSelectedComponent(this.panTodasAsDietas);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void grdRefeicoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdRefeicoesMouseClicked
+        if (evt.getClickCount() == 2) {
+            int aux = grdRefeicoes.getSelectedColumn();
+            if (aux == 1) {
+                editarRefeicao();
+            } else if (aux == 2) {
+                excluirRefeicao();
+            }
+        }
+    }//GEN-LAST:event_grdRefeicoesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,5 +1,6 @@
 package com.artgui.nutrisis.controller;
 
+import com.artgui.nutrisis.controller.tablemodel.TMViewEdtExcluirIngrediente;
 import com.artgui.nutrisis.controller.tablemodel.TMViewIngrediente;
 import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Ingrediente;
@@ -62,6 +63,11 @@ public class IngredienteController {
     
     public void atualizarTabela(JTable grd, List<Ingrediente> ingredientes){
         TMViewIngrediente tmIngrediente = new TMViewIngrediente(ingredientes);
+        grd.setModel(tmIngrediente);
+    }
+    
+    public void atualizarTabelaEdtExcluir(JTable grd, List<Ingrediente> ingredientes){
+        TMViewEdtExcluirIngrediente tmIngrediente = new TMViewEdtExcluirIngrediente(ingredientes);
         grd.setModel(tmIngrediente);
     }
     

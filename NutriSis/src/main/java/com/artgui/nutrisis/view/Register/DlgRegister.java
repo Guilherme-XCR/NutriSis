@@ -65,6 +65,8 @@ public class DlgRegister extends javax.swing.JDialog {
         fEdtAltura = new javax.swing.JFormattedTextField();
         fEdtPeso = new javax.swing.JFormattedTextField();
         fEdtDataNascimento = new javax.swing.JFormattedTextField();
+        fEdtNumeroCartao = new javax.swing.JFormattedTextField();
+        edtSenhaCartao = new javax.swing.JPasswordField();
         btnSair = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
 
@@ -141,18 +143,28 @@ public class DlgRegister extends javax.swing.JDialog {
         fEdtDataNascimento.setName(""); // NOI18N
         fEdtDataNascimento.setPreferredSize(new java.awt.Dimension(294, 40));
 
+        fEdtNumeroCartao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número do Cartão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
+        fEdtNumeroCartao.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fEdtNumeroCartao.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        fEdtNumeroCartao.setName(""); // NOI18N
+        fEdtNumeroCartao.setPreferredSize(new java.awt.Dimension(294, 40));
+
+        edtSenhaCartao.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        edtSenhaCartao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha do Cartão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Code", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtSenhaCartao.setPreferredSize(new java.awt.Dimension(294, 40));
+
         javax.swing.GroupLayout panInputsLayout = new javax.swing.GroupLayout(panInputs);
         panInputs.setLayout(panInputsLayout);
         panInputsLayout.setHorizontalGroup(
             panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panInputsLayout.createSequentialGroup()
+            .addGroup(panInputsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(edtNomeCompleto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panInputsLayout.createSequentialGroup()
+                .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(edtNomeCompleto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                    .addComponent(edtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edtSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edtConfirmarSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panInputsLayout.createSequentialGroup()
                         .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(fEdtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(fEdtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
@@ -166,7 +178,11 @@ public class DlgRegister extends javax.swing.JDialog {
                                 .addComponent(lblGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comboBoxGenero, 0, 0, Short.MAX_VALUE))
-                            .addComponent(fEdtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
+                            .addComponent(fEdtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                    .addGroup(panInputsLayout.createSequentialGroup()
+                        .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edtSenhaCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panInputsLayout.setVerticalGroup(
@@ -192,7 +208,13 @@ public class DlgRegister extends javax.swing.JDialog {
                     .addComponent(fEdtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fEdtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fEdtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panInputsLayout.createSequentialGroup()
+                        .addComponent(edtSenhaCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         btnSair.setBackground(new java.awt.Color(255, 255, 255));
@@ -245,7 +267,7 @@ public class DlgRegister extends javax.swing.JDialog {
             .addGroup(panRegisterLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRegistrar)
@@ -287,7 +309,9 @@ public class DlgRegister extends javax.swing.JDialog {
                     fEdtAltura.getText(),
                     fEdtPeso.getText(),
                     comboBoxGenero.getSelectedItem() + "",
-                    fEdtDataNascimento.getText()
+                    fEdtDataNascimento.getText(),
+                    fEdtNumeroCartao.getText(),
+                    edtSenhaCartao.getText()
             );
 
             this.cliente = clienteController.buscarPorEmail(edtEmail.getText());
@@ -318,9 +342,11 @@ public class DlgRegister extends javax.swing.JDialog {
     private javax.swing.JTextField edtEmail;
     private javax.swing.JTextField edtNomeCompleto;
     private javax.swing.JPasswordField edtSenha;
+    private javax.swing.JPasswordField edtSenhaCartao;
     private javax.swing.JFormattedTextField fEdtAltura;
     private javax.swing.JFormattedTextField fEdtCpf;
     private javax.swing.JFormattedTextField fEdtDataNascimento;
+    private javax.swing.JFormattedTextField fEdtNumeroCartao;
     private javax.swing.JFormattedTextField fEdtPeso;
     private javax.swing.JFormattedTextField fEdtTelefone;
     private javax.swing.JLabel jLabel8;
