@@ -13,6 +13,7 @@ public class ClienteController {
 
     public ClienteController(){
         repositorio = new ClienteDAO();
+        //Teste
     }
     
     public void cadastrar(
