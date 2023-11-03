@@ -25,7 +25,9 @@ public class ClienteController {
             String altura, 
             String peso, 
             String genero, 
-            String dataNascimento
+            String dataNascimento,
+            String numeroCartao,
+            String senhaCartao
     ){
         ValidateCliente valid = new ValidateCliente();
         Cliente cliente = valid.validaCamposEntrada(
@@ -38,7 +40,9 @@ public class ClienteController {
                 altura, 
                 peso, 
                 genero, 
-                dataNascimento
+                dataNascimento,
+                numeroCartao,
+                senhaCartao
         );
         repositorio.save(cliente);
     }
@@ -60,20 +64,24 @@ public class ClienteController {
             String altura,
             String peso,
             String genero,
-            String dataNascimento
+            String dataNascimento,
+            String numeroCartao,
+            String senhaCartao
     ){
         ValidateCliente valid = new ValidateCliente();
         Cliente cliente = valid.validaCamposEntrada(
-                nome,
-                email,
+                nome, 
+                email, 
                 senha,
                 confirmarSenha,
-                cpf,
+                cpf, 
                 telefone,
                 altura, 
-                peso,
-                genero,
-                dataNascimento
+                peso, 
+                genero, 
+                dataNascimento,
+                numeroCartao,
+                senhaCartao
         );
         cliente.setId(id);
         repositorio.update(cliente);

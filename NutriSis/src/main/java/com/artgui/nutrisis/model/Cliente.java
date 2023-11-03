@@ -20,6 +20,11 @@ public class Cliente extends Usuario implements Serializable{
     private String genero;
     private String dataNascimento;
     
+    private String numeroCartao;
+    private String senhaCartao;
+    private float saldoCarto;
+    
+    
     // Construtor sem Id
     public Cliente(
             String nome, 
@@ -30,12 +35,17 @@ public class Cliente extends Usuario implements Serializable{
             int altura, 
             float peso,
             String genero, 
-            String dataNascimento
+            String dataNascimento,
+            String numeroCartao,
+            String senhaCartao
     ){
         super(nome, email, senha, cpf, telefone);
         this.altura = altura;
         this.peso = peso;
         this.genero = genero;
         this.dataNascimento = dataNascimento;
+        this.numeroCartao = numeroCartao;
+        this.senhaCartao = senhaCartao;
+        this.saldoCarto = 0.0f;
     }
 }

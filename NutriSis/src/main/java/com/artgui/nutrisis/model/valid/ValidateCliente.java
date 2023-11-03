@@ -16,7 +16,9 @@ public class ValidateCliente {
             String altura, 
             String peso, 
             String genero, 
-            String dataNascimento
+            String dataNascimento,
+            String numeroCartao,
+            String senhaCartao
     ) {
 
         if (nome == null || nome.isEmpty()) {
@@ -82,6 +84,14 @@ public class ValidateCliente {
             throw new ClienteException("Data de Nascimento inválida.");
         }
         
+        if (numeroCartao== null || dataNascimento.isEmpty()){
+            throw new ClienteException("Número de cartão inválido.");
+        }
+        
+        if (senhaCartao== null || dataNascimento.isEmpty()){
+            throw new ClienteException("Senha de cartão inválida.");
+        }
+
         return new Cliente(
                 nome, 
                 email, 
@@ -91,7 +101,9 @@ public class ValidateCliente {
                 a, 
                 p, 
                 genero, 
-                dataNascimento
+                dataNascimento,
+                numeroCartao,
+                senhaCartao
         );
     }
 
