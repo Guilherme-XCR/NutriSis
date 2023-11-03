@@ -66,7 +66,8 @@ public class ClienteController {
             String genero,
             String dataNascimento,
             String numeroCartao,
-            String senhaCartao
+            String senhaCartao,
+            float saldoCartao
     ){
         ValidateCliente valid = new ValidateCliente();
         Cliente cliente = valid.validaCamposEntrada(
@@ -84,6 +85,7 @@ public class ClienteController {
                 senhaCartao
         );
         cliente.setId(id);
+        cliente.setSaldoCarto(saldoCartao);
         repositorio.update(cliente);
     }
     

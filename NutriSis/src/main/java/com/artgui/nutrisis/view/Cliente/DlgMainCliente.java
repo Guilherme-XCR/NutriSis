@@ -422,13 +422,18 @@ public class DlgMainCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAcompanhamentosActionPerformed
 
     private void btnContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContaActionPerformed
-        DlgContaCliente dlgContaCliente = new DlgContaCliente(this, true);
+        boolean isExcluirConta = false;
+        DlgContaCliente dlgContaCliente = new DlgContaCliente(this, true, cliente, isExcluirConta);
         
         this.setVisible(false);
         dlgContaCliente.setLocationRelativeTo(this);
         dlgContaCliente.setVisible(true);
         
         this.setVisible(true);
+        
+        if(isExcluirConta){
+            this.dispose();
+        }
     }//GEN-LAST:event_btnContaActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

@@ -1,21 +1,31 @@
 package com.artgui.nutrisis.view.Cliente;
 
+import com.artgui.nutrisis.controller.ClienteController;
+import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.exceptions.ReceitaException;
 import com.artgui.nutrisis.model.Cliente;
+import javax.swing.JOptionPane;
 
 public class DlgContaCliente extends javax.swing.JDialog {
-    
+
     Cliente cliente;
-    
-    public DlgContaCliente(java.awt.Dialog parent, boolean modal, Cliente cliente) {
+    ClienteController clienteController;
+    boolean isExcluirConta;
+
+    public DlgContaCliente(java.awt.Dialog parent, boolean modal, Cliente cliente, boolean isExcluirConta) {
         super(parent, modal);
-        
+
         this.cliente = cliente;
-        
+        this.clienteController = new ClienteController();
+        this.isExcluirConta = false;
+
         initComponents();
-        
+
+        this.preencherFormulario(cliente);
+        this.habilitarCampos(false);
         this.btnSalvar.setEnabled(false);
     }
-    
+
     public void habilitarCampos(boolean flag) {
         this.edtNomeCompleto.setEnabled(flag);
         this.edtEmail.setEnabled(flag);
@@ -27,7 +37,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtDataNascimento.setEnabled(flag);
         this.fEdtNumeroCartao.setEnabled(flag);
         this.edtSenhaCartao.setEnabled(flag);
-        
+
         this.comboBoxGenero.setEnabled(flag);
     }
 
@@ -42,7 +52,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtDataNascimento.setText("");
         this.fEdtNumeroCartao.setText("");
         this.edtSenhaCartao.setText("");
-        
+
         this.comboBoxGenero.setSelectedIndex(0);
     }
 
@@ -57,8 +67,8 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtDataNascimento.setText(cliente.getDataNascimento());
         this.fEdtNumeroCartao.setText(cliente.getNumeroCartao());
         this.edtSenhaCartao.setText(cliente.getSenhaCartao());
-        
-        this.comboBoxGenero.setSelectedItem(cliente.getGenero());        
+
+        this.comboBoxGenero.setSelectedItem(cliente.getGenero());
     }
 
     public void adicionarMascaraNosCampos() {
@@ -74,7 +84,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
 //            Logger.getLogger(DlgReceitaNutricionista.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -522,14 +532,34 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.habilitarCampos(true);
         this.limparCampos();
         this.preencherFormulario(cliente);
-        
+
         this.btnEditar.setEnabled(false);
         this.btnSalvar.setEnabled(true);
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
+        try {
+            clienteController.atualizar(
+                    cliente.getId(),
+                    edtNomeCompleto.getText(),
+                    edtEmail.getText(),
+                    edtSenha.getText(),
+                    edtSenha.getText(),
+                    fEdtCpf.getText(),
+                    fEdtTelefone.getText(),
+                    fEdtAltura.getText(),
+                    fEdtPeso.getText(),
+                    comboBoxGenero.getSelectedItem() + "",
+                    fEdtDataNascimento.getText(),
+                    fEdtNumeroCartao.getText(),
+                    edtSenhaCartao.getText(),
+                    cliente.getSaldoCarto()
+            );
+        } catch (ClienteException e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -537,11 +567,69 @@ public class DlgContaCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+
+        if (fEdtValor.getText() != null && fEdtValor.getText().replaceAll("\\s", "").isEmpty()) {
+
+            float valor = Float.parseFloat(fEdtValor.getText());
+            if (valor > 0.0f) {
+                String senhaCartaoDigitada = JOptionPane.showInputDialog(this, "Informe a senha do cartão:", "");
+
+                if (senhaCartaoDigitada == cliente.getSenhaCartao()) {
+                    cliente.setSaldoCarto(valor);
+
+                    try {
+                        clienteController.atualizar(
+                                cliente.getId(),
+                                cliente.getNome(),
+                                cliente.getEmail(),
+                                cliente.getSenha(),
+                                cliente.getSenha(),
+                                cliente.getCpf(),
+                                cliente.getTelefone(),
+                                cliente.getAltura() + "",
+                                cliente.getPeso() + "",
+                                cliente.getGenero(),
+                                cliente.getDataNascimento(),
+                                cliente.getNumeroCartao(),
+                                cliente.getSenhaCartao(),
+                                valor
+                        );
+                        JOptionPane.showMessageDialog(this, "R$ " + valor + " adicionados a sua conta.");
+
+                    } catch (ClienteException ex) {
+                        JOptionPane.showMessageDialog(this, ex.getMessage());
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Senha incorreta");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Valor inválido");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Valor não pode estar vazio.");
+        }
+
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int response = JOptionPane.showConfirmDialog(null,
+                "Deseja exlcuir a Conta e tudo que ela possui?",
+                "Confirmar exclusão",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.OK_OPTION) {
 
+            try {
+                clienteController.excluir(cliente);
+                JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+            } catch (ClienteException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+            this.isExcluirConta = true;
+            this.dispose();
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
