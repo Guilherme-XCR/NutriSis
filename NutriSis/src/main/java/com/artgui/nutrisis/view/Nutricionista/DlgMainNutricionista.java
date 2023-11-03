@@ -7,11 +7,13 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
     public DlgMainNutricionista(java.awt.Frame parent, boolean modal, Nutricionista nutricionista) {
         super(parent, modal);
         initComponents();
+        this.lblNomeUser.setText(nutricionista.getNome());
     }
     
     public DlgMainNutricionista(java.awt.Dialog parent, boolean modal, Nutricionista nutricionista) {
         super(parent, modal);
         initComponents();
+        this.lblNomeUser.setText(nutricionista.getNome());
     }
 
     @SuppressWarnings("unchecked")
@@ -87,7 +89,7 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
         lblNomeUser.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lblNomeUser.setForeground(new java.awt.Color(0, 0, 0));
         lblNomeUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblNomeUser.setText("Guilherme ");
+        lblNomeUser.setText("UserName");
         lblNomeUser.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lblNomeUser.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 

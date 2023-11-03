@@ -12,6 +12,9 @@ public class DlgMainCliente extends javax.swing.JDialog {
         this.cliente = cliente;
         
         initComponents();
+        
+        this.lblNomeUser.setText(cliente.getNome());
+        this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCarto());
     }
     
     public DlgMainCliente(java.awt.Dialog parent, boolean modal, Cliente cliente) {
@@ -20,8 +23,10 @@ public class DlgMainCliente extends javax.swing.JDialog {
         this.cliente = cliente;
         
         initComponents();
+        
+        this.lblNomeUser.setText(cliente.getNome());
+        this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCarto());
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -34,6 +39,7 @@ public class DlgMainCliente extends javax.swing.JDialog {
         btnConta = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         lblIconUser = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
         lblNomeUser = new javax.swing.JLabel();
         panBody = new javax.swing.JPanel();
         panReceitas = new javax.swing.JPanel();
@@ -109,10 +115,16 @@ public class DlgMainCliente extends javax.swing.JDialog {
             .addComponent(lblIconUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        lblNomeUser.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblSaldo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblSaldo.setForeground(new java.awt.Color(0, 0, 0));
+        lblSaldo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSaldo.setText("Saldo R$ 0,00");
+        lblSaldo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        lblNomeUser.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         lblNomeUser.setForeground(new java.awt.Color(0, 0, 0));
         lblNomeUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblNomeUser.setText("Guilherme ");
+        lblNomeUser.setText("UserName");
         lblNomeUser.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout panHeaderLayout = new javax.swing.GroupLayout(panHeader);
@@ -122,15 +134,22 @@ public class DlgMainCliente extends javax.swing.JDialog {
             .addGroup(panHeaderLayout.createSequentialGroup()
                 .addComponent(lblLogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                    .addComponent(lblNomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panHeaderLayout.setVerticalGroup(
             panHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblNomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNomeUser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panBody.setBackground(new java.awt.Color(51, 51, 51));
@@ -431,6 +450,7 @@ public class DlgMainCliente extends javax.swing.JDialog {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblNomeUser;
     private javax.swing.JLabel lblReceitas;
+    private javax.swing.JLabel lblSaldo;
     private javax.swing.JPanel panBody;
     private javax.swing.JPanel panConsultas;
     private javax.swing.JPanel panDietas;
