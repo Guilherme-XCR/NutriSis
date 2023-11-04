@@ -40,7 +40,7 @@ public class ClienteDAO extends Dao<Cliente> {
         super.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = "SELECT c FROM Cliente c WHERE c.email like :email";
         qry = super.entityManager.createQuery(jpql, Cliente.class);
-        qry.setParameter("email", email+"%");
+        qry.setParameter("email", email);
         List<Cliente> lst = qry.getResultList();
         super.entityManager.close();
         if(!lst.isEmpty())

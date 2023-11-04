@@ -138,7 +138,7 @@ public class ValidateCliente {
 
     private boolean isValidEmail(String email) {
         // Validar o formato do email usando uma expressão regular
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+)\\.([A-Za-z]{2,4})$";
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(email).matches();
     }

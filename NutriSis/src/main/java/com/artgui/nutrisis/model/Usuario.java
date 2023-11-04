@@ -1,6 +1,7 @@
 package com.artgui.nutrisis.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +23,8 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
-    
     protected String nome;
+    @Column(unique = true)
     protected String email;
     protected String senha;
     protected String cpf;

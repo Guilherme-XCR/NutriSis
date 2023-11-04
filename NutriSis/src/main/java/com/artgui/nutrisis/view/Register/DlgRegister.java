@@ -299,34 +299,41 @@ public class DlgRegister extends javax.swing.JDialog {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         try {
-            clienteController.cadastrar(
-                    edtNomeCompleto.getText(),
-                    edtEmail.getText(),
-                    edtSenha.getText(),
-                    edtConfirmarSenha.getText(),
-                    fEdtCpf.getText(),
-                    fEdtTelefone.getText(),
-                    fEdtAltura.getText(),
-                    fEdtPeso.getText(),
-                    comboBoxGenero.getSelectedItem() + "",
-                    fEdtDataNascimento.getText(),
-                    fEdtNumeroCartao.getText(),
-                    edtSenhaCartao.getText()
-            );
+            Cliente aux = clienteController.buscarPorEmail(edtEmail.getText());
+            if (aux == null) {
 
-            this.cliente = clienteController.buscarPorEmail(edtEmail.getText());
+                clienteController.cadastrar(
+                        edtNomeCompleto.getText(),
+                        edtEmail.getText(),
+                        edtSenha.getText(),
+                        edtConfirmarSenha.getText(),
+                        fEdtCpf.getText(),
+                        fEdtTelefone.getText(),
+                        fEdtAltura.getText(),
+                        fEdtPeso.getText(),
+                        comboBoxGenero.getSelectedItem() + "",
+                        fEdtDataNascimento.getText(),
+                        fEdtNumeroCartao.getText(),
+                        edtSenhaCartao.getText()
+                );
 
-            DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true, cliente);
-            this.setVisible(false);
-            dlgMainCliente.setLocationRelativeTo(this);
-            dlgMainCliente.setVisible(true);
+                this.cliente = clienteController.buscarPorEmail(edtEmail.getText());
 
-            this.dispose();
+                DlgMainCliente dlgMainCliente = new DlgMainCliente(this, true, cliente);
+                this.setVisible(false);
+                dlgMainCliente.setLocationRelativeTo(this);
+                dlgMainCliente.setVisible(true);
 
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Email inválido, pois ja esta cadastrado.");
+                this.edtEmail.setText("");
+            }
         } catch (ClienteException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

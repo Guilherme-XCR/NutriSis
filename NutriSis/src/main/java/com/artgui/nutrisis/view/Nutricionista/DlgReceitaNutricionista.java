@@ -581,6 +581,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         this.habilitarCampos(true);
         this.limparCampos();
         this.idReceitaEditando = -1;
+        this.ingredientes = new ArrayList<>();
         this.tabsDados.setSelectedComponent(panFormulario);
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -594,6 +595,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
             this.habilitarCampos(true);
             this.preencherFormulario(receita);
             this.idReceitaEditando = receita.getId();
+            this.ingredientes = receita.getIngredientes();
             this.tabsDados.setSelectedComponent(panFormulario);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -624,7 +626,15 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Nutricionista nutricionista = new Nutricionista("teste", "teste@teste", "senhateste", "cpfTeste", "teste", "teste", "teste");
+        Nutricionista nutricionista = new Nutricionista(
+                "teste", 
+                "teste@teste", 
+                "senhateste", 
+                "cpfTeste", 
+                "teste", 
+                "teste", 
+                "teste"
+        );
 
         try {
             if (idReceitaEditando > 0) {

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,9 @@ public class Dieta implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
+    
+    @ManyToMany(mappedBy = "dietasRecomendadas")
+    private List<Consulta> consultas;
 
     public Dieta( String nome,String descricao,int diasDuracao,List<Refeicao> refeicoes,Nutricionista nutricionista){
         this.nome = nome;

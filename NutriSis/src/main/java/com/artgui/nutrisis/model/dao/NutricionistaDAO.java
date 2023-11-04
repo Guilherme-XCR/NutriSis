@@ -39,7 +39,7 @@ import java.util.List;
         super.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = "SELECT n FROM Nutricionista n WHERE n.email like :email";
         qry = super.entityManager.createQuery(jpql, Nutricionista.class);
-        qry.setParameter("email", email+"%");
+        qry.setParameter("email", email);
         List<Nutricionista> lst = qry.getResultList();
         super.entityManager.close();
         if(!lst.isEmpty())

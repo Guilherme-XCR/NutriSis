@@ -2,7 +2,6 @@ package com.artgui.nutrisis.model.valid;
 
 import com.artgui.nutrisis.exceptions.NutricionistaException;
 import com.artgui.nutrisis.model.Nutricionista;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 public class ValidateNutricionista {
@@ -83,7 +82,7 @@ public class ValidateNutricionista {
 
     private boolean isValidEmail(String email) {
         // Validar o formato do email usando uma expressão regular
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+)\\.([A-Za-z]{2,4})$";
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(email).matches();
     }

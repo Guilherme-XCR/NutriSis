@@ -75,10 +75,11 @@ public class NutricionistaController {
 
     public Nutricionista login(String email, String senha) {
 
-        Nutricionista nutricionista = this.buscarPorEmail(email);
-
-        if (nutricionista != null && senha.equals(nutricionista.getSenha())) {
-            return nutricionista;
+        if (email != null && email.matches("^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+)\\.([A-Za-z]{2,4})$")) {
+            Nutricionista nutricionista = this.buscarPorEmail(email);
+            if (nutricionista != null && senha.equals(nutricionista.getSenha())) {
+                return nutricionista;
+            }
         }
         return null;
     }

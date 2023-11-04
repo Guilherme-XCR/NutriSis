@@ -43,6 +43,9 @@ public class Receita implements Serializable {
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
     
+    @ManyToMany(mappedBy = "receitasRecomendadas")
+    private List<Consulta> consultas;
+    
     //construtor sem id e sem refeicao
     public Receita(
             String nome, 
