@@ -22,7 +22,7 @@ public class Cliente extends Usuario implements Serializable{
     
     private String numeroCartao;
     private String senhaCartao;
-    private float saldoCarto;
+    private float saldoCartao;
     
     
     // Construtor sem Id
@@ -46,6 +46,6 @@ public class Cliente extends Usuario implements Serializable{
         this.dataNascimento = dataNascimento;
         this.numeroCartao = numeroCartao;
         this.senhaCartao = senhaCartao;
-        this.saldoCarto = 0.0f;
+        this.saldoCartao = 0.0f;
     }
 }

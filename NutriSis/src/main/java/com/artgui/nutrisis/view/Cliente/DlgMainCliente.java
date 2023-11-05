@@ -14,7 +14,7 @@ public class DlgMainCliente extends javax.swing.JDialog {
         initComponents();
         
         this.lblNomeUser.setText(cliente.getNome());
-        this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCarto());
+        this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCartao());
     }
     
     public DlgMainCliente(java.awt.Dialog parent, boolean modal, Cliente cliente) {
@@ -25,7 +25,7 @@ public class DlgMainCliente extends javax.swing.JDialog {
         initComponents();
         
         this.lblNomeUser.setText(cliente.getNome());
-        this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCarto());
+        this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCartao());
     }
     
     @SuppressWarnings("unchecked")

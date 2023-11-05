@@ -86,7 +86,7 @@ public class ClienteController {
                 senhaCartao
         );
         cliente.setId(id);
-        cliente.setSaldoCarto(saldoCartao);
+        cliente.setSaldoCartao(saldoCartao);
         repositorio.update(cliente);
     }
     

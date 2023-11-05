@@ -29,7 +29,7 @@ public class Consulta implements Serializable{
     private String Resumo;
     private String Status;
     
-    @ManyToMany( fetch = FetchType.EAGER) //cascade = CascadeType.ALL,
+    @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(
         name = "consulta_dieta",
         joinColumns = @JoinColumn(name = "consulta_id"),
@@ -37,7 +37,7 @@ public class Consulta implements Serializable{
     )
     private List<Dieta> dietasRecomendadas;
     
-    @ManyToMany( fetch = FetchType.EAGER) //cascade = CascadeType.ALL,
+    @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(
         name = "consulta_receita",
         joinColumns = @JoinColumn(name = "consulta_id"),

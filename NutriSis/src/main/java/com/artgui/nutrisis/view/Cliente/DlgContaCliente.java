@@ -2,7 +2,6 @@ package com.artgui.nutrisis.view.Cliente;
 
 import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.exceptions.ClienteException;
-import com.artgui.nutrisis.exceptions.ReceitaException;
 import com.artgui.nutrisis.model.Cliente;
 import javax.swing.JOptionPane;
 
@@ -21,6 +20,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
 
         initComponents();
 
+        this.adicionarMascaraNosCampos();
         this.preencherFormulario(cliente);
         this.habilitarCampos(false);
         this.btnSalvar.setEnabled(false);
@@ -554,7 +554,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
                     fEdtDataNascimento.getText(),
                     fEdtNumeroCartao.getText(),
                     edtSenhaCartao.getText(),
-                    cliente.getSaldoCarto()
+                    cliente.getSaldoCartao()
             );
         } catch (ClienteException e) {
             System.err.println(e.getMessage());
@@ -575,7 +575,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
                 String senhaCartaoDigitada = JOptionPane.showInputDialog(this, "Informe a senha do cartão:", "");
 
                 if (senhaCartaoDigitada == cliente.getSenhaCartao()) {
-                    cliente.setSaldoCarto(valor);
+                    cliente.setSaldoCartao(valor);
 
                     try {
                         clienteController.atualizar(
