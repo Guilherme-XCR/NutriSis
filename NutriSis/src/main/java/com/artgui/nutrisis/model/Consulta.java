@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -25,9 +26,9 @@ public class Consulta implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String Data;
-    private String Resumo;
-    private String Status;
+    private String data;
+    private String resumo;
+    private String status;
     
     @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(
@@ -53,4 +54,49 @@ public class Consulta implements Serializable{
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
 
+    public Consulta(
+            String data,
+            String resumo,
+            String status,
+            List<Dieta> dietasRecomendadas,
+            List<Receita> receitaRecomendadas,
+            Cliente cliente,
+            Nutricionista nutricionista
+    ){
+        this.data = data;
+        this.resumo = resumo;
+        this.status = status;
+        this.dietasRecomendadas = dietasRecomendadas;
+        this.receitasRecomendadas = receitasRecomendadas;
+        this.cliente = cliente;
+        this.nutricionista = nutricionista;
+    }
+    
+    public Consulta(
+            String data,
+            String resumo,
+            String status,
+            Cliente cliente,
+            Nutricionista nutricionista
+    ){
+        this.data = data;
+        this.resumo = resumo;
+        this.status = status;
+        this.cliente = cliente;
+        this.nutricionista = nutricionista;
+    }
+    
+    public void addRecomendacaoDieta(Dieta dieta){
+    this.dietasRecomendadas.add(dieta);
+    }
+    public void removeRecomendacaoDieta(Dieta dieta){
+    this.dietasRecomendadas.remove(dieta);
+    }
+    
+    public void addRecomendacaoReceita(Receita receita){
+    this.receitasRecomendadas.add(receita);
+    }
+    public void removeRecomendacaoReceita(Receita receita){
+    this.receitasRecomendadas.remove(receita);
+    }
 }

@@ -48,4 +48,12 @@ public class Dieta implements Serializable {
         this.refeicoes = refeicoes;
         this.nutricionista = nutricionista;
     }
+    
+    public void addConsulta(Consulta consulta) {
+        this.consultas.add(consulta);
+    }
+
+    public void removeConsulta(Consulta consulta) {
+        this.consultas.remove(consulta);
+    }
 }

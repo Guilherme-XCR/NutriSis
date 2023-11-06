@@ -84,4 +84,11 @@ public class Receita implements Serializable {
     public void removeRefeicao(Refeicao refeicao){
         this.refeicoes.remove(refeicao);
     }
+    public void addConsulta(Consulta consulta) {
+        this.consultas.add(consulta);
+    }
+
+    public void removeConsulta(Consulta consulta) {
+        this.consultas.remove(consulta);
+    }
 }
