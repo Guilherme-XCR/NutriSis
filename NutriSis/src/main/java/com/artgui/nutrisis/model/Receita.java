@@ -43,8 +43,8 @@ public class Receita implements Serializable {
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
     
-    @ManyToMany(mappedBy = "receitasRecomendadas")
-    private List<Consulta> consultas;
+//    @ManyToMany(mappedBy = "receitasRecomendadas")
+//    private List<Consulta> consultas;
     
     //construtor sem id e sem refeicao
     public Receita(
@@ -84,11 +84,11 @@ public class Receita implements Serializable {
     public void removeRefeicao(Refeicao refeicao){
         this.refeicoes.remove(refeicao);
     }
-    public void addConsulta(Consulta consulta) {
-        this.consultas.add(consulta);
-    }
-
-    public void removeConsulta(Consulta consulta) {
-        this.consultas.remove(consulta);
-    }
+//    public void addConsulta(Consulta consulta) {
+//        this.consultas.add(consulta);
+//    }
+//
+//    public void removeConsulta(Consulta consulta) {
+//        this.consultas.remove(consulta);
+//    }
 }

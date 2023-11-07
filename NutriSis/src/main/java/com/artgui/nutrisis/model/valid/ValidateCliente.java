@@ -2,10 +2,17 @@ package com.artgui.nutrisis.model.valid;
 
 import com.artgui.nutrisis.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
+import com.artgui.nutrisis.model.dao.ClienteDAO;
 import java.util.regex.Pattern;
 
 public class ValidateCliente {
 
+    private ClienteDAO repositorio;
+    
+    public ValidateCliente(){
+        repositorio = new ClienteDAO();
+    }
+    
     public Cliente validaCamposEntrada(
             String nome, 
             String email, 
@@ -28,11 +35,16 @@ public class ValidateCliente {
         if (nome == null || !nome.matches("^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$")) {
             throw new ClienteException("Nome inválido.");
         }
-                
+            
         if (email == null || !isValidEmail(email)) {
             throw new ClienteException("Email inválido.");
         }
-                
+        
+//        Cliente aux = repositorio.findByEmail(email);
+//        if (aux != null){
+//            throw new ClienteException("Email já esta sendo usado por outro usuário.");
+//        }
+//        
         // String senha
         if (senha == null || senha.isEmpty()){
             throw new ClienteException("Senha não pode estar em branco.");

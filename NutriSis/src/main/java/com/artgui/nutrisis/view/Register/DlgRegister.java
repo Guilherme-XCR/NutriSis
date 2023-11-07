@@ -299,9 +299,6 @@ public class DlgRegister extends javax.swing.JDialog {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         try {
-            Cliente aux = clienteController.buscarPorEmail(edtEmail.getText());
-            if (aux == null) {
-
                 clienteController.cadastrar(
                         edtNomeCompleto.getText(),
                         edtEmail.getText(),
@@ -325,10 +322,7 @@ public class DlgRegister extends javax.swing.JDialog {
                 dlgMainCliente.setVisible(true);
 
                 this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Email inválido, pois ja esta cadastrado.");
-                this.edtEmail.setText("");
-            }
+             
         } catch (ClienteException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
