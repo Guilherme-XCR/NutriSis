@@ -9,6 +9,7 @@ import java.util.List;
     public ReceitaDAO(){
     }
 
+    @Override
     public Receita find(int id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         Receita r = this.entityManager.find(Receita.class, id);
@@ -16,6 +17,7 @@ import java.util.List;
         return r;        
     }
     
+    @Override
     public List<Receita> findAll() {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         jpql = " SELECT r FROM Receita r ";
