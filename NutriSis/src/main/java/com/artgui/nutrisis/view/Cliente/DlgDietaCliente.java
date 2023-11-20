@@ -3,31 +3,31 @@ package com.artgui.nutrisis.view.Cliente;
 import com.artgui.nutrisis.controller.DietaController;
 import com.artgui.nutrisis.controller.RefeicaoController;
 import com.artgui.nutrisis.model.Dieta;
-import com.artgui.nutrisis.model.Receita;
+import com.artgui.nutrisis.model.Refeicao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class DlgDietaCliente extends javax.swing.JDialog {
-    
+
     DietaController dietaController;
     RefeicaoController refeicaoController;
-    
+
     public DlgDietaCliente(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        
+
         dietaController = new DietaController();
         refeicaoController = new RefeicaoController();
-        
+
         initComponents();
-        
+
         this.limparCampos();
         this.habilitarCampos(false);
-        
+
         this.dietaController.atualizarTabela(grdDietas);
     }
-    
+
     public void habilitarCampos(boolean flag) {
-        
+
         for (int i = 0; i < this.panAutorNutricionista.getComponents().length; i++) {
             this.panAutorNutricionista.getComponent(i).setEnabled(flag);
         }
@@ -35,33 +35,35 @@ public class DlgDietaCliente extends javax.swing.JDialog {
             this.panDietaInfo.getComponent(i).setEnabled(flag);
         }
         this.edtDescricao.setEnabled(flag);
+
+        this.edtPesquisar.setEnabled(true);
         this.grdRefeicoes.setEnabled(true);
     }
 
     public void limparCampos() {
-    
+
         this.edtNomeAutor.setText("");
         this.edtEmailAutor.setText("");
         this.edtEspecializacaoAutor.setText("");
         this.edtNomeDieta.setText("");
         this.edtDiaDuracao.setText("");
         this.edtDescricao.setText("");
-        
-        this.refeicaoController.atualizarTabela(grdRefeicoes, new ArrayList<>());
+
+        this.refeicaoController.atualizarTabelaVizualizar(grdRefeicoes, new ArrayList<>());
     }
-    
-    public void preencherFormulario(Dieta dieta){
+
+    public void preencherFormulario(Dieta dieta) {
         this.edtNomeAutor.setText(dieta.getNutricionista().getNome());
         this.edtEmailAutor.setText(dieta.getNutricionista().getEmail());
         this.edtEspecializacaoAutor.setText(dieta.getNutricionista().getEspecializacao());
         this.edtNomeDieta.setText(dieta.getNome());
         this.edtDiaDuracao.setText(dieta.getDiasDuracao() + "");
         this.edtDescricao.setText(dieta.getDescricao());
-        
-        this.refeicaoController.atualizarTabela(grdRefeicoes, dieta.getRefeicoes());    
+
+        this.refeicaoController.atualizarTabelaVizualizar(grdRefeicoes, dieta.getRefeicoes());
     }
 
-    private Object getObjetoSelecionadoNaGrid() {
+    private Object getObjetoSelecionadoNaGridDieta() {
         int rowCliked = grdDietas.getSelectedRow();
         Object obj = null;
         if (rowCliked >= 0) {
@@ -69,13 +71,16 @@ public class DlgDietaCliente extends javax.swing.JDialog {
         }
         return obj;
     }
-    
-    private void grdAlunosMouseClicked(java.awt.event.MouseEvent evt) {                                       
-        if (evt.getClickCount() == 2) {
-            btnVerDietaActionPerformed(null);
+
+    private Object getObjetoSelecionadoNaGridRefeicao() {
+        int rowCliked = grdRefeicoes.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = grdRefeicoes.getModel().getValueAt(rowCliked, -1);
         }
-    }  
-    
+        return obj;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -158,10 +163,17 @@ public class DlgDietaCliente extends javax.swing.JDialog {
             }
         });
         grdDietas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        grdDietas.setFocusTraversalPolicyProvider(true);
+        grdDietas.setFocusable(false);
         grdDietas.setGridColor(new java.awt.Color(0, 0, 0));
         grdDietas.setShowGrid(true);
         grdDietas.setShowHorizontalLines(false);
         grdDietas.setShowVerticalLines(false);
+        grdDietas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdDietasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(grdDietas);
 
         btnVoltar1.setBackground(new java.awt.Color(255, 255, 255));
@@ -195,7 +207,8 @@ public class DlgDietaCliente extends javax.swing.JDialog {
         edtPesquisar.setBackground(new java.awt.Color(204, 204, 204));
         edtPesquisar.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtPesquisar.setForeground(new java.awt.Color(0, 0, 0));
-        edtPesquisar.setFocusable(false);
+        edtPesquisar.setDisabledTextColor(new java.awt.Color(204, 255, 255));
+        edtPesquisar.setOpaque(true);
         edtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 edtPesquisarKeyReleased(evt);
@@ -229,10 +242,12 @@ public class DlgDietaCliente extends javax.swing.JDialog {
             .addGroup(panEscolha1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panEscolha1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edtPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                    .addGroup(panEscolha1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(edtPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
+                    .addComponent(lblPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panEscolha1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,6 +355,11 @@ public class DlgDietaCliente extends javax.swing.JDialog {
         grdRefeicoes.setEnabled(false);
         grdRefeicoes.setGridColor(new java.awt.Color(0, 0, 0));
         grdRefeicoes.setShowGrid(true);
+        grdRefeicoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdRefeicoesMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(grdRefeicoes);
 
         javax.swing.GroupLayout panDietaInfoLayout = new javax.swing.GroupLayout(panDietaInfo);
@@ -426,23 +446,53 @@ public class DlgDietaCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnVoltar1ActionPerformed
 
     private void btnVerDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDietaActionPerformed
-        Dieta dieta = (Dieta)  this.getObjetoSelecionadoNaGrid();
+        Dieta dieta = (Dieta) this.getObjetoSelecionadoNaGridDieta();
 
         if (dieta == null)
-        JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             this.limparCampos();
             this.preencherFormulario(dieta);
         }
     }//GEN-LAST:event_btnVerDietaActionPerformed
 
+    private void grdDietasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdDietasMouseClicked
+        if (evt.getClickCount() == 2) {
+            btnVerDietaActionPerformed(null);
+        }
+    }//GEN-LAST:event_grdDietasMouseClicked
+
     private void edtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtPesquisarKeyReleased
         String nomeDigitado = edtPesquisar.getText();
-        if(!nomeDigitado.isEmpty())
-        this.dietaController.atualizarTabela(grdDietas, nomeDigitado);
-        else
-        this.dietaController.atualizarTabela(grdDietas);
+        if (!nomeDigitado.isEmpty()) {
+            this.dietaController.atualizarTabela(grdDietas, nomeDigitado);
+        } else {
+            this.dietaController.atualizarTabela(grdDietas);
+        }
     }//GEN-LAST:event_edtPesquisarKeyReleased
+
+    private void grdRefeicoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdRefeicoesMouseClicked
+        if (evt.getClickCount() == 2) {
+            int aux = grdRefeicoes.getSelectedColumn();
+            if (aux == 1) {
+                this.VizualizarRefeicao();
+            }
+        }
+    }//GEN-LAST:event_grdRefeicoesMouseClicked
+
+    private void VizualizarRefeicao() {
+        Refeicao refeicao = (Refeicao) this.getObjetoSelecionadoNaGridRefeicao();
+
+        if (refeicao == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+            DlgRefeicaoCliente dlgRefeicaoCliente = new DlgRefeicaoCliente(this, true, refeicao);
+            this.setVisible(false);
+            dlgRefeicaoCliente.setLocationRelativeTo(this);
+            dlgRefeicaoCliente.setVisible(true);
+            this.setVisible(true);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVerDieta;

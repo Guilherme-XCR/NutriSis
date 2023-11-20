@@ -1,18 +1,19 @@
 package com.artgui.nutrisis.controller.tablemodel;
 
 import com.artgui.nutrisis.model.Ingrediente;
+import com.artgui.nutrisis.model.Receita;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
 
 public class TMViewVizualizarReceita extends AbstractTableModel {
 
-    private List<Ingrediente> lista;
+    private List<Receita> lista;
 
     private final int COL_NOME = 0;
     private final int COL_VIZUALIZAR = 1;
    
-    public TMViewVizualizarReceita(List<Ingrediente> lst) {
+    public TMViewVizualizarReceita(List<Receita> lst) {
         this.lista = lst;
     }
 
@@ -28,11 +29,11 @@ public class TMViewVizualizarReceita extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Ingrediente aux = new Ingrediente();
+        Receita aux = new Receita();
         if (lista.isEmpty()) {
             return aux;
         } else {
-            aux = (Ingrediente) lista.get(rowIndex);
+            aux = (Receita) lista.get(rowIndex);
             switch (columnIndex) {
                 case COL_NOME:
                     return aux.getNome();
@@ -47,7 +48,7 @@ public class TMViewVizualizarReceita extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == COL_VIZUALIZAR;
+        return false;
     }
 
     @Override

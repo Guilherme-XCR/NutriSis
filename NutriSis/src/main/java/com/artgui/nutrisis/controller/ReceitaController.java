@@ -2,6 +2,7 @@ package com.artgui.nutrisis.controller;
 
 import com.artgui.nutrisis.controller.tablemodel.TMViewExcluirReceita;
 import com.artgui.nutrisis.controller.tablemodel.TMViewReceita;
+import com.artgui.nutrisis.controller.tablemodel.TMViewVizualizarReceita;
 import com.artgui.nutrisis.model.exceptions.ReceitaException;
 import com.artgui.nutrisis.model.Ingrediente;
 import com.artgui.nutrisis.model.Nutricionista;
@@ -100,6 +101,11 @@ public class ReceitaController {
     
     public void atualizarTabelaExcluir(JTable grd, List<Receita> receitas) {
         TMViewExcluirReceita tmReceita = new TMViewExcluirReceita(receitas);
+        grd.setModel(tmReceita);
+    }
+    
+    public void atualizarTabelaVizualizar(JTable grd, List<Receita> receitas) {
+        TMViewVizualizarReceita tmReceita = new TMViewVizualizarReceita(receitas);
         grd.setModel(tmReceita);
     }
 }

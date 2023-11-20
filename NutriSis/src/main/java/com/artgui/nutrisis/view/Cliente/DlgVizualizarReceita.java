@@ -1,39 +1,30 @@
 package com.artgui.nutrisis.view.Cliente;
 
-import com.artgui.nutrisis.controller.ReceitaController;
+import com.artgui.nutrisis.controller.IngredienteController;
 import com.artgui.nutrisis.model.Receita;
-import com.artgui.nutrisis.model.Refeicao;
-import javax.swing.JOptionPane;
 
-public class DlgRefeicaoCliente extends javax.swing.JDialog {
+public class DlgVizualizarReceita extends javax.swing.JDialog {
 
-    private ReceitaController receitaController;
+    private IngredienteController ingredienteController;
     
-    public DlgRefeicaoCliente(java.awt.Dialog parent, boolean modal, Refeicao refeicao) {
+    public DlgVizualizarReceita(java.awt.Dialog parent, boolean modal, Receita receita) {
         super(parent, modal);
         
-        this.receitaController = new ReceitaController();
+        this.ingredienteController = new IngredienteController();
         
         initComponents();
-        
-        this.preencherFormulario(refeicao);
-    }
-
-    private void preencherFormulario(Refeicao refeicao){
-        this.edtNome.setText(refeicao.getNome());
-        this.edtHorario.setText(refeicao.getHorario());
-        this.edtCalorias.setText(refeicao.getCalorias()+ "");
-        
-        this.receitaController.atualizarTabelaVizualizar(grdReceitas, refeicao.getReceitas());
+    
+        this.preencherFormulario(receita);
     }
     
-    private Object getObjetoSelecionadoNaGridReceita() {
-        int rowCliked = grdReceitas.getSelectedRow();
-        Object obj = null;
-        if (rowCliked >= 0) {
-            obj = grdReceitas.getModel().getValueAt(rowCliked, -1);
-        }
-        return obj;
+    private void preencherFormulario(Receita receita){
+        this.edtNome.setText(receita.getNome());
+        this.edtTempoPreparo.setText(receita.getTempoPreparo() + "");
+        this.edtPorcoes.setText(receita.getPorcoes() + "");
+        this.edtCategoria.setText(receita.getCategoria());
+        this.edtModoPreparo.setText(receita.getModoPreparo());
+                
+        this.ingredienteController.atualizarTabela(grdIngredientes, receita.getIngredientes());
     }
     
     @SuppressWarnings("unchecked")
@@ -43,18 +34,19 @@ public class DlgRefeicaoCliente extends javax.swing.JDialog {
         panMain = new javax.swing.JPanel();
         btnVoltar = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
-        grdReceitas = new javax.swing.JTable();
+        grdIngredientes = new javax.swing.JTable();
         panSobreRefeicao = new javax.swing.JPanel();
         edtNome = new javax.swing.JTextField();
-        edtHorario = new javax.swing.JTextField();
-        edtCalorias = new javax.swing.JTextField();
+        edtPorcoes = new javax.swing.JTextField();
+        edtCategoria = new javax.swing.JTextField();
+        edtTempoPreparo = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        edtModoPreparo = new javax.swing.JTextPane();
         panHeader = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(51, 51, 51));
-        setResizable(false);
 
         panMain.setBackground(new java.awt.Color(51, 51, 51));
         panMain.setForeground(new java.awt.Color(0, 0, 0));
@@ -72,14 +64,14 @@ public class DlgRefeicaoCliente extends javax.swing.JDialog {
         });
 
         jScrollPane.setBackground(new java.awt.Color(51, 51, 51));
-        jScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Receitas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 14), new java.awt.Color(0, 204, 51))); // NOI18N
+        jScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingredientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 14), new java.awt.Color(0, 204, 51))); // NOI18N
         jScrollPane.setForeground(new java.awt.Color(51, 51, 51));
         jScrollPane.setEnabled(false);
 
-        grdReceitas.setBackground(new java.awt.Color(71, 71, 71));
-        grdReceitas.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        grdReceitas.setForeground(new java.awt.Color(204, 255, 255));
-        grdReceitas.setModel(new javax.swing.table.DefaultTableModel(
+        grdIngredientes.setBackground(new java.awt.Color(71, 71, 71));
+        grdIngredientes.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
+        grdIngredientes.setForeground(new java.awt.Color(204, 255, 255));
+        grdIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -87,15 +79,11 @@ public class DlgRefeicaoCliente extends javax.swing.JDialog {
 
             }
         ));
-        grdReceitas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        grdReceitas.setGridColor(new java.awt.Color(0, 0, 0));
-        grdReceitas.setShowGrid(true);
-        grdReceitas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdReceitasMouseClicked(evt);
-            }
-        });
-        jScrollPane.setViewportView(grdReceitas);
+        grdIngredientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        grdIngredientes.setEnabled(false);
+        grdIngredientes.setGridColor(new java.awt.Color(0, 0, 0));
+        grdIngredientes.setShowGrid(true);
+        jScrollPane.setViewportView(grdIngredientes);
 
         panSobreRefeicao.setBackground(new java.awt.Color(51, 51, 51));
         panSobreRefeicao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sobre", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 14), new java.awt.Color(0, 204, 51))); // NOI18N
@@ -110,23 +98,40 @@ public class DlgRefeicaoCliente extends javax.swing.JDialog {
         edtNome.setEnabled(false);
         edtNome.setOpaque(true);
 
-        edtHorario.setBackground(new java.awt.Color(71, 71, 71));
-        edtHorario.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtHorario.setForeground(new java.awt.Color(0, 0, 0));
-        edtHorario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Horario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
-        edtHorario.setDisabledTextColor(new java.awt.Color(204, 255, 255));
-        edtHorario.setDoubleBuffered(true);
-        edtHorario.setEnabled(false);
-        edtHorario.setOpaque(true);
+        edtPorcoes.setBackground(new java.awt.Color(71, 71, 71));
+        edtPorcoes.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtPorcoes.setForeground(new java.awt.Color(0, 0, 0));
+        edtPorcoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Porções", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtPorcoes.setDisabledTextColor(new java.awt.Color(204, 255, 255));
+        edtPorcoes.setDoubleBuffered(true);
+        edtPorcoes.setEnabled(false);
+        edtPorcoes.setOpaque(true);
 
-        edtCalorias.setBackground(new java.awt.Color(71, 71, 71));
-        edtCalorias.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtCalorias.setForeground(new java.awt.Color(0, 0, 0));
-        edtCalorias.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Calorias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
-        edtCalorias.setDisabledTextColor(new java.awt.Color(204, 255, 255));
-        edtCalorias.setDoubleBuffered(true);
-        edtCalorias.setEnabled(false);
-        edtCalorias.setOpaque(true);
+        edtCategoria.setBackground(new java.awt.Color(71, 71, 71));
+        edtCategoria.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtCategoria.setForeground(new java.awt.Color(0, 0, 0));
+        edtCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtCategoria.setDisabledTextColor(new java.awt.Color(204, 255, 255));
+        edtCategoria.setDoubleBuffered(true);
+        edtCategoria.setEnabled(false);
+        edtCategoria.setOpaque(true);
+
+        edtTempoPreparo.setBackground(new java.awt.Color(71, 71, 71));
+        edtTempoPreparo.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtTempoPreparo.setForeground(new java.awt.Color(0, 0, 0));
+        edtTempoPreparo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tempo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtTempoPreparo.setDisabledTextColor(new java.awt.Color(204, 255, 255));
+        edtTempoPreparo.setDoubleBuffered(true);
+        edtTempoPreparo.setEnabled(false);
+        edtTempoPreparo.setOpaque(true);
+
+        edtModoPreparo.setBackground(new java.awt.Color(71, 71, 71));
+        edtModoPreparo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modo de Preparo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtModoPreparo.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtModoPreparo.setForeground(new java.awt.Color(0, 0, 0));
+        edtModoPreparo.setDisabledTextColor(new java.awt.Color(204, 255, 255));
+        edtModoPreparo.setEnabled(false);
+        jScrollPane3.setViewportView(edtModoPreparo);
 
         javax.swing.GroupLayout panSobreRefeicaoLayout = new javax.swing.GroupLayout(panSobreRefeicao);
         panSobreRefeicao.setLayout(panSobreRefeicaoLayout);
@@ -134,22 +139,30 @@ public class DlgRefeicaoCliente extends javax.swing.JDialog {
             panSobreRefeicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panSobreRefeicaoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(edtNome)
-                .addGap(0, 0, 0)
-                .addComponent(edtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(edtCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panSobreRefeicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(panSobreRefeicaoLayout.createSequentialGroup()
+                        .addComponent(edtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edtTempoPreparo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edtPorcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(edtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panSobreRefeicaoLayout.setVerticalGroup(
             panSobreRefeicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panSobreRefeicaoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panSobreRefeicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(edtPorcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtTempoPreparo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
@@ -172,7 +185,7 @@ public class DlgRefeicaoCliente extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panSobreRefeicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -185,7 +198,7 @@ public class DlgRefeicaoCliente extends javax.swing.JDialog {
         lblTitle.setFont(new java.awt.Font("Cascadia Mono", 0, 98)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Refeição");
+        lblTitle.setText("Receita");
 
         javax.swing.GroupLayout panHeaderLayout = new javax.swing.GroupLayout(panHeader);
         panHeader.setLayout(panHeaderLayout);
@@ -214,48 +227,28 @@ public class DlgRefeicaoCliente extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(panHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(panMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void grdReceitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdReceitasMouseClicked
-        if (evt.getClickCount() == 2) {
-            int aux = grdReceitas.getSelectedColumn();
-            if (aux == 1) {
-                this.VizualizarReceita();
-            }
-        }
-    }//GEN-LAST:event_grdReceitasMouseClicked
-
-    private void VizualizarReceita() {
-        Receita receita = (Receita) this.getObjetoSelecionadoNaGridReceita();
-
-        if (receita == null) {
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        } else {
-            DlgVizualizarReceita dlgVizualizarReceita = new DlgVizualizarReceita(this, true, receita);
-            this.setVisible(false);
-            dlgVizualizarReceita.setLocationRelativeTo(this);
-            dlgVizualizarReceita.setVisible(true);
-            this.setVisible(true);
-        }   
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JTextField edtCalorias;
-    private javax.swing.JTextField edtHorario;
+    private javax.swing.JTextField edtCategoria;
+    private javax.swing.JTextPane edtModoPreparo;
     private javax.swing.JTextField edtNome;
-    private javax.swing.JTable grdReceitas;
+    private javax.swing.JTextField edtPorcoes;
+    private javax.swing.JTextField edtTempoPreparo;
+    private javax.swing.JTable grdIngredientes;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel panHeader;

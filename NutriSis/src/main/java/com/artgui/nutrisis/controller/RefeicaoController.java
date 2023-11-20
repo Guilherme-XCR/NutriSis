@@ -2,6 +2,7 @@ package com.artgui.nutrisis.controller;
 
 import com.artgui.nutrisis.controller.tablemodel.TMViewEdtExcluirRefeicao;
 import com.artgui.nutrisis.controller.tablemodel.TMViewRefeicao;
+import com.artgui.nutrisis.controller.tablemodel.TMViewVizualizarRefeicao;
 import com.artgui.nutrisis.model.exceptions.RefeicaoException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
@@ -88,6 +89,11 @@ public class RefeicaoController {
 
     public void atualizarTabelaEdtExcluir(JTable grd, List<Refeicao> refeicoes) {
         TMViewEdtExcluirRefeicao tmRefeicao = new TMViewEdtExcluirRefeicao(refeicoes);
+        grd.setModel(tmRefeicao);
+    }
+    
+    public void atualizarTabelaVizualizar(JTable grd, List<Refeicao> refeicoes) {
+        TMViewVizualizarRefeicao  tmRefeicao = new TMViewVizualizarRefeicao(refeicoes);
         grd.setModel(tmRefeicao);
     }
     

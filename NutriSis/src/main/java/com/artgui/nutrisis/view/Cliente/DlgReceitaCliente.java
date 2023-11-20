@@ -10,22 +10,22 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
 
     IngredienteController ingredienteController;
     ReceitaController receitaController;
-        
+
     public DlgReceitaCliente(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        
+
         ingredienteController = new IngredienteController();
         receitaController = new ReceitaController();
-        
+
         initComponents();
-        
+
         this.limparCampos();
         this.habilitarCampos(false);
         this.receitaController.atualizarTabela(grdReceitas);
     }
-    
+
     public void habilitarCampos(boolean flag) {
-        
+
         for (int i = 0; i < this.panAutorNutricionista.getComponents().length; i++) {
             this.panAutorNutricionista.getComponent(i).setEnabled(flag);
         }
@@ -34,11 +34,11 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         }
         this.edtModoPreparoReceita.setEnabled(flag);
         this.grdIngredientes.setEnabled(flag);
-        
+
     }
 
     public void limparCampos() {
-    
+
         this.edtNomeAutor.setText("");
         this.edtEmailAutor.setText("");
         this.edtEspecializacaoAutor.setText("");
@@ -50,8 +50,8 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         this.ingredienteController.atualizarTabela(grdIngredientes, new ArrayList());
 
     }
-    
-    public void preencherFormulario(Receita receita){
+
+    public void preencherFormulario(Receita receita) {
         this.edtNomeAutor.setText(receita.getNutricionista().getNome());
         this.edtEmailAutor.setText(receita.getNutricionista().getEmail());
         this.edtEspecializacaoAutor.setText(receita.getNutricionista().getEspecializacao());
@@ -62,7 +62,7 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         this.edtModoPreparoReceita.setText(receita.getModoPreparo());
         this.ingredienteController.atualizarTabela(grdIngredientes, receita.getIngredientes());
     }
-    
+
     private Object getObjetoSelecionadoNaGrid() {
         int rowCliked = grdReceitas.getSelectedRow();
         Object obj = null;
@@ -71,7 +71,7 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         }
         return obj;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -161,6 +161,11 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
         grdReceitas.setShowGrid(true);
         grdReceitas.setShowHorizontalLines(false);
         grdReceitas.setShowVerticalLines(false);
+        grdReceitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdReceitasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(grdReceitas);
 
         btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
@@ -450,34 +455,35 @@ public class DlgReceitaCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerReceitaActionPerformed
-        Receita receita = (Receita)  this.getObjetoSelecionadoNaGrid();
-        
+        Receita receita = (Receita) this.getObjetoSelecionadoNaGrid();
+
         if (receita == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             this.limparCampos();
             this.preencherFormulario(receita);
-        }   
+        }
     }//GEN-LAST:event_btnVerReceitaActionPerformed
 
-    private void grdAlunosMouseClicked(java.awt.event.MouseEvent evt) {                                       
-        if (evt.getClickCount() == 2) {
-            btnVerReceitaActionPerformed(null);
-        }
-    }  
-    
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void edtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtPesquisarKeyReleased
         String nomeDigitado = edtPesquisar.getText();
-        if(!nomeDigitado.isEmpty())
+        if (!nomeDigitado.isEmpty()) {
             this.receitaController.atualizarTabela(grdReceitas, nomeDigitado);
-        else
+        } else {
             this.receitaController.atualizarTabela(grdReceitas);
+        }
 
     }//GEN-LAST:event_edtPesquisarKeyReleased
+
+    private void grdReceitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdReceitasMouseClicked
+        if (evt.getClickCount() == 2) {
+            btnVerReceitaActionPerformed(null);
+        }
+    }//GEN-LAST:event_grdReceitasMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVerReceita;
