@@ -2,10 +2,10 @@ package com.artgui.nutrisis.view.Nutricionista;
 
 import com.artgui.nutrisis.controller.ReceitaController;
 import com.artgui.nutrisis.controller.RefeicaoController;
-import com.artgui.nutrisis.exceptions.RefeicaoException;
-import com.artgui.nutrisis.model.Nutricionista;
+import com.artgui.nutrisis.model.exceptions.RefeicaoException;
 import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
+import com.artgui.nutrisis.model.exceptions.ReceitaException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,31 +18,34 @@ public class DlgRefeicaoNutricionista extends javax.swing.JDialog {
 
     private Refeicao refeicao;
     private RefeicaoController refeicaoController;
+    
     private List<Receita> receitas;
+    private List<Receita> receitasExcluidas;
     private ReceitaController receitaController;
-
-
+    
     public DlgRefeicaoNutricionista(java.awt.Dialog parent, boolean modal, Refeicao refeicao, boolean isEditando) {
         super(parent, modal);
 
         this.refeicao = refeicao;
         refeicaoController = new RefeicaoController();
         receitas = new ArrayList<>();
+        receitasExcluidas = new ArrayList<>();
         receitaController = new ReceitaController();
 
         initComponents();
-
+        this.adicionarMascaraNosCampos();
         if (isEditando) {
             this.preencherFormulario(this.refeicao);
         }
 
-        this.adicionarMascaraNosCampos();
+        
     }
 
     private void preencherFormulario(Refeicao refeicao) {
-        edtNome.setText(refeicao.getNome());
-        fEdtHorario.setText(refeicao.getHorario());
-        fEdtCalorias.setText(refeicao.getCalorias() + "");
+        this.edtNome.setText(refeicao.getNome());
+        this.fEdtHorario.setText(refeicao.getHorario());
+        this.fEdtCalorias.setText(refeicao.getCalorias() + "");
+        this.receitaController.atualizarTabelaExcluir(grdReceitas, refeicao.getReceitas());
     }
 
     public void adicionarMascaraNosCampos() {
@@ -57,6 +60,34 @@ public class DlgRefeicaoNutricionista extends javax.swing.JDialog {
         }
     }
 
+    private Object getObjetoSelecionadoNaGridReceita() {
+        int rowCliked = this.grdReceitas.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = this.grdReceitas.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+    
+    private void removerReceita(){
+        Receita receita = (Receita) this.getObjetoSelecionadoNaGridReceita();
+
+        if (receita == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+            try {
+                if (receita.getId() > 0) {
+                    receitasExcluidas.add(receita);
+                }
+
+                receitas.remove(receita);
+                receitaController.atualizarTabelaExcluir(grdReceitas, receitas);
+            } catch (ReceitaException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -140,9 +171,14 @@ public class DlgRefeicaoNutricionista extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        grdReceitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdReceitasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(grdReceitas);
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
@@ -218,20 +254,17 @@ public class DlgRefeicaoNutricionista extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
-        Nutricionista nutricionista = new Nutricionista("teste", "teste@teste", "senhateste", "cpfTeste", "teste", "teste", "teste");
-
         try {
             refeicao.copy(
                     refeicaoController.criar(
                             edtNome.getText(),
                             fEdtHorario.getText(),
                             fEdtCalorias.getText(),
-                            receitas,
-                            nutricionista
+                            receitas
                     )
             );
             dispose();
-        } catch (RefeicaoException e) {
+        }catch (RefeicaoException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
 
@@ -254,11 +287,19 @@ public class DlgRefeicaoNutricionista extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Adição cancelada");
         } else {
             receitas.add(receita);
-            receitaController.atualizarTabela(grdReceitas, receitas);
+            receitaController.atualizarTabelaExcluir(grdReceitas, receitas);
         }
         
     }//GEN-LAST:event_btnAdicionarReceitaActionPerformed
 
+    private void grdReceitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdReceitasMouseClicked
+        if (evt.getClickCount() == 2) {
+            int aux = grdReceitas.getSelectedColumn();
+            if (aux == 1) {
+                this.removerReceita();
+            } 
+        }
+    }//GEN-LAST:event_grdReceitasMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarReceita;

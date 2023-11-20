@@ -1,7 +1,7 @@
 package com.artgui.nutrisis.controller;
 
 import com.artgui.nutrisis.controller.tablemodel.TMViewDieta;
-import com.artgui.nutrisis.exceptions.DietaException;
+import com.artgui.nutrisis.model.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Refeicao;
@@ -37,6 +37,7 @@ public class DietaController {
         for (Refeicao r : dieta.getRefeicoes()){
             r.setDieta(dieta);
         }
+
         repositorio.save(dieta);
     }
         
@@ -65,7 +66,7 @@ public class DietaController {
     
     public void excluir(Dieta dieta){
         if (dieta != null) {
-            repositorio.delete(dieta);
+            repositorio.delete(dieta.getId());
         } else {
             throw new DietaException("Error - Dieta inexistente.");
         }

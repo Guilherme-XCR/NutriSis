@@ -1,7 +1,7 @@
 package com.artgui.nutrisis.view.provisoria;
 
 import com.artgui.nutrisis.controller.NutricionistaController;
-import com.artgui.nutrisis.exceptions.NutricionistaException;
+import com.artgui.nutrisis.model.exceptions.NutricionistaException;
 import javax.swing.JOptionPane;
 
 public class DlgGerarNutricionista extends javax.swing.JDialog {

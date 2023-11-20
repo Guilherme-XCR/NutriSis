@@ -14,23 +14,23 @@ import lombok.Setter;
 
 @Entity
 
-public class Nutricionista extends Usuario implements Serializable{
-  
+public class Nutricionista extends Usuario implements Serializable {
+
     private String crn;
     private String especializacao;
-    
+
     // Construtor sem Id
     public Nutricionista(
-            String nome, 
-            String email, 
-            String senha, 
-            String cpf, 
-            String telefone, 
-            String crn, 
+            String nome,
+            String email,
+            String senha,
+            String cpf,
+            String telefone,
+            String crn,
             String especializacao
-    ){
+    ) {
         super(nome, email, senha, cpf, telefone);
         this.crn = crn;
         this.especializacao = especializacao;
-    }    
+    }
 }

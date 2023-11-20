@@ -2,7 +2,7 @@ package com.artgui.nutrisis.controller;
 
 import com.artgui.nutrisis.controller.tablemodel.TMViewEdtExcluirRefeicao;
 import com.artgui.nutrisis.controller.tablemodel.TMViewRefeicao;
-import com.artgui.nutrisis.exceptions.RefeicaoException;
+import com.artgui.nutrisis.model.exceptions.RefeicaoException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Receita;
@@ -33,13 +33,13 @@ public class RefeicaoController {
                 nome,
                 horario,
                 calorias,
-                receitas,
-                dieta,
-                nutricionista
+                receitas
         );
+
         for (Receita r : refeicao.getReceitas()) {
             r.addRefeicao(refeicao);
         }
+
         repositorio.save(refeicao);
     }
 
@@ -57,19 +57,18 @@ public class RefeicaoController {
                 nome,
                 horario,
                 calorias,
-                receitas,
-                dieta,
-                nutricionista
+                receitas
         );
         for (Receita r : refeicao.getReceitas()) {
             r.addRefeicao(refeicao);
         }
+
         repositorio.update(refeicao);
     }
 
     public void excluir(Refeicao refeicao) {
         if (refeicao != null) {
-            repositorio.delete(refeicao);
+            repositorio.delete(refeicao.getId());
         } else {
             throw new RefeicaoException("Error - Refeicao inexistente.");
         }
@@ -87,7 +86,7 @@ public class RefeicaoController {
         grd.setModel(tmRefeicao);
     }
 
-    public void atualizarTabelaEdtExcluir(JTable grd, List<Refeicao> refeicoes){
+    public void atualizarTabelaEdtExcluir(JTable grd, List<Refeicao> refeicoes) {
         TMViewEdtExcluirRefeicao tmRefeicao = new TMViewEdtExcluirRefeicao(refeicoes);
         grd.setModel(tmRefeicao);
     }
@@ -96,10 +95,9 @@ public class RefeicaoController {
             String nome,
             String horario,
             String calorias,
-            List<Receita> receitas,
-            Nutricionista nutricionista
+            List<Receita> receitas
     ) {
         ValidateRefeicao valid = new ValidateRefeicao();
-        return valid.validaCamposEntrada(nome, horario, calorias, receitas, null, nutricionista);
+        return valid.validaCamposEntrada(nome, horario, calorias, receitas);
     }
 }

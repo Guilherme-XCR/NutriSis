@@ -1,121 +1,120 @@
 package com.artgui.nutrisis.model.valid;
 
-import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.model.dao.ClienteDAO;
+import com.mysql.cj.protocol.a.MysqlTextValueDecoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class ValidateCliente {
 
     private ClienteDAO repositorio;
-    
-    public ValidateCliente(){
+
+    public ValidateCliente() {
         repositorio = new ClienteDAO();
     }
-    
+
     public Cliente validaCamposEntrada(
-            String nome, 
-            String email, 
-            String senha, 
-            String confirmarSenha, 
-            String cpf, 
-            String telefone, 
-            String altura, 
-            String peso, 
-            String genero, 
+            String nome,
+            String email,
+            String senha,
+            String confirmarSenha,
+            String cpf,
+            String telefone,
+            String altura,
+            String peso,
+            String genero,
             String dataNascimento,
-            String numeroCartao,
-            String senhaCartao
+            String numeroCartao
     ) {
 
         if (nome == null || nome.isEmpty()) {
             throw new ClienteException("Nome não pode estar em branco.");
         }
-        
-        if (nome == null || !nome.matches("^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$")) {
+
+        if (!nome.matches("^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$")) {
             throw new ClienteException("Nome inválido.");
         }
-            
-        if (email == null || !isValidEmail(email)) {
+
+        if (email == null || email.isEmpty()) {
+            throw new ClienteException("Email não pode estar em branco.");
+        }
+
+        if (!isValidEmail(email)) {
             throw new ClienteException("Email inválido.");
         }
-        
-//        Cliente aux = repositorio.findByEmail(email);
-//        if (aux != null){
-//            throw new ClienteException("Email já esta sendo usado por outro usuário.");
-//        }
-//        
-        // String senha
-        if (senha == null || senha.isEmpty()){
+
+        Cliente aux = repositorio.findByEmail(email);
+        if (aux != null) {
+            throw new ClienteException("Email já esta sendo usado por outro usuário.");
+        }
+
+        if (senha == null || senha.isEmpty()) {
             throw new ClienteException("Senha não pode estar em branco.");
         }
-        
-        if (!senha.equals(confirmarSenha)){
+
+        if (!senha.equals(confirmarSenha)) {
             throw new ClienteException("Confirmação de senha incorreta.");
         }
-                
+
         if (cpf == null || !isValidCPF(cpf)) {
             throw new ClienteException("CPF inválido.");
         }
-        
+
         if (telefone == null || telefone.isEmpty()) {
             throw new ClienteException("Telefone não pode estar em branco.");
-        }        
-        
+        }
+
         if (!telefone.replaceAll("[^0-9]", "").matches("^\\d+$")) {
             throw new ClienteException("Telefone inválido.");
         }
-        
-        if (!altura.matches("^\\d{3}$")) {
+
+        if (altura == null || altura.isEmpty() || !altura.matches("^[0-9]{1,3}$")) {
             throw new ClienteException("Altura não pode estar vazia.");
         }
-        
+
         int a = Integer.parseInt(altura.replaceAll("\\s", ""));
         if (a < 0 || a > 300) {
             throw new ClienteException("Altura inválida.");
         }
-        
-        if (!peso.matches("^\\d{3}\\.\\d{2}$")) {
-            throw new ClienteException("Peso  não pode estar vazia.");
+
+        if (peso == null || peso.equals(".")) {
+            throw new ClienteException("Peso  não pode estar vazio.");
         }
- 
+
         float p = Float.parseFloat(peso.replaceAll("\\s", ""));
-        if (p <= 0 || p > 500.0) {
+        if (p <= 0.0 || p > 500.0) {
             throw new ClienteException("Peso inválido.");
-        }    
-                
+        }
+
         if (genero.equals("Escolha")) {
             throw new ClienteException("Você precisa escolher um gênero.");
         }
-        
+
         if (dataNascimento == null || dataNascimento.isEmpty()) {
             throw new ClienteException("Data Nascimento não pode estar em branco.");
         }
         
-        if (!dataNascimento.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
-            throw new ClienteException("Data de Nascimento inválida.");
-        }
-        
-        if (numeroCartao== null || dataNascimento.isEmpty()){
-            throw new ClienteException("Número de cartão inválido.");
-        }
-        
-        if (senhaCartao== null || dataNascimento.isEmpty()){
-            throw new ClienteException("Senha de cartão inválida.");
+        this.isValidDataNascimento(dataNascimento);
+
+        if (numeroCartao == null || dataNascimento.isEmpty()) {
+            throw new ClienteException("Número de cartão não pode estar em branco.");
         }
 
         return new Cliente(
-                nome, 
-                email, 
-                senha, 
-                cpf, 
-                telefone, 
-                a, 
-                p, 
-                genero, 
+                nome,
+                email,
+                senha,
+                cpf,
+                telefone,
+                a,
+                p,
+                genero,
                 dataNascimento,
-                numeroCartao,
-                senhaCartao
+                numeroCartao
         );
     }
 
@@ -153,5 +152,40 @@ public class ValidateCliente {
         String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+)\\.([A-Za-z]{2,4})$";
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(email).matches();
+    }
+
+    private void isValidDataNascimento(String dataNascimento) {
+
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        formatoData.setLenient(false);
+
+        try {
+            Date data = formatoData.parse(dataNascimento);
+
+            if (!dataValida(data)) {
+                throw new ClienteException("Data fora do intervalo aceitável.");
+            }
+
+        } catch (ParseException e) {
+            throw new ClienteException("Data inválida. Certifique-se de seguir o formato dd/MM/yyyy.");
+        }
+    }
+
+    private static boolean dataValida(Date data) {
+        Date dataMinima = parseData("01/01/1900");
+        Date dataMaxima = parseData("31/12/2023");
+
+        return data.after(dataMinima) && data.before(dataMaxima);
+    }
+
+    // Método auxiliar para fazer o parse de uma string para Date
+    private static Date parseData(String dataString) {
+        try {
+            SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+            return formatoData.parse(dataString);
+        } catch (ParseException e) {
+            e.printStackTrace(); // Lidar com a exceção conforme necessário
+            return null;
+        }
     }
 }

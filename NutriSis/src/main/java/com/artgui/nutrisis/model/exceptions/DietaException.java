@@ -1,5 +1,5 @@
 
-package com.artgui.nutrisis.exceptions;
+package com.artgui.nutrisis.model.exceptions;
 
 public class DietaException extends RuntimeException {
     

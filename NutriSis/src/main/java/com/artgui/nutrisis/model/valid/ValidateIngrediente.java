@@ -1,7 +1,7 @@
 package com.artgui.nutrisis.model.valid;
 
-import com.artgui.nutrisis.exceptions.IngredienteException;
-import com.artgui.nutrisis.exceptions.ReceitaException;
+import com.artgui.nutrisis.model.exceptions.IngredienteException;
+import com.artgui.nutrisis.model.exceptions.ReceitaException;
 import com.artgui.nutrisis.model.Ingrediente;
 
 public class ValidateIngrediente {
@@ -16,8 +16,8 @@ public class ValidateIngrediente {
             throw new IngredienteException("Unidade de medida não pode estar em branco.");
         }
 
-        if (!quantidade.replaceAll("\\s", "").matches("^[0-9]{1,8}$")) {
-            throw new ReceitaException("Insira um valor no Tempo de Preparo.");
+        if (!quantidade.replaceAll("\\s", "").matches("^\\d+(\\.\\d+)?$")) {
+            throw new ReceitaException("Quantidade escrita de formato invalido.");
         }
 
         int q = Integer.parseInt(quantidade.replaceAll("\\s", ""));

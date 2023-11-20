@@ -1,8 +1,8 @@
 package com.artgui.nutrisis.model;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,12 +22,11 @@ public class Ingrediente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String nome;
     private String unidadeMedida;
     private float quantidade;
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_receita")
     private Receita receita;
 
@@ -42,6 +41,7 @@ public class Ingrediente implements Serializable {
         this.quantidade = quantidade;
     }
     
+    
     public void copy(Ingrediente outro){
         this.id = outro.getId();
         this.nome = outro.getNome();
@@ -49,5 +49,4 @@ public class Ingrediente implements Serializable {
         this.quantidade = outro.getQuantidade();
         this.receita = outro.getReceita();
     }
-
 }

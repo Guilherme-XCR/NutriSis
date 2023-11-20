@@ -1,7 +1,7 @@
 package com.artgui.nutrisis.view.Cliente;
 
 import com.artgui.nutrisis.controller.ClienteController;
-import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
 import javax.swing.JOptionPane;
 
@@ -36,7 +36,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtPeso.setEnabled(flag);
         this.fEdtDataNascimento.setEnabled(flag);
         this.fEdtNumeroCartao.setEnabled(flag);
-        this.edtSenhaCartao.setEnabled(flag);
 
         this.comboBoxGenero.setEnabled(flag);
     }
@@ -51,7 +50,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtPeso.setText("");
         this.fEdtDataNascimento.setText("");
         this.fEdtNumeroCartao.setText("");
-        this.edtSenhaCartao.setText("");
 
         this.comboBoxGenero.setSelectedIndex(0);
     }
@@ -66,7 +64,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtPeso.setText(cliente.getPeso() + "");
         this.fEdtDataNascimento.setText(cliente.getDataNascimento());
         this.fEdtNumeroCartao.setText(cliente.getNumeroCartao());
-        this.edtSenhaCartao.setText(cliente.getSenhaCartao());
 
         this.comboBoxGenero.setSelectedItem(cliente.getGenero());
     }
@@ -82,7 +79,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
 //
 //        } catch (ParseException ex) {
 //            Logger.getLogger(DlgReceitaNutricionista.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+//        } 
     }
 
     @SuppressWarnings("unchecked")
@@ -109,7 +106,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
         fEdtPeso = new javax.swing.JFormattedTextField();
         fEdtDataNascimento = new javax.swing.JFormattedTextField();
         fEdtNumeroCartao = new javax.swing.JFormattedTextField();
-        edtSenhaCartao = new javax.swing.JPasswordField();
         btnEditar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
@@ -130,18 +126,15 @@ public class DlgContaCliente extends javax.swing.JDialog {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MiniLogo.png"))); // NOI18N
 
         panUser.setBackground(new java.awt.Color(237, 249, 253));
-        panUser.setForeground(new java.awt.Color(0, 0, 0));
 
         lblIconUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/userIcon.png"))); // NOI18N
 
         lblNomeUser.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        lblNomeUser.setForeground(new java.awt.Color(0, 0, 0));
         lblNomeUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNomeUser.setText("UserName");
         lblNomeUser.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         lblSaldo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        lblSaldo.setForeground(new java.awt.Color(0, 0, 0));
         lblSaldo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSaldo.setText("Saldo R$ 0,00");
         lblSaldo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -207,9 +200,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
         lblGenero.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblGenero.setPreferredSize(new java.awt.Dimension(150, 40));
 
-        comboBoxGenero.setBackground(new java.awt.Color(255, 255, 255));
         comboBoxGenero.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        comboBoxGenero.setForeground(new java.awt.Color(0, 0, 0));
         comboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha", "Masculino", "Feminino", "Outro" }));
         comboBoxGenero.setPreferredSize(new java.awt.Dimension(294, 40));
 
@@ -246,13 +237,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
         fEdtNumeroCartao.setName(""); // NOI18N
         fEdtNumeroCartao.setPreferredSize(new java.awt.Dimension(294, 40));
 
-        edtSenhaCartao.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        edtSenhaCartao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha do Cartão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Code", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
-        edtSenhaCartao.setPreferredSize(new java.awt.Dimension(294, 40));
-
-        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setFont(new java.awt.Font("Cascadia Code", 1, 14)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(0, 0, 0));
         btnEditar.setText("Editar");
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditar.setFocusable(false);
@@ -263,9 +248,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
             }
         });
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Cascadia Code", 1, 14)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btnSalvar.setText("Salvar");
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.setFocusable(false);
@@ -276,9 +259,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
             }
         });
 
-        btnSair.setBackground(new java.awt.Color(255, 255, 255));
         btnSair.setFont(new java.awt.Font("Cascadia Code", 1, 14)); // NOI18N
-        btnSair.setForeground(new java.awt.Color(0, 0, 0));
         btnSair.setText("Sair");
         btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSair.setFocusable(false);
@@ -302,6 +283,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
             .addGroup(panInputsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtNomeCompleto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -324,10 +306,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
                                         .addComponent(comboBoxGenero, 0, 0, Short.MAX_VALUE))
                                     .addComponent(fEdtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                             .addGroup(panInputsLayout.createSequentialGroup()
-                                .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(edtSenhaCartao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(panInputsLayout.createSequentialGroup()
                                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,7 +318,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
             panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panInputsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblEditarPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblEditarPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edtNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -361,9 +339,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
                         .addComponent(fEdtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(fEdtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtSenhaCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,9 +355,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Excluir conta");
 
-        btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Cascadia Code", 1, 14)); // NOI18N
-        btnExcluir.setForeground(new java.awt.Color(0, 0, 0));
         btnExcluir.setText("Excluir");
         btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir.setFocusable(false);
@@ -422,9 +396,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Adicionar saldo a conta.");
 
-        btnConfirmar.setBackground(new java.awt.Color(255, 255, 255));
         btnConfirmar.setFont(new java.awt.Font("Cascadia Code", 1, 14)); // NOI18N
-        btnConfirmar.setForeground(new java.awt.Color(0, 0, 0));
         btnConfirmar.setText("Confirmar");
         btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar.setFocusable(false);
@@ -553,7 +525,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
                     comboBoxGenero.getSelectedItem() + "",
                     fEdtDataNascimento.getText(),
                     fEdtNumeroCartao.getText(),
-                    edtSenhaCartao.getText(),
                     cliente.getSaldoCartao()
             );
         } catch (ClienteException e) {
@@ -572,9 +543,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
 
             float valor = Float.parseFloat(fEdtValor.getText());
             if (valor > 0.0f) {
-                String senhaCartaoDigitada = JOptionPane.showInputDialog(this, "Informe a senha do cartão:", "");
-
-                if (senhaCartaoDigitada == cliente.getSenhaCartao()) {
+                
                     cliente.setSaldoCartao(valor);
 
                     try {
@@ -591,7 +560,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
                                 cliente.getGenero(),
                                 cliente.getDataNascimento(),
                                 cliente.getNumeroCartao(),
-                                cliente.getSenhaCartao(),
                                 valor
                         );
                         JOptionPane.showMessageDialog(this, "R$ " + valor + " adicionados a sua conta.");
@@ -601,9 +569,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "Senha incorreta");
-                }
-            } else {
                 JOptionPane.showMessageDialog(this, "Valor inválido");
             }
         } else {
@@ -642,7 +607,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
     private javax.swing.JTextField edtEmail;
     private javax.swing.JTextField edtNomeCompleto;
     private javax.swing.JPasswordField edtSenha;
-    private javax.swing.JPasswordField edtSenhaCartao;
     private javax.swing.JFormattedTextField fEdtAltura;
     private javax.swing.JFormattedTextField fEdtCpf;
     private javax.swing.JFormattedTextField fEdtDataNascimento;

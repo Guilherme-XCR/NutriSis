@@ -1,6 +1,6 @@
 package com.artgui.nutrisis.model.valid;
 
-import com.artgui.nutrisis.exceptions.NutricionistaException;
+import com.artgui.nutrisis.model.exceptions.NutricionistaException;
 import com.artgui.nutrisis.model.Nutricionista;
 import java.util.regex.Pattern;
 

@@ -22,37 +22,35 @@ import lombok.NoArgsConstructor;
 @Entity
 
 public class Dieta implements Serializable {
-    @Id
+    
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     private String nome;
+    
     private String descricao;
+    
     private int diasDuracao;
     
-    @OneToMany(mappedBy = "dieta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)//
+    @OneToMany(mappedBy = "dieta", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Refeicao> refeicoes;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
-    
-//    @ManyToMany(mappedBy = "dietasRecomendadas")
-//    private List<Consulta> consultas;
 
-    public Dieta( String nome,String descricao,int diasDuracao,List<Refeicao> refeicoes,Nutricionista nutricionista){
+    public Dieta( 
+            String nome,
+            String descricao,
+            int diasDuracao,
+            List<Refeicao> refeicoes,
+            Nutricionista nutricionista
+    ){
         this.nome = nome;
         this.descricao = descricao;
         this.diasDuracao = diasDuracao;
         this.refeicoes = refeicoes;
         this.nutricionista = nutricionista;
     }
-    
-//    public void addConsulta(Consulta consulta) {
-//        this.consultas.add(consulta);
-//    }
-//
-//    public void removeConsulta(Consulta consulta) {
-//        this.consultas.remove(consulta);
-//    }
 }

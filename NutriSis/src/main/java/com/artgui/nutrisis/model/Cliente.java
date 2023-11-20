@@ -15,15 +15,13 @@ import lombok.Setter;
 @Entity
 
 public class Cliente extends Usuario implements Serializable{
+    
     private int altura;
     private float peso;
     private String genero;
     private String dataNascimento;
-    
     private String numeroCartao;
-    private String senhaCartao;
     private float saldoCartao;
-    
     
     // Construtor sem Id
     public Cliente(
@@ -36,8 +34,7 @@ public class Cliente extends Usuario implements Serializable{
             float peso,
             String genero, 
             String dataNascimento,
-            String numeroCartao,
-            String senhaCartao
+            String numeroCartao
     ){
         super(nome, email, senha, cpf, telefone);
         this.altura = altura;
@@ -45,7 +42,6 @@ public class Cliente extends Usuario implements Serializable{
         this.genero = genero;
         this.dataNascimento = dataNascimento;
         this.numeroCartao = numeroCartao;
-        this.senhaCartao = senhaCartao;
         this.saldoCartao = 0.0f;
     }
 }

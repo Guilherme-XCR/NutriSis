@@ -1,7 +1,7 @@
 package com.artgui.nutrisis.controller;
 
 import com.artgui.nutrisis.controller.tablemodel.TMViewCliente;
-import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.model.dao.ClienteDAO;
 import com.artgui.nutrisis.model.valid.ValidateCliente;
@@ -27,8 +27,7 @@ public class ClienteController {
             String peso, 
             String genero, 
             String dataNascimento,
-            String numeroCartao,
-            String senhaCartao
+            String numeroCartao
     ){
         ValidateCliente valid = new ValidateCliente();
         Cliente cliente = valid.validaCamposEntrada(
@@ -42,8 +41,7 @@ public class ClienteController {
                 peso, 
                 genero, 
                 dataNascimento,
-                numeroCartao,
-                senhaCartao
+                numeroCartao
         );
         repositorio.save(cliente);
     }
@@ -67,7 +65,6 @@ public class ClienteController {
             String genero,
             String dataNascimento,
             String numeroCartao,
-            String senhaCartao,
             float saldoCartao
     ){
         ValidateCliente valid = new ValidateCliente();
@@ -82,8 +79,7 @@ public class ClienteController {
                 peso, 
                 genero, 
                 dataNascimento,
-                numeroCartao,
-                senhaCartao
+                numeroCartao
         );
         cliente.setId(id);
         cliente.setSaldoCartao(saldoCartao);
@@ -92,7 +88,7 @@ public class ClienteController {
     
     public void excluir(Cliente cliente){
         if (cliente != null) {
-            repositorio.delete(cliente);
+            repositorio.delete(cliente.getId());
         } else {
             throw new ClienteException("Error - Cliente inexistente.");
         }

@@ -40,7 +40,7 @@ public class DlgAdicionarReceitaNutricionista extends javax.swing.JDialog {
         edtPesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         grdReceitas = new javax.swing.JTable();
-        btnSalvar = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -99,18 +99,18 @@ public class DlgAdicionarReceitaNutricionista extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(grdReceitas);
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
-        btnSalvar.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
-        btnSalvar.setText("Salvar");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmar.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfirmar.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
+        btnConfirmar.setForeground(new java.awt.Color(0, 0, 0));
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
+                btnConfirmarActionPerformed(evt);
             }
         });
 
@@ -137,7 +137,7 @@ public class DlgAdicionarReceitaNutricionista extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panMainLayout.setVerticalGroup(
@@ -150,7 +150,7 @@ public class DlgAdicionarReceitaNutricionista extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -177,17 +177,17 @@ public class DlgAdicionarReceitaNutricionista extends javax.swing.JDialog {
         this.receitaController.atualizarTabela(grdReceitas);
     }//GEN-LAST:event_edtPesquisaKeyReleased
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
 
         Receita r = (Receita) this.getObjetoSelecionadoNaGridReceita();
         
-        if (receita == null)
+        if (r == null)
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         else {
             this.receita.copy(r);
             this.dispose();
         }
-    }//GEN-LAST:event_btnSalvarActionPerformed
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.receita.setId(-1);
@@ -196,7 +196,7 @@ public class DlgAdicionarReceitaNutricionista extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnConfirmar;
     private javax.swing.JTextField edtPesquisa;
     private javax.swing.JTable grdReceitas;
     private javax.swing.JScrollPane jScrollPane1;

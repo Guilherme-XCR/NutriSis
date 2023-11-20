@@ -1,4 +1,4 @@
-package com.artgui.nutrisis.interfaces;
+package com.artgui.nutrisis.model.interfaces;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface IDao<T> {
     void update(T obj);
     
     // D - delete
-    boolean delete(T obj);           
+    boolean delete(int id);           
     
     
 }

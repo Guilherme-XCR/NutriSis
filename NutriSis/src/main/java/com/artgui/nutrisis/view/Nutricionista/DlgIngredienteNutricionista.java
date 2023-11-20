@@ -1,13 +1,9 @@
 package com.artgui.nutrisis.view.Nutricionista;
 
 import com.artgui.nutrisis.controller.IngredienteController;
-import com.artgui.nutrisis.exceptions.IngredienteException;
+import com.artgui.nutrisis.model.exceptions.IngredienteException;
 import com.artgui.nutrisis.model.Ingrediente;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
 
 public class DlgIngredienteNutricionista extends javax.swing.JDialog {
 
@@ -18,7 +14,7 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
         super(parent, modal);
 
         this.ingrediente = ingrediente;
-        ingredienteController = new IngredienteController();
+        this.ingredienteController = new IngredienteController();
 
         initComponents();
 
@@ -26,22 +22,12 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
             this.preencherFormulario(ingrediente);
         }
 
-        this.adicionarMascaraNosCampos();
     }
 
     private void preencherFormulario(Ingrediente ingrediente) {
         edtNome.setText(ingrediente.getNome() + "");
         edtUnidadeMedida.setText(ingrediente.getUnidadeMedida() + "");
-        fEdtQuantidade.setText(ingrediente.getQuantidade() + "");
-    }
-
-    public void adicionarMascaraNosCampos() {
-        try {
-            MaskFormatter quantidadeFormatter = new MaskFormatter("########");
-            quantidadeFormatter.install(fEdtQuantidade);
-        } catch (ParseException ex) {
-            Logger.getLogger(DlgIngredienteNutricionista.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        edtQuantidade.setText(ingrediente.getQuantidade() + "");
     }
 
     @SuppressWarnings("unchecked")
@@ -51,10 +37,10 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
         panMain = new javax.swing.JPanel();
         edtNome = new javax.swing.JTextField();
         edtUnidadeMedida = new javax.swing.JTextField();
-        fEdtQuantidade = new javax.swing.JFormattedTextField();
         lblLogo = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        edtQuantidade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -64,26 +50,16 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
 
         edtNome.setBackground(new java.awt.Color(204, 204, 204));
         edtNome.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtNome.setForeground(new java.awt.Color(0, 0, 0));
         edtNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 14), new java.awt.Color(0, 204, 51))); // NOI18N
 
         edtUnidadeMedida.setBackground(new java.awt.Color(204, 204, 204));
         edtUnidadeMedida.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtUnidadeMedida.setForeground(new java.awt.Color(0, 0, 0));
         edtUnidadeMedida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtUnidadeMedida.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unidade de Medida", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 14), new java.awt.Color(0, 204, 51))); // NOI18N
 
-        fEdtQuantidade.setBackground(new java.awt.Color(204, 204, 204));
-        fEdtQuantidade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quantidade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 14), new java.awt.Color(0, 204, 51))); // NOI18N
-        fEdtQuantidade.setForeground(new java.awt.Color(0, 0, 0));
-        fEdtQuantidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fEdtQuantidade.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logoIngrediente.png"))); // NOI18N
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,15 +67,18 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
+
+        edtQuantidade.setBackground(new java.awt.Color(204, 204, 204));
+        edtQuantidade.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtQuantidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtQuantidade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quantidade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 14), new java.awt.Color(0, 204, 51))); // NOI18N
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
         panMain.setLayout(panMainLayout);
@@ -115,7 +94,7 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
                     .addGroup(panMainLayout.createSequentialGroup()
                         .addComponent(edtUnidadeMedida)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fEdtQuantidade))
+                        .addComponent(edtQuantidade))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -129,9 +108,9 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
                 .addGap(19, 19, 19)
                 .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(edtUnidadeMedida, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(fEdtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,7 +142,7 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
                     ingredienteController.criar(
                     edtNome.getText(),
                     edtUnidadeMedida.getText(),
-                    fEdtQuantidade.getText()
+                    edtQuantidade.getText()
                     )
             );
             dispose();
@@ -183,8 +162,8 @@ public class DlgIngredienteNutricionista extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField edtNome;
+    private javax.swing.JTextField edtQuantidade;
     private javax.swing.JTextField edtUnidadeMedida;
-    private javax.swing.JFormattedTextField fEdtQuantidade;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JPanel panMain;
     // End of variables declaration//GEN-END:variables

@@ -1,6 +1,6 @@
 package com.artgui.nutrisis.model.valid;
 
-import com.artgui.nutrisis.exceptions.DietaException;
+import com.artgui.nutrisis.model.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Refeicao;

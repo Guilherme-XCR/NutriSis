@@ -1,8 +1,6 @@
 package com.artgui.nutrisis.model.valid;
 
-import com.artgui.nutrisis.exceptions.RefeicaoException;
-import com.artgui.nutrisis.model.Dieta;
-import com.artgui.nutrisis.model.Nutricionista;
+import com.artgui.nutrisis.model.exceptions.RefeicaoException;
 import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
 import java.util.List;
@@ -13,9 +11,7 @@ public class ValidateRefeicao {
             String nome,
             String horario,
             String calorias,
-            List<Receita> receitas,
-            Dieta dieta,
-            Nutricionista nutricionista
+            List<Receita> receitas
     ) {
 
         if (nome == null || nome.isEmpty()) {
@@ -44,19 +40,12 @@ public class ValidateRefeicao {
         if (c <= 0) {
             throw new RefeicaoException("Calorias inválida.");
         }
-
-        if (nutricionista == null) {
-            throw new RefeicaoException("Nutricionista não pode estar em branco.");
-        }
-
-        // Se todas as validações passarem, crie um novo objeto Ingrediente
+        
         return new Refeicao(
                 nome,
                 horario,
                 c,
-                receitas,
-                dieta,
-                nutricionista
+                receitas
         );
     }
 }

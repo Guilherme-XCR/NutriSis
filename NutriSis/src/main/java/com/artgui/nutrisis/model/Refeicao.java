@@ -27,12 +27,10 @@ public class Refeicao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
     private String nome;
     private String horario;
     private float calorias;
-    
-    @ManyToMany( fetch = FetchType.EAGER) //cascade = CascadeType.ALL,
+    @ManyToMany( fetch = FetchType.EAGER)//, cascade = CascadeType.ALL
     @JoinTable(
         name = "refeicao_receita",
         joinColumns = @JoinColumn(name = "refeicao_id"),
@@ -49,8 +47,7 @@ public class Refeicao implements Serializable {
             String nome,
             String horario,
             float calorias,
-            List<Receita> receitas,
-            Nutricionista nutricionista
+            List<Receita> receitas
     ){
             this.nome = nome;
             this.horario = horario;
@@ -64,8 +61,7 @@ public class Refeicao implements Serializable {
             String horario,
             float calorias,
             List<Receita> receitas,
-            Dieta dieta,
-            Nutricionista nutricionista
+            Dieta dieta
     ){
             this.nome = nome;
             this.horario = horario;

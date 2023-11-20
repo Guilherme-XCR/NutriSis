@@ -4,14 +4,18 @@ import com.artgui.nutrisis.model.Nutricionista;
 
 public class DlgMainNutricionista extends javax.swing.JDialog {
 
+    private Nutricionista nutricionista;
+
     public DlgMainNutricionista(java.awt.Frame parent, boolean modal, Nutricionista nutricionista) {
         super(parent, modal);
+        this.nutricionista = nutricionista;
         initComponents();
         this.lblNomeUser.setText(nutricionista.getNome());
     }
-    
+
     public DlgMainNutricionista(java.awt.Dialog parent, boolean modal, Nutricionista nutricionista) {
         super(parent, modal);
+        this.nutricionista = nutricionista;
         initComponents();
         this.lblNomeUser.setText(nutricionista.getNome());
     }
@@ -354,42 +358,42 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceitasActionPerformed
-        DlgReceitaNutricionista dlgReceitaNutricionista = new DlgReceitaNutricionista(this, true);
-        
+        DlgReceitaNutricionista dlgReceitaNutricionista = new DlgReceitaNutricionista(this, true, nutricionista);
+
         this.setVisible(false);
         dlgReceitaNutricionista.setLocationRelativeTo(this);
         dlgReceitaNutricionista.setVisible(true);
-        
+
         this.setVisible(true);
     }//GEN-LAST:event_btnReceitasActionPerformed
 
     private void btnDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDietasActionPerformed
-        DlgDietaNutricionista dlgDietaNutricionista = new DlgDietaNutricionista(this, true);
-        
+        DlgDietaNutricionista dlgDietaNutricionista = new DlgDietaNutricionista(this, true, nutricionista);
+
         this.setVisible(false);
         dlgDietaNutricionista.setLocationRelativeTo(this);
         dlgDietaNutricionista.setVisible(true);
-        
+
         this.setVisible(true);
     }//GEN-LAST:event_btnDietasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
         DlgConsultaNutricionista dlgConsultaNutricionista = new DlgConsultaNutricionista(this, true);
-        
+
         this.setVisible(false);
         dlgConsultaNutricionista.setLocationRelativeTo(this);
         dlgConsultaNutricionista.setVisible(true);
-        
+
         this.setVisible(true);
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnAcompanhamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcompanhamentosActionPerformed
         DlgAcompanhamentoNutricionista AcompanhamentoNutricionista = new DlgAcompanhamentoNutricionista(this, true);
-        
+
         this.setVisible(false);
         AcompanhamentoNutricionista.setLocationRelativeTo(this);
         AcompanhamentoNutricionista.setVisible(true);
-        
+
         this.setVisible(true);
     }//GEN-LAST:event_btnAcompanhamentosActionPerformed
 

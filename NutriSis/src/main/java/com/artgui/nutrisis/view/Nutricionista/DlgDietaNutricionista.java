@@ -2,12 +2,12 @@ package com.artgui.nutrisis.view.Nutricionista;
 
 import com.artgui.nutrisis.controller.DietaController;
 import com.artgui.nutrisis.controller.RefeicaoController;
-import com.artgui.nutrisis.exceptions.DietaException;
-import com.artgui.nutrisis.exceptions.ReceitaException;
-import com.artgui.nutrisis.exceptions.RefeicaoException;
+import com.artgui.nutrisis.model.exceptions.DietaException;
+import com.artgui.nutrisis.model.exceptions.ReceitaException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Refeicao;
+import com.artgui.nutrisis.model.exceptions.IngredienteException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,24 +21,30 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
     private RefeicaoController refeicaoController;
     private DietaController dietaController;
 
+    private Nutricionista nutricionista;
+
     int idDietaEditando;
     List<Refeicao> refeicoes;
+    List<Refeicao> refeicoesExcluidas;
 
-    public DlgDietaNutricionista(java.awt.Dialog parent, boolean modal) {
+    public DlgDietaNutricionista(java.awt.Dialog parent, boolean modal, Nutricionista nutricionista) {
         super(parent, modal);
+
+        this.nutricionista = nutricionista;
 
         this.refeicaoController = new RefeicaoController();
         this.dietaController = new DietaController();
         this.idDietaEditando = -1;
         this.refeicoes = new ArrayList<>();
-
+        this.refeicoesExcluidas = new ArrayList<>();
+        
         initComponents();
 
         this.habilitarCampos(false);
         this.limparCampos();
         this.adicionarMascaraNosCampos();
+        
         dietaController.atualizarTabela(grdDietas);
-        refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
     }
 
     public void habilitarCampos(boolean flag) {
@@ -58,7 +64,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         this.fEdtDiasDuracao.setText("");
         this.edtDescricao.setText("");
 
-        this.refeicaoController.atualizarTabela(grdRefeicoes, new ArrayList<>());
+        this.refeicaoController.atualizarTabelaEdtExcluir(grdRefeicoes, new ArrayList<>());
     }
 
     public void preencherFormulario(Dieta dieta) {
@@ -66,7 +72,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         this.fEdtDiasDuracao.setText(dieta.getDiasDuracao() + "");
         this.edtDescricao.setText(dieta.getDescricao());
 
-        this.refeicaoController.atualizarTabela(grdRefeicoes, dieta.getRefeicoes());
+        this.refeicaoController.atualizarTabelaEdtExcluir(grdRefeicoes, dieta.getRefeicoes());
     }
 
     public void adicionarMascaraNosCampos() {
@@ -100,54 +106,53 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
     }
 
     private void editarRefeicao() {
-        Refeicao refeicaoEditando = (Refeicao) this.getObjetoSelecionadoNaGridRefeicao();
+        Refeicao refeicao = (Refeicao) this.getObjetoSelecionadoNaGridRefeicao();
+        Refeicao refeicaoRetonar = new Refeicao();
+        refeicaoRetonar.copy(refeicao);
+        
+        if(refeicao != null){
+            refeicaoRetonar.copy(refeicao);
 
-        if (refeicaoEditando == null) {
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        } else {
+            DlgRefeicaoNutricionista dlgRefeicaoNutricionista = new DlgRefeicaoNutricionista(this, true, refeicao, true);
+            dlgRefeicaoNutricionista.setLocationRelativeTo(this);
+            dlgRefeicaoNutricionista.setVisible(true);
+            
+            if (refeicaoRetonar.getId() != -1) {
+ 
+                refeicao.copy(refeicaoRetonar);
+                refeicaoController.atualizarTabelaEdtExcluir(grdRefeicoes, refeicoes);
 
-            Refeicao refeicaoRetonar = new Refeicao();
-            refeicaoRetonar.copy(refeicaoEditando);
-
-            DlgReceitaNutricionista dlgReceitaNutricionista = new DlgReceitaNutricionista(this, true);
-            dlgReceitaNutricionista.setLocationRelativeTo(this);
-            dlgReceitaNutricionista.setVisible(true);
-
-            if (refeicaoRetonar.getId() == -1) {
-                JOptionPane.showMessageDialog(this, "Edição cancelada");
             } else {
-                refeicaoEditando.setNome(refeicaoRetonar.getNome());
-                refeicaoEditando.setHorario(refeicaoRetonar.getHorario());
-                refeicaoEditando.setCalorias(refeicaoRetonar.getCalorias());
-                refeicaoEditando.setReceitas(refeicaoRetonar.getReceitas());
-                refeicaoEditando.setDieta(refeicaoRetonar.getDieta());
-
-                refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
+                JOptionPane.showMessageDialog(this, "Edição cancelada");
             }
+            
+        }else {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         }
+        
+        tabsDados.setSelectedComponent(panFormulario);
     }
 
     private void excluirRefeicao() {
+        
         Refeicao refeicao = (Refeicao) this.getObjetoSelecionadoNaGridRefeicao();
 
         if (refeicao == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         } else {
-//            try {
-//                Refeicao r = refeicaoController.buscar(refeicao);
-//                if (r != null) {
-//                    refeicaoController.excluir(refeicao);
-//                }
-//                JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-//            } catch (RefeicaoException ex) {
-//                JOptionPane.showMessageDialog(this, ex.getMessage());
-//            }
-            refeicoes.remove(refeicao);
-            refeicoes.remove(refeicao);
+            try {
+                if (refeicao.getId() > 0) {
+                    refeicoesExcluidas.add(refeicao);
+                }
 
-            refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
-
+                refeicoes.remove(refeicao);
+                refeicaoController.atualizarTabelaEdtExcluir(grdRefeicoes, refeicoes);
+            } catch (IngredienteException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
         }
+
+        tabsDados.setSelectedComponent(panFormulario);
     }
 
     @SuppressWarnings("unchecked")
@@ -207,7 +212,6 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         panBody.setBackground(new java.awt.Color(71, 71, 71));
 
         tabsDados.setBackground(new java.awt.Color(204, 204, 204));
-        tabsDados.setForeground(new java.awt.Color(0, 0, 0));
 
         panTodasAsDietas.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -218,20 +222,15 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         grdDietas.setForeground(new java.awt.Color(255, 255, 255));
         grdDietas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(grdDietas);
 
-        btnNovo.setBackground(new java.awt.Color(255, 255, 255));
         btnNovo.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnNovo.setForeground(new java.awt.Color(0, 0, 0));
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,9 +238,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
             }
         });
 
-        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(0, 0, 0));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,9 +246,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
             }
         });
 
-        btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnExcluir.setForeground(new java.awt.Color(0, 0, 0));
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,9 +254,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
             }
         });
 
-        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
         btnVoltar.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnVoltar.setForeground(new java.awt.Color(0, 0, 0));
         btnVoltar.setText("voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,7 +281,6 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
 
         edtPesquisa.setBackground(new java.awt.Color(204, 204, 204));
         edtPesquisa.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtPesquisa.setForeground(new java.awt.Color(0, 0, 0));
         edtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 edtPesquisaKeyReleased(evt);
@@ -367,31 +359,25 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
 
         edtNome.setBackground(new java.awt.Color(204, 204, 204));
         edtNome.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtNome.setForeground(new java.awt.Color(0, 0, 0));
         edtNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
 
         fEdtDiasDuracao.setBackground(new java.awt.Color(204, 204, 204));
         fEdtDiasDuracao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
-        fEdtDiasDuracao.setForeground(new java.awt.Color(0, 0, 0));
         fEdtDiasDuracao.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
 
         edtDescricao.setBackground(new java.awt.Color(204, 204, 204));
         edtDescricao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtDescricao.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtDescricao.setForeground(new java.awt.Color(0, 0, 0));
         jScrollPane2.setViewportView(edtDescricao);
 
         grdRefeicoes.setBackground(new java.awt.Color(51, 51, 51));
         grdRefeicoes.setForeground(new java.awt.Color(255, 255, 255));
         grdRefeicoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         grdRefeicoes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -408,7 +394,6 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
 
         btnAdicionarRefeicoes.setBackground(new java.awt.Color(216, 229, 205));
         btnAdicionarRefeicoes.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        btnAdicionarRefeicoes.setForeground(new java.awt.Color(0, 0, 0));
         btnAdicionarRefeicoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconRefeçoes.png"))); // NOI18N
         btnAdicionarRefeicoes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnAdicionarRefeicoes.addActionListener(new java.awt.event.ActionListener() {
@@ -460,9 +445,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
 
         panBotoes.setBackground(new java.awt.Color(51, 51, 51));
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -470,9 +453,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -563,6 +544,7 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
         this.habilitarCampos(true);
         this.limparCampos();
         this.idDietaEditando = -1;
+        this.refeicoes = new ArrayList<>();
         this.tabsDados.setSelectedComponent(panFormulario);
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -576,6 +558,10 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
             this.habilitarCampos(true);
             this.preencherFormulario(dieta);
             this.idDietaEditando = dieta.getId();
+            this.refeicoes = dieta.getRefeicoes();
+            this.refeicoesExcluidas = new ArrayList<>();
+            this.refeicaoController.atualizarTabelaEdtExcluir(grdRefeicoes, refeicoes);
+
             this.tabsDados.setSelectedComponent(panFormulario);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -628,14 +614,15 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Criação cancelada");
         } else {
             refeicoes.add(refeicao);
-            refeicaoController.atualizarTabela(grdRefeicoes, refeicoes);
+            refeicaoController.atualizarTabelaEdtExcluir(grdRefeicoes, refeicoes);
         }
     }//GEN-LAST:event_btnAdicionarRefeicoesActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Nutricionista nutricionista = new Nutricionista("teste", "teste@teste", "senhateste", "cpfTeste", "teste", "teste", "teste");
 
         try {
+            
+            
             if (idDietaEditando > 0) {
                 dietaController.atualizar(
                         idDietaEditando,
@@ -654,6 +641,13 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
                         nutricionista
                 );
             }
+            
+            for(Refeicao r: refeicoesExcluidas){
+                refeicaoController.excluir(r);
+            }
+            
+            refeicoesExcluidas = new ArrayList<>();
+            
             idDietaEditando = -1;
             dietaController.atualizarTabela(grdDietas);
             this.habilitarCampos(false);
@@ -681,7 +675,6 @@ public class DlgDietaNutricionista extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_grdRefeicoesMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarRefeicoes;

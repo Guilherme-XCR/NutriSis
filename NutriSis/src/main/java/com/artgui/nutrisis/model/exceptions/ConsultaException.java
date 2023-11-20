@@ -1,4 +1,4 @@
-package com.artgui.nutrisis.exceptions;
+package com.artgui.nutrisis.model.exceptions;
 
 public class ConsultaException extends RuntimeException {
     

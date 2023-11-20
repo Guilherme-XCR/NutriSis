@@ -1,7 +1,7 @@
-package com.artgui.nutrisis.viewOlds;
+package com.artgui.nutrisis.view.viewOlds;
         
 import com.artgui.nutrisis.controller.ClienteController;
-import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
 import java.text.ParseException;
 import java.util.logging.Level;

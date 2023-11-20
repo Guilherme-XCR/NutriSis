@@ -1,5 +1,6 @@
  package com.artgui.nutrisis.model.dao;
 
+import com.artgui.nutrisis.model.exceptions.DietaException;
 import com.artgui.nutrisis.factory.DatabaseJPA;
 import com.artgui.nutrisis.model.Dieta;
 import java.util.List;
@@ -9,6 +10,24 @@ import java.util.List;
     public DietaDAO(){
     }
 
+    @Override
+    public boolean delete(int id) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+
+        Dieta dieta = this.entityManager.find(Dieta.class, id);
+        if (dieta != null) {
+            this.entityManager.remove(dieta);
+        } else {
+            this.entityManager.getTransaction().rollback();
+            throw new DietaException("Error - Dieta inexistente.");
+        }
+
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+        return true;
+    }
+    
     public Dieta find(int id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         Dieta d = this.entityManager.find(Dieta.class, id);

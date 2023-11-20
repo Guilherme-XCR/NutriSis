@@ -29,9 +29,15 @@ public class Usuario implements Serializable {
     protected String senha;
     protected String cpf;
     protected String telefone;
-        
-    // Construtor sem id
-    public Usuario(String nome, String email, String senha, String cpf, String telefone){
+    
+    /* Construtor sem o atributo ID. */
+    public Usuario(
+            String nome, 
+            String email, 
+            String senha, 
+            String cpf, 
+            String telefone
+    ){
         this.nome = nome;
         this.email = email;
         this.senha = senha;

@@ -1,18 +1,18 @@
 package com.artgui.nutrisis.controller.tablemodel;
 
-import com.artgui.nutrisis.model.Ingrediente;
+import com.artgui.nutrisis.model.Receita;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
 
 public class TMViewExcluirReceita extends AbstractTableModel {
 
-    private List<Ingrediente> lista;
+    private List<Receita> lista;
 
     private final int COL_NOME = 0;
-    private final int COL_EXCLUIR = 1;
+    private final int COL_REMOVER = 1;
 
-    public TMViewExcluirReceita(List<Ingrediente> lst) {
+    public TMViewExcluirReceita(List<Receita> lst) {
         this.lista = lst;
     }
 
@@ -28,15 +28,15 @@ public class TMViewExcluirReceita extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Ingrediente aux = new Ingrediente();
+        Receita aux = new Receita();
         if (lista.isEmpty()) {
             return aux;
         } else {
-            aux = (Ingrediente) lista.get(rowIndex);
+            aux = (Receita) lista.get(rowIndex);
             switch (columnIndex) {
                 case COL_NOME:
                     return aux.getNome();
-                case COL_EXCLUIR:
+                case COL_REMOVER:
                     return new ImageIcon(getClass().getResource("/images/iconDelete.png"));
                 default:
                     break;
@@ -47,7 +47,7 @@ public class TMViewExcluirReceita extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == COL_EXCLUIR;
+        return false;
     }
 
     @Override
@@ -55,8 +55,8 @@ public class TMViewExcluirReceita extends AbstractTableModel {
         switch (columnIndex) {
             case COL_NOME:
                 return "Nome";
-            case COL_EXCLUIR:
-                return "Excluir";
+            case COL_REMOVER:
+                return "Remover";
             default:
                 break;
         }
@@ -66,7 +66,7 @@ public class TMViewExcluirReceita extends AbstractTableModel {
     @Override
     public Class getColumnClass(int columnIndex){
        
-        if (columnIndex == COL_EXCLUIR) {
+        if (columnIndex == COL_REMOVER) {
             return ImageIcon.class;
         }
         return String.class;

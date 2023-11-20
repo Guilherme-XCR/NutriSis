@@ -1,6 +1,6 @@
 package com.artgui.nutrisis.controller;
 
-import com.artgui.nutrisis.exceptions.ReceitaException;
+import com.artgui.nutrisis.model.exceptions.ReceitaException;
 import com.artgui.nutrisis.model.Acompanhamento;
 import com.artgui.nutrisis.model.RegistroDiario;
 import com.artgui.nutrisis.model.dao.AcompanhamentoDAO;
@@ -50,7 +50,7 @@ public class AcompanhamentoController {
 
     public void excluir(Acompanhamento acompanhamento) {
         if (acompanhamento != null) {
-            repositorio.delete(acompanhamento);
+            repositorio.delete(acompanhamento.getId());
         } else {
             throw new ReceitaException("Error - Acompanhamento inexistente.");
         }

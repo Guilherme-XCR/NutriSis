@@ -23,29 +23,23 @@ import lombok.NoArgsConstructor;
 @Entity
 
 public class Receita implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
     private String nome;
     private String modoPreparo;
     private int tempoPreparo;
     private int porcoes;
     private String categoria;
-
     @ManyToMany(mappedBy = "receitas")
     private List<Refeicao> refeicoes;
-    
-    @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "receita",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Ingrediente> ingredientes;
-    
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
-    
-//    @ManyToMany(mappedBy = "receitasRecomendadas")
-//    private List<Consulta> consultas;
-    
+
     //construtor sem id e sem refeicao
     public Receita(
             String nome, 
@@ -63,7 +57,6 @@ public class Receita implements Serializable {
         this.categoria = categoria;
         this.ingredientes = ingredientes;
         this.nutricionista = nutricionista;
-        
     }
     
     public void copy(Receita outro){
@@ -77,18 +70,10 @@ public class Receita implements Serializable {
         this.nutricionista = outro.getNutricionista();
     }
     
-    //add refeicao
     public void addRefeicao(Refeicao refeicao){
         this.refeicoes.add(refeicao);
     }
     public void removeRefeicao(Refeicao refeicao){
         this.refeicoes.remove(refeicao);
     }
-//    public void addConsulta(Consulta consulta) {
-//        this.consultas.add(consulta);
-//    }
-//
-//    public void removeConsulta(Consulta consulta) {
-//        this.consultas.remove(consulta);
-//    }
 }

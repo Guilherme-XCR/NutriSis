@@ -1,8 +1,8 @@
-package com.artgui.nutrisis.viewOlds;
+package com.artgui.nutrisis.view.viewOlds;
 
 
 
-import com.artgui.nutrisis.viewOlds.DlgCRUDReceita;
+import com.artgui.nutrisis.view.viewOlds.DlgCRUDReceita;
 
 /**
  *

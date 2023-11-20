@@ -2,8 +2,8 @@ package com.artgui.nutrisis.view.Nutricionista;
 
 import com.artgui.nutrisis.controller.IngredienteController;
 import com.artgui.nutrisis.controller.ReceitaController;
-import com.artgui.nutrisis.exceptions.IngredienteException;
-import com.artgui.nutrisis.exceptions.ReceitaException;
+import com.artgui.nutrisis.model.exceptions.IngredienteException;
+import com.artgui.nutrisis.model.exceptions.ReceitaException;
 import com.artgui.nutrisis.model.Ingrediente;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Receita;
@@ -17,32 +17,37 @@ import javax.swing.text.MaskFormatter;
 
 public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
-    IngredienteController ingredienteController;
-    ReceitaController receitaController;
+    private IngredienteController ingredienteController;
+    private ReceitaController receitaController;
 
-    int idReceitaEditando;
-    List<Ingrediente> ingredientes;
+    private Nutricionista nutricionista;
 
-    public DlgReceitaNutricionista(java.awt.Dialog parent, boolean modal) {
+    private int idReceitaEditando;
+    private List<Ingrediente> ingredientes;
+    private List<Ingrediente> ingredientesExcluidos;
+
+    public DlgReceitaNutricionista(java.awt.Dialog parent, boolean modal, Nutricionista nutricionista) {
 
         super(parent, modal);
 
-        receitaController = new ReceitaController();
-        ingredienteController = new IngredienteController();
-        idReceitaEditando = -1;
-        ingredientes = new ArrayList<>();
+        this.receitaController = new ReceitaController();
+        this.ingredienteController = new IngredienteController();
+        this.nutricionista = nutricionista;
+        this.idReceitaEditando = -1;
+        this.ingredientes = new ArrayList<>();
+        this.ingredientesExcluidos = new ArrayList<>();
 
         initComponents();
 
-        this.habilitarCampos(false);
         this.limparCampos();
+        this.habilitarCampos(false);
         this.adicionarMascaraNosCampos();
-        receitaController.atualizarTabela(grdReceitas);
-        ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, ingredientes);
 
+        receitaController.atualizarTabela(grdReceitas);
     }
 
-    public void habilitarCampos(boolean flag) {
+    private void habilitarCampos(boolean flag) {
+
         this.edtNome.setEnabled(flag);
         this.fEdtTempoPreparo.setEnabled(flag);
         this.fEdtPorcoes.setEnabled(flag);
@@ -56,7 +61,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         this.btnSalvar.setEnabled(flag);
     }
 
-    public void limparCampos() {
+    private void limparCampos() {
         this.edtNome.setText("");
         this.fEdtTempoPreparo.setText("");
         this.fEdtPorcoes.setText("");
@@ -66,7 +71,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         this.ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, new ArrayList<>());
     }
 
-    public void preencherFormulario(Receita receita) {
+    private void preencherFormulario(Receita receita) {
         this.edtNome.setText(receita.getNome());
         this.fEdtTempoPreparo.setText(receita.getTempoPreparo() + "");
         this.fEdtPorcoes.setText(receita.getPorcoes() + "");
@@ -76,7 +81,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         this.ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, receita.getIngredientes());
     }
 
-    public void adicionarMascaraNosCampos() {
+    private void adicionarMascaraNosCampos() {
 
         try {
             MaskFormatter tempoPreparoFormatter = new MaskFormatter("########");
@@ -111,42 +116,53 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
     private void editarIngrediente() {
         Ingrediente ingrediente = (Ingrediente) this.getObjetoSelecionadoNaGridIngrediente();
         Ingrediente ingredienteRetonar = new Ingrediente();
+
+        if (ingrediente != null) {
         ingredienteRetonar.copy(ingrediente);
-        if (ingrediente == null) {
-            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
-        } else {
+
             DlgIngredienteNutricionista dlgIngredienteNutricionista = new DlgIngredienteNutricionista(this, true, ingredienteRetonar, true);
             dlgIngredienteNutricionista.setLocationRelativeTo(this);
             dlgIngredienteNutricionista.setVisible(true);
-            if (ingredienteRetonar.getId() == -1) {
-                JOptionPane.showMessageDialog(this, "Edição cancelada");
-            } else {
+
+            if (ingredienteRetonar.getId() != -1) {
+ 
                 ingrediente.setNome(ingredienteRetonar.getNome());
                 ingrediente.setUnidadeMedida(ingredienteRetonar.getUnidadeMedida());
                 ingrediente.setQuantidade(ingredienteRetonar.getQuantidade());
                 ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, ingredientes);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Edição cancelada");
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         }
+
         tabsDados.setSelectedComponent(panFormulario);
     }
 
     private void excluirIngrediente() {
+
         Ingrediente ingrediente = (Ingrediente) this.getObjetoSelecionadoNaGridIngrediente();
+
         if (ingrediente == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         } else {
             try {
-                ingredienteController.excluir(ingrediente);
-                ingredientes.remove(ingrediente);
+                if (ingrediente.getId() > 0) {
+                    ingredientesExcluidos.add(ingrediente);
+                }
+
                 ingredientes.remove(ingrediente);
                 ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, ingredientes);
             } catch (IngredienteException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         }
+
         tabsDados.setSelectedComponent(panFormulario);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -207,7 +223,6 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         panBody.setBackground(new java.awt.Color(71, 71, 71));
 
         tabsDados.setBackground(new java.awt.Color(204, 204, 204));
-        tabsDados.setForeground(new java.awt.Color(0, 0, 0));
 
         panTodasAsReceitas.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -218,20 +233,15 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
         grdReceitas.setForeground(new java.awt.Color(255, 255, 255));
         grdReceitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(grdReceitas);
 
-        btnNovo.setBackground(new java.awt.Color(255, 255, 255));
         btnNovo.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnNovo.setForeground(new java.awt.Color(0, 0, 0));
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,9 +249,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
             }
         });
 
-        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(0, 0, 0));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,9 +257,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
             }
         });
 
-        btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnExcluir.setForeground(new java.awt.Color(0, 0, 0));
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,9 +265,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
             }
         });
 
-        btnVoltar.setBackground(new java.awt.Color(255, 255, 255));
         btnVoltar.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnVoltar.setForeground(new java.awt.Color(0, 0, 0));
         btnVoltar.setText("voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,7 +292,6 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
         edtPesquisa.setBackground(new java.awt.Color(204, 204, 204));
         edtPesquisa.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtPesquisa.setForeground(new java.awt.Color(0, 0, 0));
         edtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 edtPesquisaKeyReleased(evt);
@@ -367,41 +370,33 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
         edtNome.setBackground(new java.awt.Color(204, 204, 204));
         edtNome.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtNome.setForeground(new java.awt.Color(0, 0, 0));
         edtNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
 
         fEdtTempoPreparo.setBackground(new java.awt.Color(204, 204, 204));
         fEdtTempoPreparo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tempo (Min)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
-        fEdtTempoPreparo.setForeground(new java.awt.Color(0, 0, 0));
         fEdtTempoPreparo.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
 
         fEdtPorcoes.setBackground(new java.awt.Color(204, 204, 204));
         fEdtPorcoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Porções", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
-        fEdtPorcoes.setForeground(new java.awt.Color(0, 0, 0));
         fEdtPorcoes.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
 
         edtCategoria.setBackground(new java.awt.Color(204, 204, 204));
         edtCategoria.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtCategoria.setForeground(new java.awt.Color(0, 0, 0));
         edtCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
 
         edtModoPreparo.setBackground(new java.awt.Color(204, 204, 204));
         edtModoPreparo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modo de Preparo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtModoPreparo.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtModoPreparo.setForeground(new java.awt.Color(0, 0, 0));
         jScrollPane2.setViewportView(edtModoPreparo);
 
         grdIngredientes.setBackground(new java.awt.Color(51, 51, 51));
         grdIngredientes.setForeground(new java.awt.Color(255, 255, 255));
         grdIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         grdIngredientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -418,7 +413,6 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
         btnAdicionarIngrediente.setBackground(new java.awt.Color(216, 229, 205));
         btnAdicionarIngrediente.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        btnAdicionarIngrediente.setForeground(new java.awt.Color(0, 0, 0));
         btnAdicionarIngrediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconIgredientes.png"))); // NOI18N
         btnAdicionarIngrediente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnAdicionarIngrediente.addActionListener(new java.awt.event.ActionListener() {
@@ -478,9 +472,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
         panBotoes.setBackground(new java.awt.Color(51, 51, 51));
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -488,9 +480,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -596,6 +586,9 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
             this.preencherFormulario(receita);
             this.idReceitaEditando = receita.getId();
             this.ingredientes = receita.getIngredientes();
+            this.ingredientesExcluidos = new ArrayList<>();
+            this.ingredienteController.atualizarTabelaEdtExcluir(grdIngredientes, ingredientes);
+
             this.tabsDados.setSelectedComponent(panFormulario);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -626,17 +619,8 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Nutricionista nutricionista = new Nutricionista(
-                "teste", 
-                "teste@teste", 
-                "senhateste", 
-                "cpfTeste", 
-                "teste", 
-                "teste", 
-                "teste"
-        );
-
         try {
+   
             if (idReceitaEditando > 0) {
                 receitaController.atualizar(
                         idReceitaEditando,
@@ -658,10 +642,19 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
                         nutricionista
                 );
             }
+
+            for (Ingrediente i : ingredientesExcluidos) {
+                ingredienteController.excluir(i);
+            }
+
+            ingredientesExcluidos = new ArrayList<>();
+
             idReceitaEditando = -1;
             receitaController.atualizarTabela(grdReceitas);
             this.habilitarCampos(false);
             this.limparCampos();
+            tabsDados.setSelectedComponent(panTodasAsReceitas);
+
         } catch (ReceitaException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -671,6 +664,7 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.limparCampos();
         this.habilitarCampos(false);
+        this.receitaController.atualizarTabela(this.grdReceitas);
         this.tabsDados.setSelectedComponent(this.panTodasAsReceitas);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -705,9 +699,9 @@ public class DlgReceitaNutricionista extends javax.swing.JDialog {
 
         if (evt.getClickCount() == 2) {
             int aux = grdIngredientes.getSelectedColumn();
-            if (aux == 3){
+            if (aux == 3) {
                 editarIngrediente();
-            }else if (aux == 4){
+            } else if (aux == 4) {
                 excluirIngrediente();
             }
         }

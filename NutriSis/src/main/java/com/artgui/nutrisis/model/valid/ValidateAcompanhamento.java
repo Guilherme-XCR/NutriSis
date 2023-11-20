@@ -1,6 +1,6 @@
 package com.artgui.nutrisis.model.valid;
 
-import com.artgui.nutrisis.exceptions.ReceitaException;
+import com.artgui.nutrisis.model.exceptions.AcompanhamentoException;
 import com.artgui.nutrisis.model.Acompanhamento;
 import com.artgui.nutrisis.model.RegistroDiario;
 import java.util.List;
@@ -15,11 +15,11 @@ public class ValidateAcompanhamento {
     ){
 
         if (dataInicio == null || dataInicio.isEmpty()) {
-            throw new ReceitaException("Data de inicio não pode estar em branco.");
+            throw new AcompanhamentoException("Data de inicio não pode estar em branco.");
         }
         
         if (dataFinal == null || dataFinal.isEmpty()) {
-            throw new ReceitaException("Data de final não pode estar em branco.");
+            throw new AcompanhamentoException("Data de final não pode estar em branco.");
         }
         
     return new Acompanhamento(dataInicio, dataFinal, registrosDiarios);

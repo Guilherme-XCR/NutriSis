@@ -1,7 +1,7 @@
 package com.artgui.nutrisis.view.Register;
 
 import com.artgui.nutrisis.controller.ClienteController;
-import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.view.Cliente.DlgMainCliente;
 import java.text.ParseException;
@@ -66,7 +66,6 @@ public class DlgRegister extends javax.swing.JDialog {
         fEdtPeso = new javax.swing.JFormattedTextField();
         fEdtDataNascimento = new javax.swing.JFormattedTextField();
         fEdtNumeroCartao = new javax.swing.JFormattedTextField();
-        edtSenhaCartao = new javax.swing.JPasswordField();
         btnSair = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
 
@@ -110,9 +109,7 @@ public class DlgRegister extends javax.swing.JDialog {
         lblGenero.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblGenero.setPreferredSize(new java.awt.Dimension(150, 40));
 
-        comboBoxGenero.setBackground(new java.awt.Color(255, 255, 255));
         comboBoxGenero.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        comboBoxGenero.setForeground(new java.awt.Color(0, 0, 0));
         comboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha", "Masculino", "Feminino", "Outro" }));
         comboBoxGenero.setPreferredSize(new java.awt.Dimension(294, 40));
 
@@ -149,10 +146,6 @@ public class DlgRegister extends javax.swing.JDialog {
         fEdtNumeroCartao.setName(""); // NOI18N
         fEdtNumeroCartao.setPreferredSize(new java.awt.Dimension(294, 40));
 
-        edtSenhaCartao.setFont(new java.awt.Font("Cascadia Mono", 0, 12)); // NOI18N
-        edtSenhaCartao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha do Cartão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Code", 0, 10), new java.awt.Color(0, 204, 51))); // NOI18N
-        edtSenhaCartao.setPreferredSize(new java.awt.Dimension(294, 40));
-
         javax.swing.GroupLayout panInputsLayout = new javax.swing.GroupLayout(panInputs);
         panInputs.setLayout(panInputsLayout);
         panInputsLayout.setHorizontalGroup(
@@ -160,6 +153,7 @@ public class DlgRegister extends javax.swing.JDialog {
             .addGroup(panInputsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtNomeCompleto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                     .addComponent(edtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -178,11 +172,7 @@ public class DlgRegister extends javax.swing.JDialog {
                                 .addComponent(lblGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comboBoxGenero, 0, 0, Short.MAX_VALUE))
-                            .addComponent(fEdtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
-                    .addGroup(panInputsLayout.createSequentialGroup()
-                        .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtSenhaCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addComponent(fEdtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panInputsLayout.setVerticalGroup(
@@ -209,17 +199,11 @@ public class DlgRegister extends javax.swing.JDialog {
                     .addComponent(fEdtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fEdtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panInputsLayout.createSequentialGroup()
-                        .addComponent(edtSenhaCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(fEdtNumeroCartao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        btnSair.setBackground(new java.awt.Color(255, 255, 255));
         btnSair.setFont(new java.awt.Font("Cascadia Code", 1, 24)); // NOI18N
-        btnSair.setForeground(new java.awt.Color(0, 0, 0));
         btnSair.setText("Sair");
         btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSair.setFocusable(false);
@@ -229,9 +213,7 @@ public class DlgRegister extends javax.swing.JDialog {
             }
         });
 
-        btnRegistrar.setBackground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setFont(new java.awt.Font("Cascadia Code", 1, 48)); // NOI18N
-        btnRegistrar.setForeground(new java.awt.Color(0, 0, 0));
         btnRegistrar.setText("Registrar");
         btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrar.setFocusable(false);
@@ -310,8 +292,7 @@ public class DlgRegister extends javax.swing.JDialog {
                         fEdtPeso.getText(),
                         comboBoxGenero.getSelectedItem() + "",
                         fEdtDataNascimento.getText(),
-                        fEdtNumeroCartao.getText(),
-                        edtSenhaCartao.getText()
+                        fEdtNumeroCartao.getText()
                 );
 
                 this.cliente = clienteController.buscarPorEmail(edtEmail.getText());
@@ -343,7 +324,6 @@ public class DlgRegister extends javax.swing.JDialog {
     private javax.swing.JTextField edtEmail;
     private javax.swing.JTextField edtNomeCompleto;
     private javax.swing.JPasswordField edtSenha;
-    private javax.swing.JPasswordField edtSenhaCartao;
     private javax.swing.JFormattedTextField fEdtAltura;
     private javax.swing.JFormattedTextField fEdtCpf;
     private javax.swing.JFormattedTextField fEdtDataNascimento;

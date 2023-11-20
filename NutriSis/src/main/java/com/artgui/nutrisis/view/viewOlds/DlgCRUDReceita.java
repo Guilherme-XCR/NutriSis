@@ -1,13 +1,13 @@
-package com.artgui.nutrisis.viewOlds;
+package com.artgui.nutrisis.view.viewOlds;
 
 import com.artgui.nutrisis.controller.IngredienteController;
 import com.artgui.nutrisis.controller.ReceitaController;
-import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Ingrediente;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.Receita;
 
-import com.artgui.nutrisis.view.DlgCRUDIngrediente;
+import com.artgui.nutrisis.view.viewOlds.DlgCRUDIngrediente;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
-package com.artgui.nutrisis.viewOlds;
+package com.artgui.nutrisis.view.viewOlds;
 
 import com.artgui.nutrisis.controller.DietaController;
 import com.artgui.nutrisis.controller.ReceitaController;
 import com.artgui.nutrisis.controller.RefeicaoController;
-import com.artgui.nutrisis.exceptions.DietaException;
+import com.artgui.nutrisis.model.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Refeicao;
 import java.util.ArrayList;

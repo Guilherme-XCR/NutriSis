@@ -1,5 +1,6 @@
 package com.artgui.nutrisis.model.dao;
 
+import com.artgui.nutrisis.model.exceptions.AcompanhamentoException;
 import com.artgui.nutrisis.factory.DatabaseJPA;
 import com.artgui.nutrisis.model.Acompanhamento;
 import java.util.List;
@@ -8,6 +9,25 @@ public class AcompanhamentoDAO extends Dao<Acompanhamento> {
     public AcompanhamentoDAO(){
     }
 
+    @Override
+    public boolean delete(int id) {
+        this.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        this.entityManager.getTransaction().begin();
+
+        Acompanhamento acompanhamento = this.entityManager.find(Acompanhamento.class, id);
+        if (acompanhamento != null) {
+            this.entityManager.remove(acompanhamento);
+        } else {
+            this.entityManager.getTransaction().rollback();
+            throw new AcompanhamentoException("Error - Acompanhamento inexistente.");
+        }
+
+        this.entityManager.getTransaction().commit();
+        this.entityManager.close();
+        return true;
+    }
+
+    
     @Override
     public Acompanhamento find(int id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();

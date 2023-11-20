@@ -1,6 +1,6 @@
 package com.artgui.nutrisis.controller;
 
-import com.artgui.nutrisis.exceptions.ClienteException;
+import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.dao.NutricionistaDAO;
 import com.artgui.nutrisis.model.valid.ValidateNutricionista;
@@ -67,7 +67,7 @@ public class NutricionistaController {
 
     public void excluir(Nutricionista nutricionista) {
         if (nutricionista != null) {
-            repositorio.delete(nutricionista);
+            repositorio.delete(nutricionista.getId());
         } else {
             throw new ClienteException("Error - Nutricionista inexistente.");
         }

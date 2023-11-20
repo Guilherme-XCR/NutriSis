@@ -1,6 +1,5 @@
 package com.artgui.nutrisis.controller.tablemodel;
 
-import com.artgui.nutrisis.model.Ingrediente;
 import com.artgui.nutrisis.model.Refeicao;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -51,7 +50,7 @@ public class TMViewEdtExcluirRefeicao extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == COL_EXCLUIR || columnIndex == COL_EDITAR;
+        return false;
     }
 
     @Override
