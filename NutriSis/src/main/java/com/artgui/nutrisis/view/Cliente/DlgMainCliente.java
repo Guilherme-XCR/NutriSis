@@ -407,7 +407,7 @@ public class DlgMainCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDietasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        DlgConsultaCliente dlgConsultaCliente = new DlgConsultaCliente(this, true);
+        DlgConsultaCliente dlgConsultaCliente = new DlgConsultaCliente(this, true, cliente);
 
         this.setVisible(false);
         dlgConsultaCliente.setLocationRelativeTo(this);

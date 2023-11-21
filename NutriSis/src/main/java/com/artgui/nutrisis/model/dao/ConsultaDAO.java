@@ -1,6 +1,7 @@
 package com.artgui.nutrisis.model.dao;
 
 import com.artgui.nutrisis.factory.DatabaseJPA;
+import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.model.Consulta;
 import java.util.List;
 
@@ -23,20 +24,33 @@ public Consulta find(int id) {
         this.entityManager.close();
         return lst;
     }
+
+    @Override
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
     
-    public List<Consulta> filterByData(String data) {
+    public List<Consulta> filterByClienteAndData(Cliente cliente, String data) {
         super.entityManager = DatabaseJPA.getInstance().getEntityManager();
-        jpql = "SELECT c FROM Consulta c WHERE c.data like :data";
+        jpql = "SELECT c FROM Consulta c WHERE c.data like :data AND c.cliente.id like :clienteId";
         qry = super.entityManager.createQuery(jpql, Consulta.class);
         qry.setParameter("data", data+"%");
+        qry.setParameter("clienteId", cliente.getId());
+
         List<Consulta> lst = qry.getResultList();
         super.entityManager.close();
         return lst;
     }
+    
+    public List<Consulta> filterByCliente(Cliente cliente) {
+        super.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = "SELECT c FROM Consulta c WHERE c.cliente.id like :clienteId";
+        qry = super.entityManager.createQuery(jpql, Consulta.class);
+        qry.setParameter("clienteId", cliente.getId());
 
-    @Override
-    public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Consulta> lst = qry.getResultList();
+        super.entityManager.close();
+        return lst;
     }
- 
+    
 }

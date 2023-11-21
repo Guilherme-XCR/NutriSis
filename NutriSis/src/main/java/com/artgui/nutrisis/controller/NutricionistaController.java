@@ -1,9 +1,13 @@
 package com.artgui.nutrisis.controller;
 
+import com.artgui.nutrisis.controller.tablemodel.TMViewNutricionista;
+import com.artgui.nutrisis.controller.tablemodel.TMViewReceita;
 import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.dao.NutricionistaDAO;
 import com.artgui.nutrisis.model.valid.ValidateNutricionista;
+import java.util.List;
+import javax.swing.JTable;
 
 public class NutricionistaController {
 
@@ -83,4 +87,18 @@ public class NutricionistaController {
         }
         return null;
     }
+    
+    
+    public void atualizarTabela(JTable grd){
+        TMViewNutricionista tmNutricionista = new TMViewNutricionista(repositorio.findAll());
+        grd.setModel(tmNutricionista);
+    }
+    
+    public void atualizarTabela(JTable grd, String nome) {
+        List lst = repositorio.filterByName(nome);
+
+        TMViewNutricionista tableModel = new TMViewNutricionista(lst);
+        grd.setModel(tableModel);
+    }
+    
 }

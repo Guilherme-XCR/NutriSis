@@ -1,14 +1,15 @@
 package com.artgui.nutrisis.controller;
 
+import com.artgui.nutrisis.controller.tablemodel.TMViewConsulta;
 import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.model.Consulta;
 import com.artgui.nutrisis.model.Dieta;
 import com.artgui.nutrisis.model.Nutricionista;
-import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.dao.ConsultaDAO;
 import com.artgui.nutrisis.model.exceptions.ConsultaException;
 import com.artgui.nutrisis.model.valid.ValidateConsulta;
 import java.util.List;
+import javax.swing.JTable;
 
 public class ConsultaController {
 
@@ -20,24 +21,18 @@ public class ConsultaController {
 
     public void cadastrar(
             String data,
-            String resumo,
-            String status,
-            List<Dieta> dietasRecomendadas,
-            List<Receita> receitaRecomendadas,
             Cliente cliente,
             Nutricionista nutricionista
     ) {
         ValidateConsulta valid = new ValidateConsulta();
         Consulta consulta = valid.validaCamposEntrada(
                 data,
-                resumo,
-                status,
+                null,
+                "Marcada",
                 cliente,
                 nutricionista
         );
-
         
-
         repositorio.save(consulta);
     }
 
@@ -47,7 +42,6 @@ public class ConsultaController {
             String resumo,
             String status,
             List<Dieta> dietasRecomendadas,
-            List<Receita> receitaRecomendadas,
             Cliente cliente,
             Nutricionista nutricionista
     ) {
@@ -60,7 +54,6 @@ public class ConsultaController {
                 nutricionista
         );
         consulta.setId(id);
-
     
         repositorio.update(consulta);
     }
@@ -72,5 +65,37 @@ public class ConsultaController {
             throw new ConsultaException("Error - Consulta inexistente.");
         }
     }
+    
+    public void atualizarTabela(JTable grd, Cliente cliente, String data){
+        
+        List lst = repositorio.filterByClienteAndData(cliente, data);
+        
+        TMViewConsulta tmDieta = new TMViewConsulta(lst);
+        grd.setModel(tmDieta);
+    }
+    
+    public void atualizarTabela(JTable grd, Cliente cliente){
+        
+        List lst = repositorio.filterByCliente(cliente);
+        
+        TMViewConsulta tmDieta = new TMViewConsulta(lst);
+        grd.setModel(tmDieta);
+    }
 
+    public Consulta criar(
+            String data,
+            Cliente cliente,
+            Nutricionista nutricionista
+    ){
+        ValidateConsulta valid = new ValidateConsulta();
+        Consulta consulta = valid.validaCamposEntrada(
+                data,
+                null,
+                "Teste",
+                cliente,
+                nutricionista
+        );
+        
+        return consulta;
+    }
 }
