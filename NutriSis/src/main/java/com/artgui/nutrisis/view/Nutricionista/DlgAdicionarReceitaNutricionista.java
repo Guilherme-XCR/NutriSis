@@ -102,6 +102,11 @@ public class DlgAdicionarReceitaNutricionista extends javax.swing.JDialog {
 
             }
         ));
+        grdReceitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdReceitasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(grdReceitas);
 
         btnConfirmar.setBackground(new java.awt.Color(255, 255, 255));
@@ -193,6 +198,12 @@ public class DlgAdicionarReceitaNutricionista extends javax.swing.JDialog {
         this.receita.setId(-1);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void grdReceitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdReceitasMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.btnConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_grdReceitasMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

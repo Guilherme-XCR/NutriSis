@@ -3,29 +3,31 @@ package com.artgui.nutrisis.view.Cliente;
 import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Cliente;
+import java.awt.Dialog;
 import javax.swing.JOptionPane;
 
 public class DlgContaCliente extends javax.swing.JDialog {
-
+    
     Cliente cliente;
     ClienteController clienteController;
-    boolean isExcluirConta;
-
-    public DlgContaCliente(java.awt.Dialog parent, boolean modal, Cliente cliente, boolean isExcluirConta) {
+    Dialog dlg;
+    
+    public DlgContaCliente(java.awt.Dialog parent, boolean modal, Cliente cliente) {
         super(parent, modal);
-
+        
         this.cliente = cliente;
         this.clienteController = new ClienteController();
-        this.isExcluirConta = false;
-
+        this.dlg = parent;
+        
         initComponents();
-
+        
         this.adicionarMascaraNosCampos();
         this.preencherFormulario(cliente);
         this.habilitarCampos(false);
         this.btnSalvar.setEnabled(false);
+        this.atualizarInfoCliente();
     }
-
+    
     public void habilitarCampos(boolean flag) {
         this.edtNomeCompleto.setEnabled(flag);
         this.edtEmail.setEnabled(flag);
@@ -36,10 +38,10 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtPeso.setEnabled(flag);
         this.fEdtDataNascimento.setEnabled(flag);
         this.fEdtNumeroCartao.setEnabled(flag);
-
+        
         this.comboBoxGenero.setEnabled(flag);
     }
-
+    
     public void limparCampos() {
         this.edtNomeCompleto.setText("");
         this.edtEmail.setText("");
@@ -50,10 +52,10 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtPeso.setText("");
         this.fEdtDataNascimento.setText("");
         this.fEdtNumeroCartao.setText("");
-
+        
         this.comboBoxGenero.setSelectedIndex(0);
     }
-
+    
     public void preencherFormulario(Cliente cliente) {
         this.edtNomeCompleto.setText(cliente.getNome());
         this.edtEmail.setText(cliente.getEmail());
@@ -64,10 +66,10 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtPeso.setText(cliente.getPeso() + "");
         this.fEdtDataNascimento.setText(cliente.getDataNascimento());
         this.fEdtNumeroCartao.setText(cliente.getNumeroCartao());
-
+        
         this.comboBoxGenero.setSelectedItem(cliente.getGenero());
     }
-
+    
     public void adicionarMascaraNosCampos() {
 
 //        try {
@@ -81,7 +83,12 @@ public class DlgContaCliente extends javax.swing.JDialog {
 //            Logger.getLogger(DlgReceitaNutricionista.class.getName()).log(Level.SEVERE, null, ex);
 //        } 
     }
-
+    
+    private void atualizarInfoCliente() {
+        this.lblNomeUser.setText(cliente.getNome());
+        this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCartao());
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -504,7 +511,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.habilitarCampos(true);
         this.limparCampos();
         this.preencherFormulario(cliente);
-
+        
         this.btnEditar.setEnabled(false);
         this.btnSalvar.setEnabled(true);
 
@@ -527,6 +534,8 @@ public class DlgContaCliente extends javax.swing.JDialog {
                     fEdtNumeroCartao.getText(),
                     cliente.getSaldoCartao()
             );
+            cliente.setNome(edtNomeCompleto.getText());
+            this.atualizarInfoCliente();
         } catch (ClienteException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -538,43 +547,26 @@ public class DlgContaCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-
-        if (fEdtValor.getText() != null && fEdtValor.getText().replaceAll("\\s", "").isEmpty()) {
-
+        
+        if (fEdtValor.getText() != null && !fEdtValor.getText().isEmpty() && fEdtValor.getText().matches("^([0-9]*\\.[0-9]+|[0-9]+)$")) {
             float valor = Float.parseFloat(fEdtValor.getText());
             if (valor > 0.0f) {
-                
-                    cliente.setSaldoCartao(valor);
-
-                    try {
-                        clienteController.atualizar(
-                                cliente.getId(),
-                                cliente.getNome(),
-                                cliente.getEmail(),
-                                cliente.getSenha(),
-                                cliente.getSenha(),
-                                cliente.getCpf(),
-                                cliente.getTelefone(),
-                                cliente.getAltura() + "",
-                                cliente.getPeso() + "",
-                                cliente.getGenero(),
-                                cliente.getDataNascimento(),
-                                cliente.getNumeroCartao(),
-                                valor
-                        );
-                        JOptionPane.showMessageDialog(this, "R$ " + valor + " adicionados a sua conta.");
-
-                    } catch (ClienteException ex) {
-                        JOptionPane.showMessageDialog(this, ex.getMessage());
-                    }
-
-                } else {
+                try {
+                    clienteController.atualizarSaldo(cliente, valor);
+                    JOptionPane.showMessageDialog(this, "R$ " + valor + " adicionados a sua conta.");
+                    this.atualizarInfoCliente();
+                    cliente.setSaldoCartao(cliente.getSaldoCartao() + valor);
+                    this.fEdtValor.setText("");
+                } catch (ClienteException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+            } else {
                 JOptionPane.showMessageDialog(this, "Valor inválido");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Valor não pode estar vazio.");
         }
-
+        
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -585,15 +577,14 @@ public class DlgContaCliente extends javax.swing.JDialog {
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.OK_OPTION) {
-
+            
             try {
                 clienteController.excluir(cliente);
                 JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
             } catch (ClienteException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
-            this.isExcluirConta = true;
-            this.dispose();
+            this.dlg.dispose();
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 

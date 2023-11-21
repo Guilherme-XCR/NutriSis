@@ -1,33 +1,38 @@
 package com.artgui.nutrisis.view.Cliente;
 
+import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.model.Cliente;
 
 public class DlgMainCliente extends javax.swing.JDialog {
 
     Cliente cliente;
-    
+
     public DlgMainCliente(java.awt.Frame parent, boolean modal, Cliente cliente) {
         super(parent, modal);
-        
+
         this.cliente = cliente;
-        
+
         initComponents();
-        
+
         this.lblNomeUser.setText(cliente.getNome());
         this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCartao());
     }
-    
+
     public DlgMainCliente(java.awt.Dialog parent, boolean modal, Cliente cliente) {
         super(parent, modal);
-        
+
         this.cliente = cliente;
-        
+
         initComponents();
-        
+
+        this.atualizarInfoCliente();
+    }
+
+    private void atualizarInfoCliente() {
         this.lblNomeUser.setText(cliente.getNome());
         this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCartao());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -383,57 +388,55 @@ public class DlgMainCliente extends javax.swing.JDialog {
 
     private void btnReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceitasActionPerformed
         DlgReceitaCliente dlgReceitaCliente = new DlgReceitaCliente(this, true);
-        
+
         this.setVisible(false);
         dlgReceitaCliente.setLocationRelativeTo(this);
         dlgReceitaCliente.setVisible(true);
-        
+
         this.setVisible(true);
     }//GEN-LAST:event_btnReceitasActionPerformed
 
     private void btnDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDietasActionPerformed
         DlgDietaCliente dlgDietaCliente = new DlgDietaCliente(this, true);
-        
+
         this.setVisible(false);
         dlgDietaCliente.setLocationRelativeTo(this);
         dlgDietaCliente.setVisible(true);
-        
+
         this.setVisible(true);
     }//GEN-LAST:event_btnDietasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
         DlgConsultaCliente dlgConsultaCliente = new DlgConsultaCliente(this, true);
-        
+
         this.setVisible(false);
         dlgConsultaCliente.setLocationRelativeTo(this);
         dlgConsultaCliente.setVisible(true);
-        
+
         this.setVisible(true);
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnAcompanhamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcompanhamentosActionPerformed
         DlgAcompanhamentoCliente dlgAcompanhamentoCliente = new DlgAcompanhamentoCliente(this, true);
-        
+
         this.setVisible(false);
         dlgAcompanhamentoCliente.setLocationRelativeTo(this);
         dlgAcompanhamentoCliente.setVisible(true);
-        
+
         this.setVisible(true);
     }//GEN-LAST:event_btnAcompanhamentosActionPerformed
 
     private void btnContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContaActionPerformed
-        boolean isExcluirConta = false;
-        DlgContaCliente dlgContaCliente = new DlgContaCliente(this, true, cliente, isExcluirConta);
-        
+
+        DlgContaCliente dlgContaCliente = new DlgContaCliente(this, true, cliente);
         this.setVisible(false);
         dlgContaCliente.setLocationRelativeTo(this);
         dlgContaCliente.setVisible(true);
         
         this.setVisible(true);
         
-        if(isExcluirConta){
-            this.dispose();
-        }
+        this.atualizarInfoCliente();
+
     }//GEN-LAST:event_btnContaActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

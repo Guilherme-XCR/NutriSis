@@ -37,10 +37,6 @@ public class RefeicaoController {
                 receitas
         );
 
-        for (Receita r : refeicao.getReceitas()) {
-            r.addRefeicao(refeicao);
-        }
-
         repositorio.save(refeicao);
     }
 
@@ -60,9 +56,6 @@ public class RefeicaoController {
                 calorias,
                 receitas
         );
-        for (Receita r : refeicao.getReceitas()) {
-            r.addRefeicao(refeicao);
-        }
 
         repositorio.update(refeicao);
     }

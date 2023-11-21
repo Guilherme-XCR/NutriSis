@@ -32,8 +32,7 @@ public class Receita implements Serializable {
     private int tempoPreparo;
     private int porcoes;
     private String categoria;
-    @ManyToMany(mappedBy = "receitas")
-    private List<Refeicao> refeicoes;
+    
     @OneToMany(mappedBy = "receita",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Ingrediente> ingredientes;
     @ManyToOne
@@ -68,12 +67,5 @@ public class Receita implements Serializable {
         this.categoria = outro.getCategoria();
         this.ingredientes = outro.getIngredientes();
         this.nutricionista = outro.getNutricionista();
-    }
-    
-    public void addRefeicao(Refeicao refeicao){
-        this.refeicoes.add(refeicao);
-    }
-    public void removeRefeicao(Refeicao refeicao){
-        this.refeicoes.remove(refeicao);
     }
 }

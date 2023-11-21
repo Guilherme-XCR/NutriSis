@@ -43,6 +43,8 @@ public class ClienteController {
                 dataNascimento,
                 numeroCartao
         );
+                valid.uniqueEmail(email);
+
         repositorio.save(cliente);
     }
 
@@ -83,6 +85,14 @@ public class ClienteController {
         );
         cliente.setId(id);
         cliente.setSaldoCartao(saldoCartao);
+        repositorio.update(cliente);
+    }
+    
+    public void atualizarSaldo(
+            Cliente cliente,
+            float saldoCartao
+    ){
+        cliente.setSaldoCartao(cliente.getSaldoCartao() + saldoCartao);
         repositorio.update(cliente);
     }
     

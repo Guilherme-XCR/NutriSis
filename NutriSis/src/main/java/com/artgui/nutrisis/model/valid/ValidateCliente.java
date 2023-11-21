@@ -47,10 +47,7 @@ public class ValidateCliente {
             throw new ClienteException("Email inválido.");
         }
 
-        Cliente aux = repositorio.findByEmail(email);
-        if (aux != null) {
-            throw new ClienteException("Email já esta sendo usado por outro usuário.");
-        }
+        
 
         if (senha == null || senha.isEmpty()) {
             throw new ClienteException("Senha não pode estar em branco.");
@@ -186,6 +183,13 @@ public class ValidateCliente {
         } catch (ParseException e) {
             e.printStackTrace(); // Lidar com a exceção conforme necessário
             return null;
+        }
+    }
+    
+    public void uniqueEmail(String email){
+            Cliente aux = repositorio.findByEmail(email);
+        if (aux != null) {
+            throw new ClienteException("Email já esta sendo usado por outro usuário.");
         }
     }
 }
