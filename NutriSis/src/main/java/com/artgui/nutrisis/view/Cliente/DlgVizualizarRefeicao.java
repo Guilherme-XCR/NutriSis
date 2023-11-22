@@ -5,11 +5,11 @@ import com.artgui.nutrisis.model.Receita;
 import com.artgui.nutrisis.model.Refeicao;
 import javax.swing.JOptionPane;
 
-public class DlgRefeicaoCliente extends javax.swing.JDialog {
+public class DlgVizualizarRefeicao extends javax.swing.JDialog {
 
     private ReceitaController receitaController;
     
-    public DlgRefeicaoCliente(java.awt.Dialog parent, boolean modal, Refeicao refeicao) {
+    public DlgVizualizarRefeicao(java.awt.Dialog parent, boolean modal, Refeicao refeicao) {
         super(parent, modal);
         
         this.receitaController = new ReceitaController();

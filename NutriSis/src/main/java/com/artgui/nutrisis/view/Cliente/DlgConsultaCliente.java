@@ -1,9 +1,11 @@
 package com.artgui.nutrisis.view.Cliente;
 
+import com.artgui.nutrisis.controller.ClienteController;
 import com.artgui.nutrisis.controller.ConsultaController;
 import com.artgui.nutrisis.controller.DietaController;
 import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.model.Consulta;
+import com.artgui.nutrisis.model.Dieta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -13,6 +15,7 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
 
     private DietaController dietaController;
     private ConsultaController consultaController;
+    private ClienteController clienteController;
 
     public DlgConsultaCliente(java.awt.Dialog parent, boolean modal, Cliente cliente) {
         super(parent, modal);
@@ -20,6 +23,7 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
         this.cliente = cliente;
         this.dietaController = new DietaController();
         this.consultaController = new ConsultaController();
+        this.clienteController = new ClienteController();
 
         initComponents();
 
@@ -32,6 +36,7 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
         this.edtNomeNutricionista.setText("");
         this.edtStatus.setText("");
         this.edtData.setText("");
+        this.edtDescricao.setText("");
 
         this.dietaController.atualizarTabelaVizualizar(grdDietas, new ArrayList<>());
     }
@@ -41,7 +46,8 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
         this.edtNomeNutricionista.setText(consulta.getNutricionista().getNome());
         this.edtStatus.setText(consulta.getStatus());
         this.edtData.setText(consulta.getDataMarcada());
-
+        this.edtDescricao.setText(consulta.getDescricao());
+        
         this.dietaController.atualizarTabelaVizualizar(grdDietas, consulta.getDietasRecomendadas());
     }
 
@@ -68,6 +74,20 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
         return obj;
     }
 
+    private void VizualizarDieta(){
+        Dieta dieta = (Dieta) this.getObjetoSelecionadoNaGridDieta();
+        
+        if (dieta == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+            DlgVizualizarDieta dlgVizualizarDieta = new DlgVizualizarDieta(this, true, dieta);
+            this.setVisible(false);
+            dlgVizualizarDieta.setLocationRelativeTo(this);
+            dlgVizualizarDieta.setVisible(true);
+            this.setVisible(true);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -88,9 +108,6 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
         btnVoltar = new javax.swing.JButton();
         lblTituloDietas = new javax.swing.JLabel();
         lblTituloOpções = new javax.swing.JLabel();
-        panPesquisa = new javax.swing.JPanel();
-        lblTituloPesquisa = new javax.swing.JLabel();
-        edtPesquisa = new javax.swing.JTextField();
         panDados = new javax.swing.JPanel();
         panInputs = new javax.swing.JPanel();
         edtNomeCliente = new javax.swing.JTextField();
@@ -223,43 +240,6 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
         lblTituloOpções.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTituloOpções.setText("Opções");
 
-        panPesquisa.setBackground(new java.awt.Color(71, 71, 71));
-
-        lblTituloPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblTituloPesquisa.setForeground(new java.awt.Color(0, 204, 51));
-        lblTituloPesquisa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTituloPesquisa.setText("Pesquisar");
-
-        edtPesquisa.setBackground(new java.awt.Color(204, 204, 204));
-        edtPesquisa.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtPesquisa.setForeground(new java.awt.Color(0, 0, 0));
-        edtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                edtPesquisaKeyReleased(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panPesquisaLayout = new javax.swing.GroupLayout(panPesquisa);
-        panPesquisa.setLayout(panPesquisaLayout);
-        panPesquisaLayout.setHorizontalGroup(
-            panPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panPesquisaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTituloPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtPesquisa)
-                .addContainerGap())
-        );
-        panPesquisaLayout.setVerticalGroup(
-            panPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPesquisaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(edtPesquisa)
-                    .addComponent(lblTituloPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout panTodasAsConsultasLayout = new javax.swing.GroupLayout(panTodasAsConsultas);
         panTodasAsConsultas.setLayout(panTodasAsConsultasLayout);
         panTodasAsConsultasLayout.setHorizontalGroup(
@@ -274,7 +254,6 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panTodasAsConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
-                    .addComponent(panPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTituloDietas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -293,11 +272,8 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
                         .addComponent(btnVizualizarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(112, 112, 112)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panTodasAsConsultasLayout.createSequentialGroup()
-                        .addComponent(panPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         tabsDados.addTab("Todas as Consultas", panTodasAsConsultas);
@@ -508,8 +484,9 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMarcarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarConsultaActionPerformed
-        Consulta consulta = new Consulta();
-
+        
+        if (cliente.getSaldoCartao() >= 100.0){
+             Consulta consulta = new Consulta();
         DlgMarcarConsulta dlgMarcarConsulta = new DlgMarcarConsulta(this, true, consulta, cliente);
         dlgMarcarConsulta.setLocationRelativeTo(this);
         dlgMarcarConsulta.setVisible(true);
@@ -519,7 +496,17 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
         } else {
             consultaController.cadastrar(consulta.getDataMarcada(), consulta.getCliente(), consulta.getNutricionista());
             this.consultaController.atualizarTabela(grdConsultas, cliente);
+            this.clienteController.atualizarSaldo(cliente, -100.0f);
+            this.cliente.setSaldoCartao(cliente.getSaldoCartao() - 100.0f);
+            this.atualizarInfoCliente();
+
         }
+        }else{
+            JOptionPane.showMessageDialog(this, "Saldo insuficiente! (R$100.00)");
+        }
+        
+        
+       
 
     }//GEN-LAST:event_btnMarcarConsultaActionPerformed
 
@@ -540,18 +527,13 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void edtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtPesquisaKeyReleased
-        String dataDigitado = edtPesquisa.getText();
-        if (!dataDigitado.isEmpty()) {
-            this.consultaController.atualizarTabela(grdConsultas, cliente, dataDigitado);
-        } else {
-            this.consultaController.atualizarTabela(grdConsultas, cliente);
-        }
-
-    }//GEN-LAST:event_edtPesquisaKeyReleased
-
     private void grdDietasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdDietasMouseClicked
-        // copiar de outras tables
+        if (evt.getClickCount() == 2) {
+            int aux = grdDietas.getSelectedColumn();
+            if (aux == 1) {
+                this.VizualizarDieta();
+            }
+        }
     }//GEN-LAST:event_grdDietasMouseClicked
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -574,7 +556,6 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
     private javax.swing.JTextPane edtDescricao;
     private javax.swing.JTextField edtNomeCliente;
     private javax.swing.JTextField edtNomeNutricionista;
-    private javax.swing.JTextField edtPesquisa;
     private javax.swing.JTextField edtStatus;
     private javax.swing.JTable grdConsultas;
     private javax.swing.JTable grdDietas;
@@ -589,13 +570,11 @@ public class DlgConsultaCliente extends javax.swing.JDialog {
     private javax.swing.JLabel lblSaldo;
     private javax.swing.JLabel lblTituloDietas;
     private javax.swing.JLabel lblTituloOpções;
-    private javax.swing.JLabel lblTituloPesquisa;
     private javax.swing.JPanel panBody;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panDados;
     private javax.swing.JPanel panHeader;
     private javax.swing.JPanel panInputs;
-    private javax.swing.JPanel panPesquisa;
     private javax.swing.JPanel panTodasAsConsultas;
     private javax.swing.JTabbedPane tabsDados;
     // End of variables declaration//GEN-END:variables

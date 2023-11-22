@@ -378,7 +378,7 @@ public class DlgMainNutricionista extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDietasActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        DlgConsultaNutricionista dlgConsultaNutricionista = new DlgConsultaNutricionista(this, true);
+        DlgConsultaNutricionista dlgConsultaNutricionista = new DlgConsultaNutricionista(this, true, nutricionista);
 
         this.setVisible(false);
         dlgConsultaNutricionista.setLocationRelativeTo(this);

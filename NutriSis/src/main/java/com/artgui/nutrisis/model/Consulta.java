@@ -27,7 +27,7 @@ public class Consulta implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String dataMarcada;
-    private String resumo;
+    private String descricao;
     private String status;
     
     @ManyToMany( fetch = FetchType.EAGER)
@@ -48,14 +48,14 @@ public class Consulta implements Serializable{
 
     public Consulta(
             String data,
-            String resumo,
+            String descricao,
             String status,
             List<Dieta> dietasRecomendadas,
             Cliente cliente,
             Nutricionista nutricionista
     ){
         this.dataMarcada = data;
-        this.resumo = resumo;
+        this.descricao = descricao;
         this.status = status;
         this.dietasRecomendadas = dietasRecomendadas;
         this.cliente = cliente;
@@ -64,13 +64,13 @@ public class Consulta implements Serializable{
     
     public Consulta(
             String data,
-            String resumo,
+            String descricao,
             String status,
             Cliente cliente,
             Nutricionista nutricionista
     ){
         this.dataMarcada = data;
-        this.resumo = resumo;
+        this.descricao = descricao;
         this.status = status;
         this.cliente = cliente;
         this.nutricionista = nutricionista;
@@ -86,7 +86,7 @@ public class Consulta implements Serializable{
     public void copy(Consulta outro){
         this.id = outro.getId();
         this.dataMarcada = outro.getDataMarcada();
-        this.resumo = outro.getResumo();
+        this.descricao = outro.getDescricao();
         this.status = outro.getStatus();
         this.cliente = outro.getCliente();
         this.nutricionista = outro.getNutricionista();

@@ -53,4 +53,13 @@ public class Dieta implements Serializable {
         this.refeicoes = refeicoes;
         this.nutricionista = nutricionista;
     }
+    
+    public void copy(Dieta outro){
+        this.id = outro.getId();
+        this.nome = outro.getNome();
+        this.descricao = outro.getDescricao();
+        this.diasDuracao = outro.getDiasDuracao();
+        this.refeicoes = outro.getRefeicoes();
+        this.nutricionista = outro.getNutricionista();
+    }
 }

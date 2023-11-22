@@ -53,6 +53,7 @@ public class ConsultaController {
                 cliente,
                 nutricionista
         );
+        consulta.setDietasRecomendadas(dietasRecomendadas);
         consulta.setId(id);
     
         repositorio.update(consulta);
@@ -81,6 +82,23 @@ public class ConsultaController {
         TMViewConsulta tmDieta = new TMViewConsulta(lst);
         grd.setModel(tmDieta);
     }
+    
+    public void atualizarTabela(JTable grd, Nutricionista nutricionista, String data){
+        
+        List lst = repositorio.filterByNutricionistaAndData(nutricionista, data);
+        
+        TMViewConsulta tmDieta = new TMViewConsulta(lst);
+        grd.setModel(tmDieta);
+    }
+    
+    public void atualizarTabela(JTable grd, Nutricionista nutricionista){
+        
+        List lst = repositorio.filterByNutricionista(nutricionista);
+        
+        TMViewConsulta tmDieta = new TMViewConsulta(lst);
+        grd.setModel(tmDieta);
+    }
+    
 
     public Consulta criar(
             String data,

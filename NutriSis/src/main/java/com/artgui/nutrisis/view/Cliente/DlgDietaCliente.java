@@ -486,7 +486,7 @@ public class DlgDietaCliente extends javax.swing.JDialog {
         if (refeicao == null) {
             JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
         } else {
-            DlgRefeicaoCliente dlgRefeicaoCliente = new DlgRefeicaoCliente(this, true, refeicao);
+            DlgVizualizarRefeicao dlgRefeicaoCliente = new DlgVizualizarRefeicao(this, true, refeicao);
             this.setVisible(false);
             dlgRefeicaoCliente.setLocationRelativeTo(this);
             dlgRefeicaoCliente.setVisible(true);

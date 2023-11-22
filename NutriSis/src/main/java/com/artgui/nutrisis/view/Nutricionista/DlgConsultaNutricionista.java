@@ -1,10 +1,83 @@
 package com.artgui.nutrisis.view.Nutricionista;
 
+import com.artgui.nutrisis.controller.ConsultaController;
+import com.artgui.nutrisis.controller.DietaController;
+import com.artgui.nutrisis.model.Consulta;
+import com.artgui.nutrisis.model.Dieta;
+import com.artgui.nutrisis.model.Nutricionista;
+import com.artgui.nutrisis.view.Cliente.DlgVizualizarDieta;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 public class DlgConsultaNutricionista extends javax.swing.JDialog {
 
-    public DlgConsultaNutricionista(java.awt.Dialog parent, boolean modal) {
+    private Nutricionista nutricionista;
+
+    private DietaController dietaController;
+    private ConsultaController consultaController;
+
+    public DlgConsultaNutricionista(java.awt.Dialog parent, boolean modal, Nutricionista nutricionista) {
         super(parent, modal);
+
+        this.nutricionista = nutricionista;
+        this.dietaController = new DietaController();
+        this.consultaController = new ConsultaController();
+
         initComponents();
+
+        this.consultaController.atualizarTabela(grdConsultas, nutricionista);
+    }
+
+    private void limparCampos() {
+        this.edtNomeCliente.setText("");
+        this.edtNomeNutricionista.setText("");
+        this.edtStatus.setText("");
+        this.edtData.setText("");
+        this.edtDescricao.setText("");
+
+        this.dietaController.atualizarTabelaVizualizar(grdDietas, new ArrayList<>());
+    }
+
+    private void preencherFormulario(Consulta consulta) {
+        this.edtNomeCliente.setText(consulta.getCliente().getNome());
+        this.edtNomeNutricionista.setText(consulta.getNutricionista().getNome());
+        this.edtStatus.setText(consulta.getStatus());
+        this.edtData.setText(consulta.getDataMarcada());
+        this.edtDescricao.setText(consulta.getDescricao());
+
+        this.dietaController.atualizarTabelaVizualizar(grdDietas, consulta.getDietasRecomendadas());
+    }
+
+    private Object getObjetoSelecionadoNaGridDieta() {
+        int rowCliked = this.grdDietas.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = this.grdDietas.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+
+    private Object getObjetoSelecionadoNaGridConsulta() {
+        int rowCliked = this.grdConsultas.getSelectedRow();
+        Object obj = null;
+        if (rowCliked >= 0) {
+            obj = this.grdConsultas.getModel().getValueAt(rowCliked, -1);
+        }
+        return obj;
+    }
+    
+    private void VizualizarDieta(){
+        Dieta dieta = (Dieta) this.getObjetoSelecionadoNaGridDieta();
+        
+        if (dieta == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+            DlgVizualizarDieta dlgVizualizarDieta = new DlgVizualizarDieta(this, true, dieta);
+            this.setVisible(false);
+            dlgVizualizarDieta.setLocationRelativeTo(this);
+            dlgVizualizarDieta.setVisible(true);
+            this.setVisible(true);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -16,31 +89,27 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
         lblLogo = new javax.swing.JLabel();
         panBody = new javax.swing.JPanel();
         tabsDados = new javax.swing.JTabbedPane();
-        panTodasAsDietas = new javax.swing.JPanel();
+        panTodasAsConsultas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        grdDietas = new javax.swing.JTable();
-        btnNovo = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
+        grdConsultas = new javax.swing.JTable();
+        btnAtualizarConsulta = new javax.swing.JButton();
+        btnVizualizarConsulta = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         lblTituloDietas = new javax.swing.JLabel();
         lblTituloOpções = new javax.swing.JLabel();
-        panPesquisa = new javax.swing.JPanel();
-        lblTituloPesquisa = new javax.swing.JLabel();
-        edtPesquisa = new javax.swing.JTextField();
-        panFormulario = new javax.swing.JPanel();
+        panDados = new javax.swing.JPanel();
         panInputs = new javax.swing.JPanel();
-        edtNome = new javax.swing.JTextField();
-        fEdtDiasDuracao = new javax.swing.JFormattedTextField();
+        edtNomeCliente = new javax.swing.JTextField();
+        edtStatus = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         edtDescricao = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
-        grdRefeicoes = new javax.swing.JTable();
+        grdDietas = new javax.swing.JTable();
         lblRefeicoes = new javax.swing.JLabel();
-        btnAdicionarRefeicoes = new javax.swing.JButton();
+        edtData = new javax.swing.JTextField();
+        edtNomeNutricionista = new javax.swing.JTextField();
         panBotoes = new javax.swing.JPanel();
-        btnSalvar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        panDadosConsulta = new javax.swing.JPanel();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -67,14 +136,14 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
         tabsDados.setBackground(new java.awt.Color(204, 204, 204));
         tabsDados.setForeground(new java.awt.Color(0, 0, 0));
 
-        panTodasAsDietas.setBackground(new java.awt.Color(51, 51, 51));
+        panTodasAsConsultas.setBackground(new java.awt.Color(51, 51, 51));
 
         jScrollPane1.setBackground(new java.awt.Color(51, 51, 51));
         jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
 
-        grdDietas.setBackground(new java.awt.Color(51, 51, 51));
-        grdDietas.setForeground(new java.awt.Color(255, 255, 255));
-        grdDietas.setModel(new javax.swing.table.DefaultTableModel(
+        grdConsultas.setBackground(new java.awt.Color(51, 51, 51));
+        grdConsultas.setForeground(new java.awt.Color(255, 255, 255));
+        grdConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -85,25 +154,30 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(grdDietas);
+        grdConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                grdConsultasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(grdConsultas);
 
-        btnNovo.setBackground(new java.awt.Color(255, 255, 255));
-        btnNovo.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnNovo.setForeground(new java.awt.Color(0, 0, 0));
-        btnNovo.setText("Marcar Consulta");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizarConsulta.setBackground(new java.awt.Color(255, 255, 255));
+        btnAtualizarConsulta.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
+        btnAtualizarConsulta.setForeground(new java.awt.Color(0, 0, 0));
+        btnAtualizarConsulta.setText("Atualizar Consulta");
+        btnAtualizarConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
+                btnAtualizarConsultaActionPerformed(evt);
             }
         });
 
-        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
-        btnEditar.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(0, 0, 0));
-        btnEditar.setText("Vizualizar Consulta");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnVizualizarConsulta.setBackground(new java.awt.Color(255, 255, 255));
+        btnVizualizarConsulta.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
+        btnVizualizarConsulta.setForeground(new java.awt.Color(0, 0, 0));
+        btnVizualizarConsulta.setText("Vizualizar Consulta");
+        btnVizualizarConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnVizualizarConsultaActionPerformed(evt);
             }
         });
 
@@ -127,108 +201,73 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
         lblTituloOpções.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTituloOpções.setText("Opções");
 
-        panPesquisa.setBackground(new java.awt.Color(71, 71, 71));
-
-        lblTituloPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblTituloPesquisa.setForeground(new java.awt.Color(0, 204, 51));
-        lblTituloPesquisa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTituloPesquisa.setText("Pesquisar");
-
-        edtPesquisa.setBackground(new java.awt.Color(204, 204, 204));
-        edtPesquisa.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtPesquisa.setForeground(new java.awt.Color(0, 0, 0));
-        edtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                edtPesquisaKeyReleased(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panPesquisaLayout = new javax.swing.GroupLayout(panPesquisa);
-        panPesquisa.setLayout(panPesquisaLayout);
-        panPesquisaLayout.setHorizontalGroup(
-            panPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panPesquisaLayout.createSequentialGroup()
+        javax.swing.GroupLayout panTodasAsConsultasLayout = new javax.swing.GroupLayout(panTodasAsConsultas);
+        panTodasAsConsultas.setLayout(panTodasAsConsultasLayout);
+        panTodasAsConsultasLayout.setHorizontalGroup(
+            panTodasAsConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTodasAsConsultasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTituloPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edtPesquisa)
-                .addContainerGap())
-        );
-        panPesquisaLayout.setVerticalGroup(
-            panPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPesquisaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(edtPesquisa)
-                    .addComponent(lblTituloPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout panTodasAsDietasLayout = new javax.swing.GroupLayout(panTodasAsDietas);
-        panTodasAsDietas.setLayout(panTodasAsDietasLayout);
-        panTodasAsDietasLayout.setHorizontalGroup(
-            panTodasAsDietasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTodasAsDietasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panTodasAsDietasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panTodasAsConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVizualizarConsulta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAtualizarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTituloOpções, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panTodasAsDietasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panTodasAsConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
-                    .addComponent(panPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTituloDietas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        panTodasAsDietasLayout.setVerticalGroup(
-            panTodasAsDietasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panTodasAsDietasLayout.createSequentialGroup()
+        panTodasAsConsultasLayout.setVerticalGroup(
+            panTodasAsConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panTodasAsConsultasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panTodasAsDietasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panTodasAsConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTituloDietas)
                     .addComponent(lblTituloOpções, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panTodasAsDietasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panTodasAsDietasLayout.createSequentialGroup()
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panTodasAsConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panTodasAsConsultasLayout.createSequentialGroup()
+                        .addComponent(btnAtualizarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVizualizarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(112, 112, 112)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panTodasAsDietasLayout.createSequentialGroup()
-                        .addComponent(panPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
-        tabsDados.addTab("Todas as Consultas", panTodasAsDietas);
+        tabsDados.addTab("Todas as Consultas", panTodasAsConsultas);
 
-        panFormulario.setBackground(new java.awt.Color(51, 51, 51));
+        panDados.setBackground(new java.awt.Color(51, 51, 51));
 
         panInputs.setBackground(new java.awt.Color(51, 51, 51));
 
-        edtNome.setBackground(new java.awt.Color(204, 204, 204));
-        edtNome.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
-        edtNome.setForeground(new java.awt.Color(0, 0, 0));
-        edtNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtNomeCliente.setBackground(new java.awt.Color(204, 204, 204));
+        edtNomeCliente.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtNomeCliente.setForeground(new java.awt.Color(0, 0, 0));
+        edtNomeCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtNomeCliente.setDisabledTextColor(new java.awt.Color(0, 204, 204));
+        edtNomeCliente.setEnabled(false);
 
-        fEdtDiasDuracao.setBackground(new java.awt.Color(204, 204, 204));
-        fEdtDiasDuracao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
-        fEdtDiasDuracao.setForeground(new java.awt.Color(0, 0, 0));
-        fEdtDiasDuracao.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtStatus.setBackground(new java.awt.Color(204, 204, 204));
+        edtStatus.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtStatus.setForeground(new java.awt.Color(0, 0, 0));
+        edtStatus.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Status\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtStatus.setDisabledTextColor(new java.awt.Color(0, 204, 204));
+        edtStatus.setEnabled(false);
 
         edtDescricao.setBackground(new java.awt.Color(204, 204, 204));
         edtDescricao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descrição", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
         edtDescricao.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         edtDescricao.setForeground(new java.awt.Color(0, 0, 0));
+        edtDescricao.setDisabledTextColor(new java.awt.Color(0, 204, 204));
+        edtDescricao.setEnabled(false);
         jScrollPane2.setViewportView(edtDescricao);
 
-        grdRefeicoes.setBackground(new java.awt.Color(51, 51, 51));
-        grdRefeicoes.setForeground(new java.awt.Color(255, 255, 255));
-        grdRefeicoes.setModel(new javax.swing.table.DefaultTableModel(
+        grdDietas.setBackground(new java.awt.Color(51, 51, 51));
+        grdDietas.setForeground(new java.awt.Color(255, 255, 255));
+        grdDietas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -239,28 +278,31 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        grdRefeicoes.addMouseListener(new java.awt.event.MouseAdapter() {
+        grdDietas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                grdRefeicoesMouseClicked(evt);
+                grdDietasMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(grdRefeicoes);
+        jScrollPane3.setViewportView(grdDietas);
 
         lblRefeicoes.setFont(new java.awt.Font("Cascadia Mono", 0, 36)); // NOI18N
         lblRefeicoes.setForeground(new java.awt.Color(204, 255, 255));
         lblRefeicoes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRefeicoes.setText("Refeições");
+        lblRefeicoes.setText("Dietas Recomendadas");
 
-        btnAdicionarRefeicoes.setBackground(new java.awt.Color(216, 229, 205));
-        btnAdicionarRefeicoes.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        btnAdicionarRefeicoes.setForeground(new java.awt.Color(0, 0, 0));
-        btnAdicionarRefeicoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconRefeçoes.png"))); // NOI18N
-        btnAdicionarRefeicoes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnAdicionarRefeicoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarRefeicoesActionPerformed(evt);
-            }
-        });
+        edtData.setBackground(new java.awt.Color(204, 204, 204));
+        edtData.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtData.setForeground(new java.awt.Color(0, 0, 0));
+        edtData.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtData.setDisabledTextColor(new java.awt.Color(0, 204, 204));
+        edtData.setEnabled(false);
+
+        edtNomeNutricionista.setBackground(new java.awt.Color(204, 204, 204));
+        edtNomeNutricionista.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
+        edtNomeNutricionista.setForeground(new java.awt.Color(0, 0, 0));
+        edtNomeNutricionista.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nutricionista", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cascadia Mono", 0, 12), new java.awt.Color(0, 204, 51))); // NOI18N
+        edtNomeNutricionista.setDisabledTextColor(new java.awt.Color(0, 204, 204));
+        edtNomeNutricionista.setEnabled(false);
 
         javax.swing.GroupLayout panInputsLayout = new javax.swing.GroupLayout(panInputs);
         panInputs.setLayout(panInputsLayout);
@@ -269,18 +311,19 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
             .addGroup(panInputsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panInputsLayout.createSequentialGroup()
-                        .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(edtNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                            .addComponent(edtNomeNutricionista))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fEdtDiasDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panInputsLayout.createSequentialGroup()
-                        .addComponent(btnAdicionarRefeicoes, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblRefeicoes, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(edtStatus)
+                            .addComponent(edtData)))
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                    .addComponent(lblRefeicoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panInputsLayout.setVerticalGroup(
@@ -289,15 +332,17 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panInputsLayout.createSequentialGroup()
-                        .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fEdtDiasDuracao))
+                        .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(edtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(edtData, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edtNomeNutricionista, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panInputsLayout.createSequentialGroup()
-                        .addGroup(panInputsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblRefeicoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAdicionarRefeicoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblRefeicoes, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -305,23 +350,13 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
 
         panBotoes.setBackground(new java.awt.Color(51, 51, 51));
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
-        btnSalvar.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
-        btnSalvar.setText("Salvar");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setBackground(new java.awt.Color(255, 255, 255));
+        btnSair.setFont(new java.awt.Font("Cascadia Mono", 0, 24)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(0, 0, 0));
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
-            }
-        });
-
-        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -329,37 +364,32 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
         panBotoes.setLayout(panBotoesLayout);
         panBotoesLayout.setHorizontalGroup(
             panBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBotoesLayout.createSequentialGroup()
+            .addGroup(panBotoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(847, 847, 847))
         );
         panBotoesLayout.setVerticalGroup(
             panBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBotoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGroup(panBotoesLayout.createSequentialGroup()
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout panFormularioLayout = new javax.swing.GroupLayout(panFormulario);
-        panFormulario.setLayout(panFormularioLayout);
-        panFormularioLayout.setHorizontalGroup(
-            panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panFormularioLayout.createSequentialGroup()
+        javax.swing.GroupLayout panDadosLayout = new javax.swing.GroupLayout(panDados);
+        panDados.setLayout(panDadosLayout);
+        panDadosLayout.setHorizontalGroup(
+            panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panDadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panInputs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        panFormularioLayout.setVerticalGroup(
-            panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panFormularioLayout.createSequentialGroup()
+        panDadosLayout.setVerticalGroup(
+            panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panDadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -367,23 +397,7 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        tabsDados.addTab("Formulário de Consulta", panFormulario);
-
-        panDadosConsulta.setBackground(new java.awt.Color(51, 51, 51));
-        panDadosConsulta.setPreferredSize(new java.awt.Dimension(120, 509));
-
-        javax.swing.GroupLayout panDadosConsultaLayout = new javax.swing.GroupLayout(panDadosConsulta);
-        panDadosConsulta.setLayout(panDadosConsultaLayout);
-        panDadosConsultaLayout.setHorizontalGroup(
-            panDadosConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1268, Short.MAX_VALUE)
-        );
-        panDadosConsultaLayout.setVerticalGroup(
-            panDadosConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
-        );
-
-        tabsDados.addTab("Dados da consulta", panDadosConsulta);
+        tabsDados.addTab("Dados", panDados);
 
         javax.swing.GroupLayout panBodyLayout = new javax.swing.GroupLayout(panBody);
         panBody.setLayout(panBodyLayout);
@@ -435,51 +449,76 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        
-    }//GEN-LAST:event_btnNovoActionPerformed
+    private void grdConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdConsultasMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.btnVizualizarConsultaActionPerformed(null);
+        }
+    }//GEN-LAST:event_grdConsultasMouseClicked
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-    }//GEN-LAST:event_btnEditarActionPerformed
+    private void btnAtualizarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarConsultaActionPerformed
+        Consulta consulta = (Consulta) this.getObjetoSelecionadoNaGridConsulta();
+
+        if (consulta != null) {
+            if ("Marcada".equals(consulta.getStatus())) {
+                DlgAtualizaConsulta dlgAtualizaConsulta = new DlgAtualizaConsulta(this, true, consulta);
+                dlgAtualizaConsulta.setLocationRelativeTo(this);
+                dlgAtualizaConsulta.setVisible(true);
+
+                this.consultaController.atualizarTabela(grdConsultas, nutricionista);
+            } else {
+                if ("Concluida".equals(consulta.getStatus())) {
+                    JOptionPane.showMessageDialog(this, "A consulta ja foi Concluida.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "A consulta esta Em Progresso.");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        }
+    }//GEN-LAST:event_btnAtualizarConsultaActionPerformed
+
+    private void btnVizualizarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVizualizarConsultaActionPerformed
+
+        Consulta consulta = (Consulta) this.getObjetoSelecionadoNaGridConsulta();
+
+        if (consulta == null) {
+            JOptionPane.showMessageDialog(this, "Primeiro selecione um registro na tabela.");
+        } else {
+            this.preencherFormulario(consulta);
+            this.tabsDados.setSelectedComponent(panDados);
+        }
+    }//GEN-LAST:event_btnVizualizarConsultaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void edtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtPesquisaKeyReleased
-        
-    }//GEN-LAST:event_edtPesquisaKeyReleased
+    private void grdDietasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdDietasMouseClicked
+        if (evt.getClickCount() == 2) {
+            int aux = grdDietas.getSelectedColumn();
+            if (aux == 1) {
+                this.VizualizarDieta();
+            }
+        }
+    }//GEN-LAST:event_grdDietasMouseClicked
 
-    private void grdRefeicoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdRefeicoesMouseClicked
-        
-    }//GEN-LAST:event_grdRefeicoesMouseClicked
-
-    private void btnAdicionarRefeicoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarRefeicoesActionPerformed
-        
-    }//GEN-LAST:event_btnAdicionarRefeicoesActionPerformed
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.limparCampos();
+        this.tabsDados.setSelectedComponent(panTodasAsConsultas);
+    }//GEN-LAST:event_btnSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdicionarRefeicoes;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnAtualizarConsulta;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnVizualizarConsulta;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JTextField edtData;
     private javax.swing.JTextPane edtDescricao;
-    private javax.swing.JTextField edtNome;
-    private javax.swing.JTextField edtPesquisa;
-    private javax.swing.JFormattedTextField fEdtDiasDuracao;
+    private javax.swing.JTextField edtNomeCliente;
+    private javax.swing.JTextField edtNomeNutricionista;
+    private javax.swing.JTextField edtStatus;
+    private javax.swing.JTable grdConsultas;
     private javax.swing.JTable grdDietas;
-    private javax.swing.JTable grdRefeicoes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -487,16 +526,13 @@ public class DlgConsultaNutricionista extends javax.swing.JDialog {
     private javax.swing.JLabel lblRefeicoes;
     private javax.swing.JLabel lblTituloDietas;
     private javax.swing.JLabel lblTituloOpções;
-    private javax.swing.JLabel lblTituloPesquisa;
     private javax.swing.JPanel panBody;
     private javax.swing.JPanel panBotoes;
-    private javax.swing.JPanel panDadosConsulta;
-    private javax.swing.JPanel panFormulario;
+    private javax.swing.JPanel panDados;
     private javax.swing.JPanel panHeader;
     private javax.swing.JPanel panInputs;
     private javax.swing.JPanel panMain;
-    private javax.swing.JPanel panPesquisa;
-    private javax.swing.JPanel panTodasAsDietas;
+    private javax.swing.JPanel panTodasAsConsultas;
     private javax.swing.JTabbedPane tabsDados;
     // End of variables declaration//GEN-END:variables
 }

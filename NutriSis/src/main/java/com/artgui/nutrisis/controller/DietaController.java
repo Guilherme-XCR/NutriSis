@@ -1,6 +1,7 @@
 package com.artgui.nutrisis.controller;
 
 import com.artgui.nutrisis.controller.tablemodel.TMViewDieta;
+import com.artgui.nutrisis.controller.tablemodel.TMViewExcluirDieta;
 import com.artgui.nutrisis.controller.tablemodel.TMViewVizualizarDieta;
 import com.artgui.nutrisis.model.exceptions.DietaException;
 import com.artgui.nutrisis.model.Dieta;
@@ -88,6 +89,11 @@ public class DietaController {
 
         TMViewDieta tableModel = new TMViewDieta(lst);
         grd.setModel(tableModel);
+    }
+    
+     public void atualizarTabelaExcluir(JTable grd, List<Dieta> dietas){
+         TMViewExcluirDieta tmDieta = new TMViewExcluirDieta(dietas);
+        grd.setModel(tmDieta);
     }
     
     public void atualizarTabelaVizualizar(JTable grd, List<Dieta> dietas){
