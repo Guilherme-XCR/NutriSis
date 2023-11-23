@@ -14,8 +14,7 @@ public class DlgMainCliente extends javax.swing.JDialog {
 
         initComponents();
 
-        this.lblNomeUser.setText(cliente.getNome());
-        this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCartao());
+        this.atualizarInfoCliente();
     }
 
     public DlgMainCliente(java.awt.Dialog parent, boolean modal, Cliente cliente) {
@@ -414,16 +413,18 @@ public class DlgMainCliente extends javax.swing.JDialog {
         dlgConsultaCliente.setVisible(true);
 
         this.setVisible(true);
+        this.atualizarInfoCliente();
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnAcompanhamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcompanhamentosActionPerformed
-        DlgAcompanhamentoCliente dlgAcompanhamentoCliente = new DlgAcompanhamentoCliente(this, true);
+        DlgAcompanhamentoCliente dlgAcompanhamentoCliente = new DlgAcompanhamentoCliente(this, true, cliente);
 
         this.setVisible(false);
         dlgAcompanhamentoCliente.setLocationRelativeTo(this);
         dlgAcompanhamentoCliente.setVisible(true);
 
         this.setVisible(true);
+        this.atualizarInfoCliente();
     }//GEN-LAST:event_btnAcompanhamentosActionPerformed
 
     private void btnContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContaActionPerformed

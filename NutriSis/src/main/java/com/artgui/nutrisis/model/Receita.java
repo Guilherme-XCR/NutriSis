@@ -34,7 +34,7 @@ public class Receita implements Serializable {
     private String categoria;
     
     @OneToMany(mappedBy = "receita",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Ingrediente> ingredientes;
+    private List<Ingrediente> ingredientes;  
     @ManyToOne
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;

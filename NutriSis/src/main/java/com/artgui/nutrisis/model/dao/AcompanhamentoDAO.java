@@ -3,6 +3,8 @@ package com.artgui.nutrisis.model.dao;
 import com.artgui.nutrisis.model.exceptions.AcompanhamentoException;
 import com.artgui.nutrisis.factory.DatabaseJPA;
 import com.artgui.nutrisis.model.Acompanhamento;
+import com.artgui.nutrisis.model.Cliente;
+import com.artgui.nutrisis.model.Nutricionista;
 import java.util.List;
 
 public class AcompanhamentoDAO extends Dao<Acompanhamento> {
@@ -43,6 +45,28 @@ public class AcompanhamentoDAO extends Dao<Acompanhamento> {
         qry = this.entityManager.createQuery(jpql, Acompanhamento.class);
         List lst = qry.getResultList();
         this.entityManager.close();
+        return lst;
+    }
+    
+    public List<Acompanhamento> filterByCliente(Cliente cliente) {
+        super.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = "SELECT a FROM Acompanhamento a WHERE a.cliente.id like :clienteId";
+        qry = super.entityManager.createQuery(jpql, Acompanhamento.class);
+        qry.setParameter("clienteId", cliente.getId());
+
+        List<Acompanhamento> lst = qry.getResultList();
+        super.entityManager.close();
+        return lst;
+    }
+    
+    public List<Acompanhamento> filterByNutricionista(Nutricionista nutricionista) {
+        super.entityManager = DatabaseJPA.getInstance().getEntityManager();
+        jpql = "SELECT a FROM Acompanhamento a WHERE a.nutricionista.id like :nutricionistaId";
+        qry = super.entityManager.createQuery(jpql, Acompanhamento.class);
+        qry.setParameter("nutricionistaId", nutricionista.getId());
+
+        List<Acompanhamento> lst = qry.getResultList();
+        super.entityManager.close();
         return lst;
     }
 }

@@ -7,27 +7,27 @@ import java.awt.Dialog;
 import javax.swing.JOptionPane;
 
 public class DlgContaCliente extends javax.swing.JDialog {
-    
+
     Cliente cliente;
     ClienteController clienteController;
     Dialog dlg;
-    
+
     public DlgContaCliente(java.awt.Dialog parent, boolean modal, Cliente cliente) {
         super(parent, modal);
-        
+
         this.cliente = cliente;
         this.clienteController = new ClienteController();
         this.dlg = parent;
-        
+
         initComponents();
-        
+
         this.adicionarMascaraNosCampos();
         this.preencherFormulario(cliente);
         this.habilitarCampos(false);
         this.btnSalvar.setEnabled(false);
         this.atualizarInfoCliente();
     }
-    
+
     public void habilitarCampos(boolean flag) {
         this.edtNomeCompleto.setEnabled(flag);
         this.edtEmail.setEnabled(flag);
@@ -38,10 +38,10 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtPeso.setEnabled(flag);
         this.fEdtDataNascimento.setEnabled(flag);
         this.fEdtNumeroCartao.setEnabled(flag);
-        
+
         this.comboBoxGenero.setEnabled(flag);
     }
-    
+
     public void limparCampos() {
         this.edtNomeCompleto.setText("");
         this.edtEmail.setText("");
@@ -52,10 +52,10 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtPeso.setText("");
         this.fEdtDataNascimento.setText("");
         this.fEdtNumeroCartao.setText("");
-        
+
         this.comboBoxGenero.setSelectedIndex(0);
     }
-    
+
     public void preencherFormulario(Cliente cliente) {
         this.edtNomeCompleto.setText(cliente.getNome());
         this.edtEmail.setText(cliente.getEmail());
@@ -66,10 +66,10 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.fEdtPeso.setText(cliente.getPeso() + "");
         this.fEdtDataNascimento.setText(cliente.getDataNascimento());
         this.fEdtNumeroCartao.setText(cliente.getNumeroCartao());
-        
+
         this.comboBoxGenero.setSelectedItem(cliente.getGenero());
     }
-    
+
     public void adicionarMascaraNosCampos() {
 
 //        try {
@@ -83,12 +83,12 @@ public class DlgContaCliente extends javax.swing.JDialog {
 //            Logger.getLogger(DlgReceitaNutricionista.class.getName()).log(Level.SEVERE, null, ex);
 //        } 
     }
-    
+
     private void atualizarInfoCliente() {
         this.lblNomeUser.setText(cliente.getNome());
         this.lblSaldo.setText("Saldo R$ " + cliente.getSaldoCartao());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -117,9 +117,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
         btnSalvar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         lblEditarPerfil = new javax.swing.JLabel();
-        panInputs1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        btnExcluir = new javax.swing.JButton();
         panInputs2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JButton();
@@ -355,47 +352,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        panInputs1.setBackground(new java.awt.Color(71, 71, 71));
-
-        jLabel2.setFont(new java.awt.Font("Cascadia Mono", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Excluir conta");
-
-        btnExcluir.setFont(new java.awt.Font("Cascadia Code", 1, 14)); // NOI18N
-        btnExcluir.setText("Excluir");
-        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnExcluir.setFocusable(false);
-        btnExcluir.setPreferredSize(new java.awt.Dimension(500, 100));
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panInputs1Layout = new javax.swing.GroupLayout(panInputs1);
-        panInputs1.setLayout(panInputs1Layout);
-        panInputs1Layout.setHorizontalGroup(
-            panInputs1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panInputs1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panInputs1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(213, 213, 213))
-        );
-        panInputs1Layout.setVerticalGroup(
-            panInputs1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panInputs1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
-        );
-
         panInputs2.setBackground(new java.awt.Color(71, 71, 71));
 
         jLabel1.setFont(new java.awt.Font("Cascadia Mono", 0, 36)); // NOI18N
@@ -425,28 +381,26 @@ public class DlgContaCliente extends javax.swing.JDialog {
         panInputs2Layout.setHorizontalGroup(
             panInputs2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panInputs2Layout.createSequentialGroup()
-                .addGroup(panInputs2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panInputs2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE))
-                    .addGroup(panInputs2Layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addGroup(panInputs2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fEdtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(panInputs2Layout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addGroup(panInputs2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(fEdtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panInputs2Layout.setVerticalGroup(
             panInputs2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panInputs2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(139, 139, 139)
                 .addComponent(fEdtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panBodyLayout = new javax.swing.GroupLayout(panBody);
@@ -457,22 +411,18 @@ public class DlgContaCliente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(panInputs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panInputs1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panInputs2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panInputs2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panBodyLayout.setVerticalGroup(
             panBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panInputs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panBodyLayout.createSequentialGroup()
-                        .addComponent(panInputs2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panInputs1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(panInputs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(panInputs2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
@@ -511,7 +461,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
         this.habilitarCampos(true);
         this.limparCampos();
         this.preencherFormulario(cliente);
-        
+
         this.btnEditar.setEnabled(false);
         this.btnSalvar.setEnabled(true);
 
@@ -536,6 +486,8 @@ public class DlgContaCliente extends javax.swing.JDialog {
             );
             cliente.setNome(edtNomeCompleto.getText());
             this.atualizarInfoCliente();
+            this.btnSalvar.setEnabled(false);
+            this.btnEditar.setEnabled(true);
         } catch (ClienteException e) {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -547,7 +499,7 @@ public class DlgContaCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+
         if (fEdtValor.getText() != null && !fEdtValor.getText().isEmpty() && fEdtValor.getText().matches("^([0-9]*\\.[0-9]+|[0-9]+)$")) {
             float valor = Float.parseFloat(fEdtValor.getText());
             if (valor > 0.0f) {
@@ -555,7 +507,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
                     clienteController.atualizarSaldo(cliente, valor);
                     JOptionPane.showMessageDialog(this, "R$ " + valor + " adicionados a sua conta.");
                     this.atualizarInfoCliente();
-                    cliente.setSaldoCartao(cliente.getSaldoCartao() + valor);
                     this.fEdtValor.setText("");
                 } catch (ClienteException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -566,32 +517,13 @@ public class DlgContaCliente extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Valor não pode estar vazio.");
         }
-        
+
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
-
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int response = JOptionPane.showConfirmDialog(null,
-                "Deseja exlcuir a Conta e tudo que ela possui?",
-                "Confirmar exclusão",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-        if (response == JOptionPane.OK_OPTION) {
-            
-            try {
-                clienteController.excluir(cliente);
-                JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
-            } catch (ClienteException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            }
-            this.dlg.dispose();
-        }
-    }//GEN-LAST:event_btnExcluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> comboBoxGenero;
@@ -606,7 +538,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField fEdtTelefone;
     private javax.swing.JFormattedTextField fEdtValor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblEditarPerfil;
     private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblIconUser;
@@ -616,7 +547,6 @@ public class DlgContaCliente extends javax.swing.JDialog {
     private javax.swing.JPanel panBody;
     private javax.swing.JPanel panHeader;
     private javax.swing.JPanel panInputs;
-    private javax.swing.JPanel panInputs1;
     private javax.swing.JPanel panInputs2;
     private javax.swing.JPanel panMain;
     private javax.swing.JPanel panUser;

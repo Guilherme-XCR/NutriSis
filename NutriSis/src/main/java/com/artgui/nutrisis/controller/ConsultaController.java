@@ -1,6 +1,7 @@
 package com.artgui.nutrisis.controller;
 
-import com.artgui.nutrisis.controller.tablemodel.TMViewConsulta;
+import com.artgui.nutrisis.controller.tablemodel.TMViewConsultaCliente;
+import com.artgui.nutrisis.controller.tablemodel.TMViewConsultaNutricionista;
 import com.artgui.nutrisis.model.Cliente;
 import com.artgui.nutrisis.model.Consulta;
 import com.artgui.nutrisis.model.Dieta;
@@ -67,35 +68,22 @@ public class ConsultaController {
         }
     }
     
-    public void atualizarTabela(JTable grd, Cliente cliente, String data){
-        
-        List lst = repositorio.filterByClienteAndData(cliente, data);
-        
-        TMViewConsulta tmDieta = new TMViewConsulta(lst);
-        grd.setModel(tmDieta);
-    }
+ 
     
     public void atualizarTabela(JTable grd, Cliente cliente){
         
         List lst = repositorio.filterByCliente(cliente);
         
-        TMViewConsulta tmDieta = new TMViewConsulta(lst);
+        TMViewConsultaCliente tmDieta = new TMViewConsultaCliente(lst);
         grd.setModel(tmDieta);
     }
-    
-    public void atualizarTabela(JTable grd, Nutricionista nutricionista, String data){
-        
-        List lst = repositorio.filterByNutricionistaAndData(nutricionista, data);
-        
-        TMViewConsulta tmDieta = new TMViewConsulta(lst);
-        grd.setModel(tmDieta);
-    }
+   
     
     public void atualizarTabela(JTable grd, Nutricionista nutricionista){
         
         List lst = repositorio.filterByNutricionista(nutricionista);
         
-        TMViewConsulta tmDieta = new TMViewConsulta(lst);
+        TMViewConsultaNutricionista tmDieta = new TMViewConsultaNutricionista(lst);
         grd.setModel(tmDieta);
     }
     

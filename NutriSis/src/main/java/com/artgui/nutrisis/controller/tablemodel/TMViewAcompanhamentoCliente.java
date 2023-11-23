@@ -1,18 +1,18 @@
 package com.artgui.nutrisis.controller.tablemodel;
 
-import com.artgui.nutrisis.model.Consulta;
+import com.artgui.nutrisis.model.Acompanhamento;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class TMViewConsulta extends AbstractTableModel {
+public class TMViewAcompanhamentoCliente extends AbstractTableModel {
 
-    private List<Consulta> lista;
+    private List<Acompanhamento> lista;
 
-    private final int COL_STATUS = 0;
-    private final int COL_DATA = 1;
+    private final int COL_DATA_INICIO = 0;
+    private final int COL_DATA_FINAL = 1;
     private final int COL_NUTRICIONISTA = 2;
 
-    public TMViewConsulta(List<Consulta> lst) {
+    public TMViewAcompanhamentoCliente(List<Acompanhamento> lst) {
         this.lista = lst;
     }
 
@@ -28,16 +28,16 @@ public class TMViewConsulta extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Consulta aux = new Consulta();
+        Acompanhamento aux = new Acompanhamento();
         if (lista.isEmpty()) {
             return aux;
         } else {
-            aux = (Consulta) lista.get(rowIndex);
+            aux = (Acompanhamento) lista.get(rowIndex);
             switch (columnIndex) {
-                case COL_STATUS:
-                    return aux.getStatus();
-                case COL_DATA:
-                    return aux.getDataMarcada();
+                case COL_DATA_INICIO:
+                    return aux.getDataInicio();
+                case COL_DATA_FINAL:
+                    return aux.getDataFinal();
                 case COL_NUTRICIONISTA:
                     return aux.getNutricionista().getNome();
                 default:
@@ -55,10 +55,10 @@ public class TMViewConsulta extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
-            case COL_STATUS:
-                return "Status";
-            case COL_DATA:
-                return "Data";
+            case COL_DATA_INICIO:
+                return "Data de Inicio";
+            case COL_DATA_FINAL:
+                return "Data de Encerramento";
             case COL_NUTRICIONISTA:
                 return "Nutricionista";
             default:
