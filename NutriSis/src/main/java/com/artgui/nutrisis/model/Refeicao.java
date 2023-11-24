@@ -37,12 +37,10 @@ public class Refeicao implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "receita_id")
     )
     private List<Receita> receitas;
-    
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_dieta")
     private Dieta dieta;
        
-    //sem id e sem dieta
     public Refeicao(
             String nome,
             String horario,
@@ -55,7 +53,6 @@ public class Refeicao implements Serializable {
             this.receitas = receitas;
     }
     
-    //sem id
     public Refeicao(
             String nome,
             String horario,

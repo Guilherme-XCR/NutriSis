@@ -14,7 +14,6 @@ public class ClienteDAO extends Dao<Cliente> {
     public boolean delete(int id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-
         Cliente cliente = this.entityManager.find(Cliente.class, id);
         if (cliente != null) {
             this.entityManager.remove(cliente);
@@ -22,7 +21,6 @@ public class ClienteDAO extends Dao<Cliente> {
             this.entityManager.getTransaction().rollback();
             throw new ClienteException("Error - Cliente inexistente.");
         }
-
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
         return true;

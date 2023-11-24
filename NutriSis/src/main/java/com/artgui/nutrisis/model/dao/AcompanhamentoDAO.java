@@ -15,7 +15,6 @@ public class AcompanhamentoDAO extends Dao<Acompanhamento> {
     public boolean delete(int id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-
         Acompanhamento acompanhamento = this.entityManager.find(Acompanhamento.class, id);
         if (acompanhamento != null) {
             this.entityManager.remove(acompanhamento);
@@ -23,7 +22,6 @@ public class AcompanhamentoDAO extends Dao<Acompanhamento> {
             this.entityManager.getTransaction().rollback();
             throw new AcompanhamentoException("Error - Acompanhamento inexistente.");
         }
-
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
         return true;

@@ -22,11 +22,9 @@ public class RegistroDiario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String dataDoDia;
     private int quantidadeDeRefeicoes;
     private String descricaoDasRefeicoes;
-
     @ManyToOne
     @JoinColumn(name = "acompanhamento_id")
     private Acompanhamento acompanhamento;

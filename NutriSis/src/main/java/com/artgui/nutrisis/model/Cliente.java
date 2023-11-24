@@ -23,7 +23,6 @@ public class Cliente extends Usuario implements Serializable{
     private String numeroCartao;
     private float saldoCartao;
     
-    // Construtor sem Id
     public Cliente(
             String nome, 
             String email, 

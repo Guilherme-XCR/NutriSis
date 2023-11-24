@@ -33,7 +33,6 @@ public class ConsultaController {
                 cliente,
                 nutricionista
         );
-        
         repositorio.save(consulta);
     }
 
@@ -56,7 +55,6 @@ public class ConsultaController {
         );
         consulta.setDietasRecomendadas(dietasRecomendadas);
         consulta.setId(id);
-    
         repositorio.update(consulta);
     }
 
@@ -71,18 +69,14 @@ public class ConsultaController {
  
     
     public void atualizarTabela(JTable grd, Cliente cliente){
-        
         List lst = repositorio.filterByCliente(cliente);
-        
         TMViewConsultaCliente tmDieta = new TMViewConsultaCliente(lst);
         grd.setModel(tmDieta);
     }
    
     
     public void atualizarTabela(JTable grd, Nutricionista nutricionista){
-        
         List lst = repositorio.filterByNutricionista(nutricionista);
-        
         TMViewConsultaNutricionista tmDieta = new TMViewConsultaNutricionista(lst);
         grd.setModel(tmDieta);
     }
@@ -101,7 +95,6 @@ public class ConsultaController {
                 cliente,
                 nutricionista
         );
-        
         return consulta;
     }
 }

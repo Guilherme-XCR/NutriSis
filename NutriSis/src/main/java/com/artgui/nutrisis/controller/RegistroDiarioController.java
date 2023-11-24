@@ -9,8 +9,8 @@ import java.util.List;
 import javax.swing.JTable;
 
 public class RegistroDiarioController {
-    
- private RegistroDiarioDAO repositorio;
+
+    private RegistroDiarioDAO repositorio;
 
     public RegistroDiarioController() {
         repositorio = new RegistroDiarioDAO();
@@ -23,7 +23,6 @@ public class RegistroDiarioController {
     ) {
         ValidateRegistroDiario valid = new ValidateRegistroDiario();
         RegistroDiario registroDiario = valid.validaRegistroDiario(dataDoDia, quantidadeDeRefeicoes, descricaoDasRefeicoes);
-
         repositorio.save(registroDiario);
     }
 
@@ -35,13 +34,9 @@ public class RegistroDiarioController {
     ) {
         ValidateRegistroDiario valid = new ValidateRegistroDiario();
         RegistroDiario registroDiario = valid.validaRegistroDiario(dataDoDia, quantidadeDeRefeicoes, descricaoDasRefeicoes);
-
         registroDiario.setId(id);
-        
         repositorio.update(registroDiario);
     }
-
-    
 
     public void excluir(RegistroDiario registroDiario) {
         if (registroDiario != null) {
@@ -50,17 +45,14 @@ public class RegistroDiarioController {
             throw new RegistroDiarioException("Error - Registro Diario inexistente.");
         }
     }
-    
-    public RegistroDiario criar(String dataDoDia, String quantidadeDeRefeicoes, String descricaoDasRefeicoes){
+
+    public RegistroDiario criar(String dataDoDia, String quantidadeDeRefeicoes, String descricaoDasRefeicoes) {
         ValidateRegistroDiario valid = new ValidateRegistroDiario();
         RegistroDiario registroDiario = valid.validaRegistroDiario(dataDoDia, quantidadeDeRefeicoes, descricaoDasRefeicoes);
-
         return registroDiario;
     }
-    
-    
+
     public void atualizarTabelaVizualizar(JTable grd, List<RegistroDiario> RegistrosDiarios) {
-        
         TMViewVizualizarRegistroDiario tmReceita = new TMViewVizualizarRegistroDiario(RegistrosDiarios);
         grd.setModel(tmReceita);
     }

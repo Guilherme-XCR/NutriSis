@@ -22,39 +22,34 @@ import lombok.NoArgsConstructor;
 @Entity
 
 public class Dieta implements Serializable {
-    
-    @Id 
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
     private String nome;
-    
     private String descricao;
-    
     private int diasDuracao;
-    
     @OneToMany(mappedBy = "dieta", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Refeicao> refeicoes;
-    
     @ManyToOne
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
 
-    public Dieta( 
+    public Dieta(
             String nome,
             String descricao,
             int diasDuracao,
             List<Refeicao> refeicoes,
             Nutricionista nutricionista
-    ){
+    ) {
         this.nome = nome;
         this.descricao = descricao;
         this.diasDuracao = diasDuracao;
         this.refeicoes = refeicoes;
         this.nutricionista = nutricionista;
     }
-    
-    public void copy(Dieta outro){
+
+    public void copy(Dieta outro) {
         this.id = outro.getId();
         this.nome = outro.getNome();
         this.descricao = outro.getDescricao();

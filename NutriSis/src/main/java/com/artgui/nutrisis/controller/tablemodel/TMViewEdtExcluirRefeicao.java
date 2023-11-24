@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewEdtExcluirRefeicao extends AbstractTableModel {
 
     private List<Refeicao> lista;
-
     private final int COL_NOME = 0;
     private final int COL_EDITAR = 1;
     private final int COL_EXCLUIR = 2;
@@ -70,7 +69,6 @@ public class TMViewEdtExcluirRefeicao extends AbstractTableModel {
     
     @Override
     public Class getColumnClass(int columnIndex){
-       
         if (columnIndex == COL_EXCLUIR || columnIndex == COL_EDITAR) {
             return ImageIcon.class;
         }

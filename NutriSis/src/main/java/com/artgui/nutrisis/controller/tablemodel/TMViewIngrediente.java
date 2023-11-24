@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewIngrediente extends AbstractTableModel {
 
     private List<Ingrediente> lista;
-
     private final int COL_NOME = 0;
     private final int COL_UNIDADE_MEDIDA = 1;
     private final int COL_QUANTIDADE = 2;

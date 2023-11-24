@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewReceita extends AbstractTableModel {
 
     private List<Receita> lista;
-
     private final int COL_NOME = 0;
 
     public TMViewReceita(List<Receita> lst) {

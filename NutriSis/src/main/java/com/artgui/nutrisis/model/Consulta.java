@@ -29,7 +29,6 @@ public class Consulta implements Serializable{
     private String dataMarcada;
     private String descricao;
     private String status;
-    
     @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(
         name = "consulta_dieta",
@@ -37,11 +36,9 @@ public class Consulta implements Serializable{
         inverseJoinColumns = @JoinColumn(name = "dieta_id")
     )
     private List<Dieta> dietasRecomendadas;
-    
     @ManyToOne()
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-    
     @ManyToOne()
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;

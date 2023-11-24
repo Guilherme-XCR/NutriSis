@@ -1,6 +1,5 @@
 package com.artgui.nutrisis.controller.tablemodel;
 
-import com.artgui.nutrisis.model.Ingrediente;
 import com.artgui.nutrisis.model.Refeicao;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -9,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewVizualizarRefeicao extends AbstractTableModel {
 
     private List<Refeicao> lista;
-
     private final int COL_NOME = 0;
     private final int COL_VIZUALIZAR = 1;
 
@@ -66,7 +64,6 @@ public class TMViewVizualizarRefeicao extends AbstractTableModel {
     
     @Override
     public Class getColumnClass(int columnIndex){
-       
         if (columnIndex == COL_VIZUALIZAR) {
             return ImageIcon.class;
         }

@@ -14,7 +14,6 @@ public class RefeicaoDAO extends Dao<Refeicao> {
     public boolean delete(int id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-
         Refeicao refeicao = this.entityManager.find(Refeicao.class, id);
         if (refeicao != null) {
             this.entityManager.remove(refeicao);
@@ -22,7 +21,6 @@ public class RefeicaoDAO extends Dao<Refeicao> {
             this.entityManager.getTransaction().rollback();
             throw new RefeicaoException("Error - Refeicao inexistente.");
         }
-
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
         return true;

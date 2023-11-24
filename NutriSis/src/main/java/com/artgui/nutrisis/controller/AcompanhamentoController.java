@@ -31,7 +31,6 @@ public class AcompanhamentoController {
         acompanhamento.setCliente(cliente);
         acompanhamento.setNutricionista(nutricionista);
         repositorio.save(acompanhamento);
-
     }
 
     public void atualizar(
@@ -44,20 +43,15 @@ public class AcompanhamentoController {
     ) {
         ValidateAcompanhamento valid = new ValidateAcompanhamento();
         Acompanhamento acompanhamento = valid.validaAcompanhamento(dataInicio, dataFinal);
-
         acompanhamento.setId(id);
         acompanhamento.setCliente(cliente);
         acompanhamento.setNutricionista(nutricionista);
         acompanhamento.setRegistrosDiarios(registrosDiarios);
-
         if (acompanhamento.getRegistrosDiarios() != null) {
-
             for (RegistroDiario rd : acompanhamento.getRegistrosDiarios()) {
                 rd.setAcompanhamento(acompanhamento);
             }
-
             repositorio.update(acompanhamento);
-
         }
     }
     
@@ -77,22 +71,17 @@ public class AcompanhamentoController {
         Acompanhamento acompanhamento = valid.validaAcompanhamento(dataInicio, dataFinal);
         acompanhamento.setCliente(cliente);
         acompanhamento.setNutricionista(nutricionista);
-
         return acompanhamento;
     }
 
     public void atualizarTabela(JTable grd, Cliente cliente) {
-
         List lst = repositorio.filterByCliente(cliente);
-
         TMViewAcompanhamentoCliente tmDieta = new TMViewAcompanhamentoCliente(lst);
         grd.setModel(tmDieta);
     }
     
     public void atualizarTabela(JTable grd, Nutricionista nutricionista) {
-
         List lst = repositorio.filterByNutricionista(nutricionista);
-
         TMViewAcompanhamentoNutricionista tmDieta = new TMViewAcompanhamentoNutricionista(lst);
         grd.setModel(tmDieta);
     }

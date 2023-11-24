@@ -20,7 +20,7 @@ public class ValidateIngrediente {
             throw new ReceitaException("Quantidade escrita de formato invalido.");
         }
 
-        int q = Integer.parseInt(quantidade.replaceAll("\\s", ""));
+        float q = Float.parseFloat(quantidade.replaceAll("\\s", ""));
         if (q <= 0) {
             throw new IngredienteException("Quantidade inválida.");
         }

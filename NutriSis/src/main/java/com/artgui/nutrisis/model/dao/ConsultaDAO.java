@@ -38,7 +38,6 @@ public class ConsultaDAO extends Dao<Consulta> {
         qry = super.entityManager.createQuery(jpql, Consulta.class);
         qry.setParameter("data", data + "%");
         qry.setParameter("clienteId", cliente.getId());
-
         List<Consulta> lst = qry.getResultList();
         super.entityManager.close();
         return lst;
@@ -49,7 +48,6 @@ public class ConsultaDAO extends Dao<Consulta> {
         jpql = "SELECT c FROM Consulta c WHERE c.cliente.id like :clienteId";
         qry = super.entityManager.createQuery(jpql, Consulta.class);
         qry.setParameter("clienteId", cliente.getId());
-
         List<Consulta> lst = qry.getResultList();
         super.entityManager.close();
         return lst;
@@ -61,7 +59,6 @@ public class ConsultaDAO extends Dao<Consulta> {
         qry = super.entityManager.createQuery(jpql, Consulta.class);
         qry.setParameter("data", data + "%");
         qry.setParameter("nutricionistaId", nutricionista.getId());
-
         List<Consulta> lst = qry.getResultList();
         super.entityManager.close();
         return lst;
@@ -72,7 +69,6 @@ public class ConsultaDAO extends Dao<Consulta> {
         jpql = "SELECT c FROM Consulta c WHERE c.nutricionista.id like :nutricionistaId";
         qry = super.entityManager.createQuery(jpql, Consulta.class);
         qry.setParameter("nutricionistaId", nutricionista.getId());
-
         List<Consulta> lst = qry.getResultList();
         super.entityManager.close();
         return lst;

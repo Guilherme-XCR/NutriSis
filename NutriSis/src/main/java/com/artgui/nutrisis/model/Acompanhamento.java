@@ -24,17 +24,13 @@ public class Acompanhamento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String dataInicio;
     private String dataFinal;
-
     @OneToMany(mappedBy = "acompanhamento", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<RegistroDiario> registrosDiarios;
-
     @ManyToOne()
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-
     @ManyToOne()
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;

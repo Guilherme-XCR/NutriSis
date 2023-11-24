@@ -19,30 +19,28 @@ import lombok.NoArgsConstructor;
 @Entity
 
 public class Ingrediente implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
     private String unidadeMedida;
     private float quantidade;
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_receita")
     private Receita receita;
 
-    // construtor sem id
     public Ingrediente(
-            String nome, 
-            String unidadeMedida, 
+            String nome,
+            String unidadeMedida,
             float quantidade
-    ){
+    ) {
         this.nome = nome;
         this.unidadeMedida = unidadeMedida;
         this.quantidade = quantidade;
     }
-    
-    
-    public void copy(Ingrediente outro){
+
+    public void copy(Ingrediente outro) {
         this.id = outro.getId();
         this.nome = outro.getNome();
         this.unidadeMedida = outro.getUnidadeMedida();

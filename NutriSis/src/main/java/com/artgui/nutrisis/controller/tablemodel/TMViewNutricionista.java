@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewNutricionista extends AbstractTableModel {
 
     private List<Nutricionista> lista;
-    
     private final int COL_NOME = 0;
     private final int COL_ESPECIALIZACAO = 1;
 

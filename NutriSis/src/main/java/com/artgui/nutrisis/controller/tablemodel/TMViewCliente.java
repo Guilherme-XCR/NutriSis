@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewCliente extends AbstractTableModel {
 
     private List<Cliente> lista;
-    
     private final int COL_NOME = 0;
     private final int COL_EMAIL = 1;
     private final int COL_TELEFONE = 2;

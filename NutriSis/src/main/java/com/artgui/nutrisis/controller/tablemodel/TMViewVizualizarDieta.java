@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewVizualizarDieta extends AbstractTableModel {
 
     private List<Dieta> lista;
-
     private final int COL_NOME = 0;
     private final int COL_VIZUALIZAR = 1;
    
@@ -65,7 +64,6 @@ public class TMViewVizualizarDieta extends AbstractTableModel {
     
     @Override
     public Class getColumnClass(int columnIndex){
-       
         if (columnIndex == COL_VIZUALIZAR) {
             return ImageIcon.class;
         }

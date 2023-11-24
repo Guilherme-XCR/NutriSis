@@ -14,7 +14,6 @@ import java.util.List;
     public boolean delete(int id) {
         this.entityManager = DatabaseJPA.getInstance().getEntityManager();
         this.entityManager.getTransaction().begin();
-
         Ingrediente ingrediente = this.entityManager.find(Ingrediente.class, id);
         if (ingrediente != null) {
             this.entityManager.remove(ingrediente);
@@ -22,7 +21,6 @@ import java.util.List;
             this.entityManager.getTransaction().rollback();
             throw new IngredienteException("Error - Ingrediente inexistente.");
         }
-
         this.entityManager.getTransaction().commit();
         this.entityManager.close();
         return true;

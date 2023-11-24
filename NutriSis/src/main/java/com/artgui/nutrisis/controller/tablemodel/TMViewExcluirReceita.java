@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewExcluirReceita extends AbstractTableModel {
 
     private List<Receita> lista;
-
     private final int COL_NOME = 0;
     private final int COL_REMOVER = 1;
 
@@ -65,7 +64,6 @@ public class TMViewExcluirReceita extends AbstractTableModel {
     
     @Override
     public Class getColumnClass(int columnIndex){
-       
         if (columnIndex == COL_REMOVER) {
             return ImageIcon.class;
         }

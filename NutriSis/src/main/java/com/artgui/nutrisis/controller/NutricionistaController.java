@@ -1,7 +1,6 @@
 package com.artgui.nutrisis.controller;
 
 import com.artgui.nutrisis.controller.tablemodel.TMViewNutricionista;
-import com.artgui.nutrisis.controller.tablemodel.TMViewReceita;
 import com.artgui.nutrisis.model.exceptions.ClienteException;
 import com.artgui.nutrisis.model.Nutricionista;
 import com.artgui.nutrisis.model.dao.NutricionistaDAO;
@@ -40,9 +39,7 @@ public class NutricionistaController {
     }
 
     public Nutricionista buscarPorEmail(String email) {
-
         return repositorio.findByEmail(email);
-
     }
 
     public void atualizar(
@@ -78,7 +75,6 @@ public class NutricionistaController {
     }
 
     public Nutricionista login(String email, String senha) {
-
         if (email != null && email.matches("^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+)\\.([A-Za-z]{2,4})$")) {
             Nutricionista nutricionista = this.buscarPorEmail(email);
             if (nutricionista != null && senha.equals(nutricionista.getSenha())) {
@@ -100,5 +96,4 @@ public class NutricionistaController {
         TMViewNutricionista tableModel = new TMViewNutricionista(lst);
         grd.setModel(tableModel);
     }
-    
 }

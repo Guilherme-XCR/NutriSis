@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewEdtExcluirIngrediente extends AbstractTableModel {
 
     private List<Ingrediente> lista;
-
     private final int COL_NOME = 0;
     private final int COL_UNIDADE_MEDIDA = 1;
     private final int COL_QUANTIDADE = 2;
@@ -80,7 +79,6 @@ public class TMViewEdtExcluirIngrediente extends AbstractTableModel {
     
     @Override
     public Class getColumnClass(int columnIndex){
-       
         if (columnIndex == COL_EXCLUIR || columnIndex == COL_EDITAR) {
             return ImageIcon.class;
         }

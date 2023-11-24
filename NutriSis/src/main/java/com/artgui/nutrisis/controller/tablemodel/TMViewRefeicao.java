@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewRefeicao extends AbstractTableModel {
 
     private List<Refeicao> lista;
-
     private final int COL_NOME = 0;
 
     public TMViewRefeicao(List<Refeicao> lst) {

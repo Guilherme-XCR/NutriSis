@@ -35,11 +35,9 @@ public class DietaController {
                 refeicoes, 
                 nutricionista
         );
-        
         for (Refeicao r : dieta.getRefeicoes()){
             r.setDieta(dieta);
         }
-
         repositorio.save(dieta);
     }
         

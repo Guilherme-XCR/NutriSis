@@ -8,10 +8,9 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewVizualizarRegistroDiario extends AbstractTableModel {
 
     private List<RegistroDiario> lista;
-
     private final int COL_DATA = 0;
     private final int COL_VIZUALIZAR = 1;
-   
+
     public TMViewVizualizarRegistroDiario(List<RegistroDiario> lst) {
         this.lista = lst;
     }
@@ -62,17 +61,16 @@ public class TMViewVizualizarRegistroDiario extends AbstractTableModel {
         }
         return "";
     }
-    
+
     @Override
-    public Class getColumnClass(int columnIndex){
-       
+    public Class getColumnClass(int columnIndex) {
         if (columnIndex == COL_VIZUALIZAR) {
             return ImageIcon.class;
         }
         return String.class;
     }
-    
-    public List getLista(){
+
+    public List getLista() {
         return this.lista;
     }
 }

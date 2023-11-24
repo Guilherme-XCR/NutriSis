@@ -36,7 +36,6 @@ public class RefeicaoController {
                 calorias,
                 receitas
         );
-
         repositorio.save(refeicao);
     }
 
@@ -56,7 +55,6 @@ public class RefeicaoController {
                 calorias,
                 receitas
         );
-
         repositorio.update(refeicao);
     }
 

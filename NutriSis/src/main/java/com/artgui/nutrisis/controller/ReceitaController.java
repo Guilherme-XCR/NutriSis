@@ -38,7 +38,6 @@ public class ReceitaController {
                 categoria,
                 ingredientes,
                 nutricionista);
-
         for (Ingrediente i : receita.getIngredientes()) {
             i.setReceita(receita);
         }
@@ -66,11 +65,9 @@ public class ReceitaController {
                 nutricionista
         );
         receita.setId(id);
-
         for (Ingrediente i : receita.getIngredientes()) {
             i.setReceita(receita);
         }
-
         repositorio.update(receita);
     }
 

@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -32,14 +31,12 @@ public class Receita implements Serializable {
     private int tempoPreparo;
     private int porcoes;
     private String categoria;
-    
     @OneToMany(mappedBy = "receita",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Ingrediente> ingredientes;  
     @ManyToOne
     @JoinColumn(name = "id_nutricionista")
     private Nutricionista nutricionista;
 
-    //construtor sem id e sem refeicao
     public Receita(
             String nome, 
             String modoPreparo, 

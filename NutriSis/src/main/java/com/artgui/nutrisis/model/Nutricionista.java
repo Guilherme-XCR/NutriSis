@@ -19,7 +19,6 @@ public class Nutricionista extends Usuario implements Serializable {
     private String crn;
     private String especializacao;
 
-    // Construtor sem Id
     public Nutricionista(
             String nome,
             String email,

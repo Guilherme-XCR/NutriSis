@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewAcompanhamentoCliente extends AbstractTableModel {
 
     private List<Acompanhamento> lista;
-
     private final int COL_DATA_INICIO = 0;
     private final int COL_DATA_FINAL = 1;
     private final int COL_NUTRICIONISTA = 2;

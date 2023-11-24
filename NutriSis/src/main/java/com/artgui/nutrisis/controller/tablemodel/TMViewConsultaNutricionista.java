@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 public class TMViewConsultaNutricionista extends AbstractTableModel {
 
     private List<Consulta> lista;
-
     private final int COL_STATUS = 0;
     private final int COL_DATA = 1;
     private final int COL_CLIENTE = 2;
